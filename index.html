@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>HKG Dashboard</title>
 <!-- HKG Dashboard v2.1 -->
 <style>
@@ -24,7 +24,9 @@ body.light{--bg:#f0ede8;--s1:#faf8f5;--s2:#f4f1ec;--s3:#e8e4dd;--b1:#ddd9d0;--b2
   --txt:#000;--txt2:#111;--txt3:#555;--sub:#333;--sub2:#555;--green:#00843d;
   --card:#fff;--card2:#f8f8fc;--bdr:#e0e0e8;--ls:#000}
 
-.app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;background:var(--bg)}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;background:var(--bg);padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top)}
+@media (min-width:520px){.app{max-width:540px;border-left:1px solid var(--b1);border-right:1px solid var(--b1);box-shadow:0 0 24px rgba(0,0,0,.18)}}
+@media (min-width:900px){.app{max-width:600px}}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;background:var(--bg);border-bottom:1px solid var(--b1);flex-shrink:0}
 .brand{font-size:18px;font-weight:700;letter-spacing:2px;color:var(--txt);line-height:1}
 .brand-sub{font-size:7px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:1px}
@@ -198,6 +200,13 @@ tr:last-child td{border-bottom:none}
 #fx-level-1.fx-fill{padding:0;overflow:hidden;height:100%;display:flex;flex-direction:column}
 #fx-level-1.fx-fill > *{flex:1;min-height:0}
 
+
+/* iOS Safari momentum scrolling + bg outside app + safe area */
+html,body{background:#0a0a0a}
+body.light{background:#f5f5f5}
+*{-webkit-tap-highlight-color:transparent}
+.overlay,#mo-body{-webkit-overflow-scrolling:touch}
+@supports(padding:env(safe-area-inset-top)){.ov-hdr{padding-top:max(10px,env(safe-area-inset-top))}}
 </style>
 </head>
 <body class="dark">
