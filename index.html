@@ -25,8 +25,38 @@ body.light{--bg:#f0ede8;--s1:#faf8f5;--s2:#f4f1ec;--s3:#e8e4dd;--b1:#ddd9d0;--b2
   --card:#fff;--card2:#f8f8fc;--bdr:#e0e0e8;--ls:#000}
 
 .app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;background:var(--bg);padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top)}
-@media (min-width:520px){.app{max-width:540px;border-left:1px solid var(--b1);border-right:1px solid var(--b1);box-shadow:0 0 24px rgba(0,0,0,.18)}}
-@media (min-width:900px){.app{max-width:600px}}
+/* TABLET / iPAD: fill 95% width, scale fonts up, layout stays the same */
+@media (min-width:768px){
+  .app{max-width:95vw;border-left:1px solid var(--b1);border-right:1px solid var(--b1);box-shadow:0 0 32px rgba(0,0,0,.25)}
+  .topbar{padding:14px 22px 12px}
+  .brand{font-size:26px;letter-spacing:3px}
+  .top-date,.top-gen{font-size:11px}
+  .left-hdr{padding:14px 22px 12px}
+  #main-month-label{font-size:26px !important;letter-spacing:4px}
+  .tile{padding:0 22px}
+  .t-lbl{font-size:11px;letter-spacing:1.6px;margin-bottom:5px}
+  .t-val{font-size:36px;letter-spacing:-.8px}
+  .t-unit{font-size:11px;margin-top:4px}
+  .right{width:110px}
+  .ni{height:120px;padding:6px}
+  .ni-ico{font-size:24px}
+  .ni-name{font-size:11px;letter-spacing:.8px}
+  .nav-hdr{padding:9px 0;font-size:9px;letter-spacing:2.5px}
+  .bottom{padding:6px 0}
+  .tog-row{padding:8px 22px}
+  .t-label{font-size:11px;letter-spacing:2px}
+  .tbtn{font-size:11px;padding:7px 14px}
+  .ov-hdr{padding:14px 22px}
+  .ov-back{font-size:12px;padding:7px 14px}
+}
+/* iPad landscape / desktop: even more spacious */
+@media (min-width:1100px){
+  .t-val{font-size:42px}
+  .t-lbl{font-size:12px}
+  .right{width:130px}
+  .ni-ico{font-size:28px}
+  .ni-name{font-size:12px}
+}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;background:var(--bg);border-bottom:1px solid var(--b1);flex-shrink:0}
 .brand{font-size:18px;font-weight:700;letter-spacing:2px;color:var(--txt);line-height:1}
 .brand-sub{font-size:7px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:1px}
