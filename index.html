@@ -104,7 +104,7 @@ body.light{--bg:#f0ede8;--s1:#faf8f5;--s2:#f4f1ec;--s3:#e8e4dd;--b1:#ddd9d0;--b2
 #file-input{display:none}
 .up-btn{font-size:9px;padding:4px 10px;background:var(--s3);color:var(--txt);border:1px solid var(--b2);border-radius:3px;cursor:pointer;letter-spacing:.5px;white-space:nowrap;font-family:inherit;font-weight:600}
 .theme-btn{font-size:9px;padding:4px 8px;background:var(--s3);color:var(--txt);border:1px solid var(--b2);border-radius:3px;cursor:pointer;letter-spacing:.5px;font-family:inherit;font-weight:600;flex-shrink:0}
-.overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:100;flex-direction:column;max-width:430px;margin:0 auto;height:100vh;height:100dvh}
+.overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:100;flex-direction:column;max-width:430px;margin:0 auto;height:100vh;height:100dvh;padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top)}
 .overlay.open{display:flex}
 .ov-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-bottom:2px solid var(--red);flex-shrink:0}
 .ov-back{font-size:10px;font-weight:600;letter-spacing:1px;cursor:pointer;padding:5px 12px;border:1px solid var(--b2);border-radius:3px;color:var(--txt);background:transparent;font-family:inherit}
@@ -237,6 +237,39 @@ body.light{background:#f5f5f5}
 *{-webkit-tap-highlight-color:transparent}
 .overlay,#mo-body{-webkit-overflow-scrolling:touch}
 @supports(padding:env(safe-area-inset-top)){.ov-hdr{padding-top:max(10px,env(safe-area-inset-top))}}
+/* iPad / tablet: overlays match app width and scale fonts up */
+@media (min-width:768px){
+  .overlay{max-width:95vw;border-left:1px solid var(--b1);border-right:1px solid var(--b1);box-shadow:0 0 32px rgba(0,0,0,.25)}
+  .overlay [style*="font-size:6.5px"]{font-size:9px !important}
+  .overlay [style*="font-size:7px"]{font-size:10px !important}
+  .overlay [style*="font-size:7.5px"]{font-size:10.5px !important}
+  .overlay [style*="font-size:8px"]{font-size:11px !important}
+  .overlay [style*="font-size:9px"]{font-size:12px !important}
+  .overlay [style*="font-size:10px"]{font-size:13px !important}
+  .overlay [style*="font-size:11px"]{font-size:14.5px !important}
+  .overlay [style*="font-size:12px"]{font-size:16px !important}
+  .overlay [style*="font-size:13px"]{font-size:17px !important}
+  .overlay [style*="font-size:14px"]{font-size:18px !important}
+  .overlay [style*="font-size:15px"]{font-size:19px !important}
+  .overlay [style*="font-size:16px"]{font-size:21px !important}
+  .overlay [style*="font-size:17px"]{font-size:22px !important}
+  .overlay [style*="font-size:18px"]{font-size:24px !important}
+  .overlay [style*="font-size:22px"]{font-size:28px !important}
+  .overlay [style*="font-size:24px"]{font-size:31px !important}
+  .overlay [style*="padding:7px"]{padding:11px !important}
+  .overlay [style*="padding:8px"]{padding:12px !important}
+  .overlay [style*="padding:9px"]{padding:13px !important}
+  .overlay table{font-size:14px}
+  .overlay table th,.overlay table td{padding:11px 14px !important}
+  #ov-pl-body{font-size:14px}
+  .overlay [style*="grid-template-columns:1fr 1fr 1fr"]>div,
+  .overlay [style*="grid-template-columns:repeat(3,1fr)"]>div{padding:14px 18px !important}
+}
+@media (min-width:1100px){
+  .overlay [style*="font-size:18px"]{font-size:28px !important}
+  .overlay [style*="font-size:14px"]{font-size:20px !important}
+  .overlay [style*="font-size:11px"]{font-size:16px !important}
+}
 </style>
 </head>
 <body class="dark">
@@ -258,7 +291,7 @@ body.light{background:#f5f5f5}
 <div class="app" id="app" style="display:none">
   <div class="topbar">
     <div style="display:flex;align-items:center">
-      <div class="brand">HKG <span style="font-size:9px;color:#cc0000;font-weight:600;letter-spacing:1px;margin-left:6px">v-iPad-1244</span></div>
+      <div class="brand">HKG <span style="font-size:9px;color:#cc0000;font-weight:600;letter-spacing:1px;margin-left:6px">v-iPad2-1248</span></div>
     </div>
     <div>
       <div class="top-date"><span class="dot"></span><span id="top-date">—</span></div>
