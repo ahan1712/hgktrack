@@ -291,7 +291,7 @@ body.light{background:#f5f5f5}
 <div class="app" id="app" style="display:none">
   <div class="topbar">
     <div style="display:flex;align-items:center">
-      <div class="brand">HKG <span style="font-size:9px;color:#cc0000;font-weight:600;letter-spacing:1px;margin-left:6px">v-rod-1644</span></div>
+      <div class="brand">HKG <span style="font-size:9px;color:#cc0000;font-weight:600;letter-spacing:1px;margin-left:6px">v-rev-1735</span></div>
     </div>
     <div>
       <div class="top-date"><span class="dot"></span><span id="top-date">—</span></div>
@@ -374,116 +374,161 @@ body.light{background:#f5f5f5}
         <button class="ov-back" onclick="closeOv()">← Back</button>
       </div>
     </div>
+    <!-- HERO: month + total cost (obvious) -->
     <div style="display:flex;align-items:stretch;background:var(--s2);border-bottom:2px solid var(--red);flex-shrink:0">
       <div style="width:3px;background:var(--red);flex-shrink:0"></div>
-      <div style="flex:1;padding:13px 14px;display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:16px;font-weight:600;color:var(--txt);letter-spacing:.3px;line-height:1.2" id="cs-heading">—'s Costing Breakdown</div>
-        <div style="text-align:right;flex-shrink:0;margin-left:12px">
-          <div style="font-size:7px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Total Cost / Ton</div>
-          <div style="font-size:22px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="cs-tc-pt-mtd">—</div>
+      <div style="flex:1;padding:13px 16px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:7.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Costing Breakdown</div>
+          <div style="font-size:17px;font-weight:700;color:var(--txt);letter-spacing:.2px;line-height:1.1" id="cs-heading">—</div>
+          <div style="font-size:7.5px;color:var(--dim3);margin-top:3px;letter-spacing:.5px">৳ per MT rod · MTD figures (toggle below for shorter periods)</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:14px">
+          <div style="font-size:7.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Total Cost / Ton</div>
+          <div style="font-size:30px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-1.2px" id="cs-tc-pt-mtd">—</div>
         </div>
       </div>
     </div>
-    <div style="padding:5px 16px 4px;background:var(--card);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);flex-shrink:0">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">Scrap</div>
-    </div>
-    <div style="flex:.7;display:flex;flex-direction:column;justify-content:center;padding:6px 16px;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5px">
+
+    <!-- SCRAP CONSUMPTION COST (flex:1.1 — stretches to breathe) -->
+    <div style="flex:1.1;display:flex;flex-direction:column;background:var(--card);border-bottom:2px solid var(--red);min-height:0">
+      <div style="padding:7px 16px;border-bottom:1px solid var(--b1);border-left:3px solid var(--red);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
         <div>
-          <div style="font-size:7px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Expenditure / Ton</div>
-          <div style="font-size:17px;font-weight:600;color:var(--txt3);line-height:1;letter-spacing:-.3px" id="cs-exp-pt">—</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">Scrap Consumption Cost</div>
+          <div style="font-size:7px;color:var(--dim3);margin-top:1px;letter-spacing:.4px">derived from scrap expenditure</div>
         </div>
         <div style="text-align:right">
-          <div style="font-size:7px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Consumption / Ton</div>
-          <div style="font-size:17px;font-weight:600;color:var(--red);line-height:1;letter-spacing:-.3px" id="cs-consump-pt">—</div>
+          <div style="font-size:6.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:1px">Cost / Ton</div>
+          <div style="font-size:22px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="cs-consump-pt">—</div>
         </div>
       </div>
-      <div style="position:relative;height:4px;background:var(--b1);border-radius:3px;margin-bottom:4px">
-        <div id="cs-bar-exp" style="position:absolute;left:0;top:0;height:4px;border-radius:3px 0 0 3px;background:var(--b3)"></div>
-        <div id="cs-bar-gap" style="position:absolute;top:0;height:4px;background:rgba(204,0,0,.15);border-left:2px dashed rgba(204,0,0,.4);border-right:2px solid var(--red)"></div>
+      <!-- Source attribution row -->
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border-bottom:1px solid var(--b1);min-height:0">
+        <div style="padding:11px 14px;border-right:1px solid var(--b1);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Scrap Expenditure / Ton</div>
+          <div style="font-size:16px;font-weight:600;color:var(--txt2);letter-spacing:-.2px;line-height:1" id="cs-exp-pt">—</div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px;letter-spacing:.3px">৳ purchased / billet MT</div>
+        </div>
+        <div style="padding:11px 14px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Scrap : Billet Ratio</div>
+          <div style="font-size:16px;font-weight:600;color:var(--txt2);letter-spacing:-.2px;line-height:1" id="cs-ratio">—</div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px;letter-spacing:.3px">MT scrap to make 1 MT billet</div>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:5px">
-        <div style="flex:1;height:1px;background:var(--b1)"></div>
-        <div style="font-size:7px;font-weight:600;color:var(--red);letter-spacing:.5px" id="cs-gap-label">—</div>
-        <div style="flex:1;height:1px;background:var(--b1)"></div>
-      </div>
-    </div>
-    <div style="flex:.5;display:flex;align-items:stretch;background:var(--s1);border-bottom:1px solid var(--b1);min-height:0">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--b1)">
-        <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:2px;letter-spacing:.8px">Scrap Used</div>
-        <div style="font-size:14px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px" id="cs-scrap-used">—</div>
-        <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--b1)">
-        <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:2px;letter-spacing:.8px">Billet</div>
-        <div style="font-size:14px;font-weight:700;color:var(--txt3);line-height:1;letter-spacing:-.3px" id="cs-billet">—</div>
-        <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--b1)">
-        <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:2px;letter-spacing:.8px">Rod</div>
-        <div style="font-size:14px;font-weight:700;color:var(--txt3);line-height:1;letter-spacing:-.3px" id="cs-rod">—</div>
-        <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
-        <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:2px;letter-spacing:.8px">Scrap:Rod</div>
-        <div style="font-size:14px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.3px" id="cs-ratio">—</div>
-        <div style="font-size:6px;color:var(--dim3);margin-top:1px">ratio</div>
+      <!-- Mini stats: scrap used / billet / rod -->
+      <div style="flex:.7;display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--card);min-height:0">
+        <div style="padding:9px 12px;text-align:center;border-right:1px solid var(--b1);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Scrap Used</div>
+          <div style="font-size:14px;font-weight:700;color:var(--txt);line-height:1"><span id="cs-scrap-used">—</span> <span style="font-size:7px;color:var(--dim3);font-weight:500">MT</span></div>
+        </div>
+        <div style="padding:9px 12px;text-align:center;border-right:1px solid var(--b1);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Billet</div>
+          <div style="font-size:14px;font-weight:700;color:var(--txt);line-height:1"><span id="cs-billet">—</span> <span style="font-size:7px;color:var(--dim3);font-weight:500">MT</span></div>
+        </div>
+        <div style="padding:9px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Rod</div>
+          <div style="font-size:14px;font-weight:700;color:var(--txt);line-height:1"><span id="cs-rod">—</span> <span style="font-size:7px;color:var(--dim3);font-weight:500">MT</span></div>
+        </div>
       </div>
     </div>
-    <div style="padding:5px 16px 4px;background:var(--card);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);flex-shrink:0">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">Other Costs</div>
-    </div>
-    <div style="flex:.55;display:flex;align-items:stretch;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
-      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-right:1px solid var(--b1)">
-        <div style="font-size:7px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Other Cost / Ton</div>
-        <div style="font-size:18px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.3px" id="cs-oc-pt-mtd">—</div>
-        <div style="font-size:6px;color:var(--dim3);margin-top:1px">৳ / MT rod</div>
+
+    <!-- OTHER COST (flex:1.4 — bigger because it has more sub-sections) -->
+    <div style="flex:1.4;display:flex;flex-direction:column;background:var(--card);border-bottom:2px solid var(--red);min-height:0">
+      <div style="padding:7px 16px;border-bottom:1px solid var(--b1);border-left:3px solid var(--red);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">Other Cost</div>
+          <div style="font-size:7px;color:var(--dim3);margin-top:1px;letter-spacing:.4px">electricity + salary + chemicals + rest</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:6.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:1px">Cost / Ton</div>
+          <div style="font-size:22px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="cs-oc-pt-mtd">—</div>
+        </div>
       </div>
-      <div style="flex:1.6;display:flex;flex-direction:column;justify-content:center;padding:0 12px">
-        <div style="font-size:7px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Electricity</div>
-        <div style="display:flex;justify-content:space-around;align-items:flex-end">
-          <div style="text-align:center">
-            <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim3);margin-bottom:1px;letter-spacing:.5px">Total Bill</div>
-            <div style="font-size:16px;font-weight:600;color:var(--txt);line-height:1;letter-spacing:-.3px" id="cs-elec-total">—</div>
+      <!-- Composition bar -->
+      <div style="padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--b1);flex-shrink:0">
+        <div style="display:flex;height:7px;border-radius:3px;overflow:hidden;background:var(--b2)">
+          <div id="cs-bar-elec"  style="height:100%;background:#fb8c00"></div>
+          <div id="cs-bar-sal"   style="height:100%;background:#1e88e5"></div>
+          <div id="cs-bar-chem"  style="height:100%;background:#43a047"></div>
+          <div id="cs-bar-rest"  style="height:100%;background:#6d4c41"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:5px;font-size:8px;color:var(--dim2)">
+          <span><span style="display:inline-block;width:7px;height:7px;background:#fb8c00;border-radius:50%;margin-right:4px"></span>Electricity <strong style="color:var(--txt)" id="cs-pct-elec">—</strong></span>
+          <span><span style="display:inline-block;width:7px;height:7px;background:#1e88e5;border-radius:50%;margin-right:4px"></span>Salary <strong style="color:var(--txt)" id="cs-pct-sal">—</strong></span>
+          <span><span style="display:inline-block;width:7px;height:7px;background:#43a047;border-radius:50%;margin-right:4px"></span>Chemicals <strong style="color:var(--txt)" id="cs-pct-chem">—</strong></span>
+          <span><span style="display:inline-block;width:7px;height:7px;background:#6d4c41;border-radius:50%;margin-right:4px"></span>Rest <strong style="color:var(--txt)" id="cs-pct-rest">—</strong></span>
+        </div>
+      </div>
+      <!-- Big 4: Electricity, Salary, Chemicals, Rest /Ton (stretchable) -->
+      <div style="flex:1.1;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
+        <div style="padding:10px 8px;border-right:1px solid var(--b1);text-align:center;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#fb8c00;margin-bottom:3px">Electricity</div>
+          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px">৳<span id="cs-elec-pt">—</span></div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px">per ton</div>
+        </div>
+        <div style="padding:10px 8px;border-right:1px solid var(--b1);text-align:center;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#1e88e5;margin-bottom:3px">Salary</div>
+          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px">৳<span id="cs-sal-pt">—</span></div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px">৳<span id="cs-sal-total">—</span> total</div>
+        </div>
+        <div style="padding:10px 8px;border-right:1px solid var(--b1);text-align:center;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#43a047;margin-bottom:3px">Chemicals</div>
+          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px">৳<span id="cs-chem-pt">—</span></div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px">৳<span id="cs-chem-total">—</span> total</div>
+        </div>
+        <div style="padding:10px 8px;text-align:center;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#6d4c41;margin-bottom:3px">Rest</div>
+          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px">৳<span id="cs-rest-pt">—</span></div>
+          <div style="font-size:6.5px;color:var(--dim3);margin-top:3px">gas / oxygen / refractory</div>
+        </div>
+      </div>
+      <!-- Salary detail (left half) + Electricity total MTD (right half) -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--s2);border-bottom:1px solid var(--b1);flex-shrink:0">
+        <div style="padding:7px 14px;border-right:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <div style="font-size:7px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#1e88e5;flex-shrink:0">Salary detail</div>
+          <div style="display:flex;gap:10px;font-size:8.5px;color:var(--dim2)">
+            <span>Rolling <strong style="color:var(--txt)">৳<span id="cs-sal-roll">—</span></strong></span>
+            <span>Office <strong style="color:var(--txt)">৳<span id="cs-sal-off">—</span></strong></span>
+            <span>Labour <strong style="color:var(--txt)">৳<span id="cs-sal-lab">—</span></strong></span>
           </div>
-          <div style="width:1px;background:var(--b1);align-self:stretch;margin:0 3px"></div>
-          <div style="text-align:center">
-            <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim3);margin-bottom:1px;letter-spacing:.5px">Per Ton</div>
-            <div style="font-size:16px;font-weight:600;color:var(--txt3);line-height:1;letter-spacing:-.3px" id="cs-elec-pt">—</div>
+        </div>
+        <div style="padding:7px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <div style="font-size:7px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#fb8c00;flex-shrink:0">Electricity bill</div>
+          <div style="font-size:9.5px;color:var(--dim2)">
+            MTD total <strong style="color:var(--txt);font-size:11px">৳<span id="cs-elec-total-mtd">—</span></strong>
+          </div>
+        </div>
+      </div>
+      <!-- Chemicals breakdown — RESTORED to original badge+big-number style -->
+      <div style="flex:1;display:flex;flex-direction:column;background:var(--card);min-height:0">
+        <div style="padding:5px 14px;border-bottom:1px solid var(--b1);flex-shrink:0">
+          <div style="font-size:6.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#43a047">Chemicals</div>
+        </div>
+        <div style="flex:1;display:flex;align-items:stretch;min-height:0">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
+            <div style="font-size:6.5px;font-weight:600;padding:1px 6px;border-radius:3px;margin-bottom:4px;background:rgba(29,158,117,.12);color:#1d9e75;text-transform:uppercase;letter-spacing:.5px">SiMn</div>
+            <div style="font-size:17px;font-weight:700;color:#1d9e75;line-height:1;letter-spacing:-.3px">৳<span id="cs-simn-pt">—</span></div>
+            <div style="font-size:6.5px;color:#1d9e75;margin-top:2px;opacity:.7">৳/t</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
+            <div style="font-size:6.5px;font-weight:600;padding:1px 6px;border-radius:3px;margin-bottom:4px;background:rgba(186,117,23,.12);color:#ba7517;text-transform:uppercase;letter-spacing:.5px">FeSi</div>
+            <div style="font-size:17px;font-weight:700;color:#ba7517;line-height:1;letter-spacing:-.3px">৳<span id="cs-fesi-pt">—</span></div>
+            <div style="font-size:6.5px;color:#ba7517;margin-top:2px;opacity:.7">৳/t</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
+            <div style="font-size:6.5px;font-weight:600;padding:1px 6px;border-radius:3px;margin-bottom:4px;background:rgba(99,153,34,.12);color:#639922;text-transform:uppercase;letter-spacing:.5px">Boric</div>
+            <div style="font-size:17px;font-weight:700;color:#639922;line-height:1;letter-spacing:-.3px">৳<span id="cs-boric-pt">—</span></div>
+            <div style="font-size:6.5px;color:#639922;margin-top:2px;opacity:.7">৳/t</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+            <div style="font-size:6.5px;font-weight:600;padding:1px 6px;border-radius:3px;margin-bottom:4px;background:rgba(83,74,183,.12);color:#534ab7;text-transform:uppercase;letter-spacing:.5px">Qrtz</div>
+            <div style="font-size:17px;font-weight:700;color:#534ab7;line-height:1;letter-spacing:-.3px">৳<span id="cs-quartz-pt">—</span></div>
+            <div style="font-size:6.5px;color:#534ab7;margin-top:2px;opacity:.7">৳/t</div>
           </div>
         </div>
       </div>
     </div>
-    <div style="flex:.3;display:flex;align-items:center;justify-content:center;background:var(--s1);border-bottom:1px solid var(--b1);min-height:0">
-      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim)">Salary: Coming Soon</div>
-    </div>
-    <div style="flex:.8;display:flex;flex-direction:column;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
-      <div style="padding:3px 12px;border-bottom:1px solid var(--b1);flex-shrink:0">
-        <div style="font-size:6.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim)">Chemicals</div>
-      </div>
-      <div style="flex:1;display:flex;align-items:stretch;min-height:0">
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:600;padding:1px 5px;border-radius:3px;margin-bottom:3px;background:rgba(29,158,117,.12);color:#1d9e75;text-transform:uppercase;letter-spacing:.5px">SiMn</div>
-          <div style="font-size:16px;font-weight:700;color:#1d9e75;line-height:1;letter-spacing:-.3px" id="cs-simn-pt">—</div>
-          <div style="font-size:6px;color:#1d9e75;margin-top:1px;opacity:.7">৳/t</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:600;padding:1px 5px;border-radius:3px;margin-bottom:3px;background:rgba(186,117,23,.12);color:#ba7517;text-transform:uppercase;letter-spacing:.5px">FeSi</div>
-          <div style="font-size:16px;font-weight:700;color:#ba7517;line-height:1;letter-spacing:-.3px" id="cs-fesi-pt">—</div>
-          <div style="font-size:6px;color:#ba7517;margin-top:1px;opacity:.7">৳/t</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:600;padding:1px 5px;border-radius:3px;margin-bottom:3px;background:rgba(99,153,34,.12);color:#639922;text-transform:uppercase;letter-spacing:.5px">Boric</div>
-          <div style="font-size:16px;font-weight:700;color:#639922;line-height:1;letter-spacing:-.3px" id="cs-boric-pt">—</div>
-          <div style="font-size:6px;color:#639922;margin-top:1px;opacity:.7">৳/t</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
-          <div style="font-size:6px;font-weight:600;padding:1px 5px;border-radius:3px;margin-bottom:3px;background:rgba(83,74,183,.12);color:#534ab7;text-transform:uppercase;letter-spacing:.5px">Qrtz</div>
-          <div style="font-size:16px;font-weight:700;color:#534ab7;line-height:1;letter-spacing:-.3px" id="cs-quartz-pt">—</div>
-          <div style="font-size:6px;color:#534ab7;margin-top:1px;opacity:.7">৳/t</div>
-        </div>
-      </div>
-    </div>
+
     <div style="display:flex;flex-shrink:0;border-top:2px solid var(--red)">
       <div class="cpbtn" onclick="setCostP('today')">TODAY</div>
       <div class="cpbtn on" onclick="setCostP('7d')">7D</div>
@@ -491,27 +536,26 @@ body.light{background:#f5f5f5}
       <div class="cpbtn" onclick="setCostP('14d')">14D</div>
       <div class="cpbtn" onclick="setCostP('30d')">30D</div>
     </div>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:12px 16px;background:var(--s2);min-height:0">
+    <div style="flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:7px 14px;background:var(--s2)">
       <div style="font-size:7.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Total Cost / Ton</div>
-      <div style="font-size:46px;font-weight:700;letter-spacing:-2px;color:var(--red);line-height:1;margin-bottom:10px" id="cs-tc-pt">—</div>
-      <div style="height:1px;background:var(--b1);margin-bottom:10px"></div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.6px;color:var(--red);line-height:1;margin-bottom:5px" id="cs-tc-pt">—</div>
+      <div style="height:1px;background:var(--b1);margin-bottom:5px"></div>
       <div style="display:flex;gap:28px">
         <div>
           <div style="font-size:7.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Scrap / Ton</div>
-          <div style="font-size:24px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="cs-sc-pt">—</div>
+          <div style="font-size:14px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.3px" id="cs-sc-pt">—</div>
         </div>
         <div>
           <div style="font-size:7.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Other / Ton</div>
-          <div style="font-size:24px;font-weight:700;color:var(--dim);line-height:1;letter-spacing:-.5px" id="cs-oc-pt">—</div>
+          <div style="font-size:14px;font-weight:700;color:var(--dim);line-height:1;letter-spacing:-.3px" id="cs-oc-pt">—</div>
         </div>
       </div>
-      <div style="font-size:7px;color:var(--dim3);margin-top:8px;letter-spacing:.3px">৳ per MT rod produced</div>
+      <div style="font-size:6.5px;color:var(--dim3);margin-top:4px;letter-spacing:.3px">৳ per MT rod produced</div>
     </div>
   </div>
 
   <!-- REVENUE -->
   <div class="overlay" id="ov-revenue" style="overflow:hidden">
-    <!-- TOPBAR -->
     <div class="ov-hdr" style="flex-shrink:0">
       <div style="font-size:17px;font-weight:700;letter-spacing:.5px;color:var(--txt)">Revenue</div>
       <div style="display:flex;gap:8px;align-items:center">
@@ -520,159 +564,36 @@ body.light{background:#f5f5f5}
       </div>
     </div>
 
-    <!-- SECTION 1: April heading + MTD metrics — fills ~40% -->
-    <div style="flex:2;display:flex;flex-direction:column;background:var(--s2);border-bottom:2px solid var(--red);min-height:0;flex-shrink:0">
-      <div style="display:flex;align-items:stretch;flex:1;min-height:0">
-        <div style="width:3px;background:var(--red);flex-shrink:0"></div>
-        <div style="flex:1;display:flex;flex-direction:column;padding:7px 14px;justify-content:space-between">
-          <div style="font-size:16px;font-weight:700;color:var(--txt);letter-spacing:.3px;line-height:1.2" id="rv-heading">—'s Revenue Breakdown</div>
-          <!-- Row 1 -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--b1);padding-bottom:6px">
-            <div style="padding-right:8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Avg Price</div>
-              <div style="font-size:22px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="rv-mtd-ap">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">৳/MT</div>
-            </div>
-            <div style="padding:0 8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Total Sales</div>
-              <div style="font-size:22px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-mtd-vol">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-            </div>
-            <div style="padding:0 8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Rod Revenue</div>
-              <div style="font-size:22px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-mtd-rev">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">৳</div>
-            </div>
-            <div style="padding-left:8px">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Delivery</div>
-              <div style="font-size:22px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-mtd-del">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-            </div>
-          </div>
-          <!-- Row 2 -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding-top:6px">
-            <div style="padding-right:8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Avg Market</div>
-              <div style="font-size:20px;font-weight:700;color:var(--txt3);line-height:1;letter-spacing:-.5px" id="rv-others-rate">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">৳/MT</div>
-            </div>
-            <div style="padding:0 8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">vs Market</div>
-              <div style="font-size:20px;font-weight:700;line-height:1;letter-spacing:-.5px" id="rv-mtd-vs">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">diff</div>
-            </div>
-            <div style="padding:0 8px;border-right:1px solid var(--b1)">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Other Rev</div>
-              <div style="font-size:20px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-other-rev-mtd">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">৳ MTD</div>
-            </div>
-            <div style="padding-left:8px">
-              <div style="font-size:6.5px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Rod Stock</div>
-              <div style="font-size:20px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-rod-inv">—</div>
-              <div style="font-size:6px;color:var(--dim3);margin-top:1px">MT</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- TABS -->
+    <div id="rv-tabs" style="display:flex;flex-shrink:0;border-bottom:2px solid var(--red);background:var(--s1)"></div>
 
-    <!-- SECTION 2: 2026 Overview — fills ~35% -->
-    <div style="flex:2;display:flex;flex-direction:column;min-height:0">
-      <div style="padding:5px 14px;background:var(--bg);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);flex-shrink:0">
-        <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">2026 Overview</div>
-      </div>
-      <!-- Salesman rates row -->
-      <div style="flex:1;display:flex;align-items:stretch;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Mahfuz Sir</div>
-          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px" id="rv-mahfuz-avg">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:1px">avg ৳/MT</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Meraj</div>
-          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px" id="rv-meraj-avg">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:1px">avg ৳/MT</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Nadim</div>
-          <div style="font-size:16px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.3px" id="rv-nadim-avg">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:1px">avg ৳/MT</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:2px">Halima</div>
-          <div style="font-size:16px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.3px" id="rv-halima-avg">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:1px">avg ৳/MT</div>
-        </div>
-      </div>
-      <!-- Halima vs Others bar row -->
-      <div style="flex:1;display:flex;align-items:stretch;background:var(--s1);border-bottom:1px solid var(--b1);min-height:0">
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:4px;letter-spacing:.8px">Halima Steel Corp</div>
-          <div style="height:5px;background:var(--b1);border-radius:3px;margin-bottom:3px"><div id="rv-halima-bar" style="height:5px;border-radius:3px;background:var(--red);width:100%"></div></div>
-          <div style="font-size:10px;font-weight:700;color:var(--red);letter-spacing:-.2px" id="rv-halima-vol">—</div>
-          <div style="font-size:6px;color:var(--dim3)">MT sold YTD</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 12px">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);margin-bottom:4px;letter-spacing:.8px">All Other Customers</div>
-          <div style="height:5px;background:var(--b1);border-radius:3px;margin-bottom:3px"><div id="rv-others-bar" style="height:5px;border-radius:3px;background:var(--silver);width:100%"></div></div>
-          <div style="font-size:10px;font-weight:700;color:var(--txt2);letter-spacing:-.2px" id="rv-others-vol">—</div>
-          <div style="font-size:6px;color:var(--dim3)">MT sold YTD</div>
-        </div>
-      </div>
-      <!-- Top regions -->
-      <div style="flex:1;display:flex;align-items:stretch;background:var(--card);border-bottom:1px solid var(--b1);min-height:0">
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:2px">Top Region</div>
-          <div style="font-size:12px;font-weight:700;color:var(--red);line-height:1" id="rv-reg1-name">—</div>
-          <div style="font-size:9px;font-weight:600;color:var(--txt2)" id="rv-reg1-qty">—</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:2px">2nd Region</div>
-          <div style="font-size:12px;font-weight:700;color:var(--txt2);line-height:1" id="rv-reg2-name">—</div>
-          <div style="font-size:9px;font-weight:600;color:var(--txt3)" id="rv-reg2-qty">—</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px;border-right:1px solid var(--b1)">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:2px">3rd Region</div>
-          <div style="font-size:12px;font-weight:700;color:var(--txt2);line-height:1" id="rv-reg3-name">—</div>
-          <div style="font-size:9px;font-weight:600;color:var(--txt3)" id="rv-reg3-qty">—</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 10px">
-          <div style="font-size:6px;font-weight:500;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:2px">Other Rev 2026</div>
-          <div style="font-size:14px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.2px" id="rv-other-rev-total">—</div>
-          <div style="font-size:6px;color:var(--dim3)">৳ non-rod</div>
-        </div>
-      </div>
-    </div>
+    <!-- TAB BODY (scrollable) -->
+    <div id="rv-body" style="flex:1;overflow-y:auto;min-height:0;background:var(--bg)"></div>
 
-    <!-- SECTION 3: TOGGLE + DRIVEN DATA — fills ~25% -->
-    <div style="flex:1.5;display:flex;flex-direction:column;min-height:0">
-      <div style="display:flex;flex-shrink:0;border-top:2px solid var(--red)">
-        <div id="rv-tbtn-today" onclick="setRvP('today')" style="flex:1;padding:10px 2px;text-align:center;font-size:9px;font-weight:700;color:var(--dim);border-right:1px solid var(--b1);background:var(--bg);text-transform:uppercase;cursor:pointer;letter-spacing:.5px">TODAY</div>
-        <div id="rv-tbtn-7d"   onclick="setRvP('7d')"   style="flex:1;padding:10px 2px;text-align:center;font-size:9px;font-weight:700;background:var(--red);color:#fff;border-right:1px solid var(--b1);text-transform:uppercase;cursor:pointer;letter-spacing:.5px">7D</div>
-        <div id="rv-tbtn-10d" onclick="setRvP('10d')"  style="flex:1;padding:10px 2px;text-align:center;font-size:9px;font-weight:700;color:var(--dim);border-right:1px solid var(--b1);background:var(--bg);text-transform:uppercase;cursor:pointer;letter-spacing:.5px">10D</div>
-        <div id="rv-tbtn-14d" onclick="setRvP('14d')"  style="flex:1;padding:10px 2px;text-align:center;font-size:9px;font-weight:700;color:var(--dim);border-right:1px solid var(--b1);background:var(--bg);text-transform:uppercase;cursor:pointer;letter-spacing:.5px">14D</div>
-        <div id="rv-tbtn-30d" onclick="setRvP('30d')"  style="flex:1;padding:10px 2px;text-align:center;font-size:9px;font-weight:700;color:var(--dim);background:var(--bg);text-transform:uppercase;cursor:pointer;letter-spacing:.5px">30D</div>
-      </div>
-      <!-- Toggle-driven data -->
-      <div style="flex:1;display:flex;align-items:stretch;background:var(--s2);min-height:0">
-        <div style="flex:1.4;display:flex;flex-direction:column;justify-content:center;padding:0 14px;border-right:1px solid var(--b1)">
-          <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Total Sales Volume</div>
-          <div style="font-size:36px;font-weight:700;letter-spacing:-2px;color:var(--txt);line-height:1" id="rv-vol-big">—</div>
-          <div style="font-size:6.5px;color:var(--dim3);margin-top:2px">MT sold</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-right:1px solid var(--b1)">
-          <div style="font-size:7px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">HKG Avg Rate</div>
-          <div style="font-size:22px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-.5px" id="rv-hkg-rate">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:2px">৳/ton wtd avg</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 12px">
-          <div style="font-size:7px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Total Sales Rev</div>
-          <div style="font-size:22px;font-weight:700;color:var(--txt2);line-height:1;letter-spacing:-.5px" id="rv-rev-big">—</div>
-          <div style="font-size:6px;color:var(--dim3);margin-top:2px">৳</div>
-        </div>
-      </div>
+    <!-- COMPACT PERIOD TOGGLE (matches Costing tab style) -->
+    <div style="display:flex;flex-shrink:0;border-top:2px solid var(--red)">
+      <div class="cpbtn" onclick="setRvP('today')">TODAY</div>
+      <div class="cpbtn on" onclick="setRvP('7d')">7D</div>
+      <div class="cpbtn" onclick="setRvP('10d')">10D</div>
+      <div class="cpbtn" onclick="setRvP('14d')">14D</div>
+      <div class="cpbtn" onclick="setRvP('30d')">30D</div>
     </div>
-
+    <div style="flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:7px 14px;background:var(--s2)">
+      <div style="font-size:7.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">Period Revenue</div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.6px;color:var(--red);line-height:1;margin-bottom:5px" id="rv-per-rev">—</div>
+      <div style="height:1px;background:var(--b1);margin-bottom:5px"></div>
+      <div style="display:flex;gap:28px">
+        <div>
+          <div style="font-size:7.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Volume</div>
+          <div style="font-size:14px;font-weight:700;color:var(--silver);line-height:1;letter-spacing:-.3px"><span id="rv-per-vol">—</span> <span style="font-size:8px;color:var(--dim3);font-weight:500">MT</span></div>
+        </div>
+        <div>
+          <div style="font-size:7.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Avg Price</div>
+          <div style="font-size:14px;font-weight:700;color:var(--silver);line-height:1;letter-spacing:-.3px">৳<span id="rv-per-px">—</span></div>
+        </div>
+      </div>
+      <div style="font-size:6.5px;color:var(--dim3);margin-top:4px;letter-spacing:.3px">৳ revenue from rod sales in selected period</div>
+    </div>
   </div>
   <!-- MARGINS -->
   <div class="overlay" id="ov-margins" style="overflow:hidden">
@@ -695,6 +616,8 @@ body.light{background:#f5f5f5}
         <button class="ov-back" onclick="closeOv()">← Back</button>
       </div>
     </div>
+    <div id="iv-tabs" style="display:flex;flex-shrink:0;border-bottom:2px solid var(--red);background:var(--s1)"></div>
+    <div id="iv-body-stocks" style="display:contents">
 
     <!-- CLOSING STOCKS label -->
     <div style="padding:5px 14px;background:var(--bg);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);flex-shrink:0">
@@ -817,6 +740,9 @@ body.light{background:#f5f5f5}
       <div style="font-size:26px;font-weight:700;letter-spacing:-1px;color:var(--red)" id="iv-total-val">—</div>
     </div>
 
+  
+    </div>
+    <div id="iv-body-detail" style="flex:1;overflow-y:auto;min-height:0;display:none;background:var(--bg)"></div>
   </div>
   <!-- FINANCES (replaces placeholder) -->
   <div class="overlay" id="ov-finances">
@@ -1223,7 +1149,7 @@ window.openOv=function(name){
 
 
 var D={},curP='7d',costP='7d',rvP='7d';
-var EMBEDDED={"meta":{"latest_date":"30 Apr 2026","latest_date_iso":"2026-04-30","mtd_start":"01 Apr 2026","generated":"06 May 2026 16:41","data_note":"Rebuilt with corrected per-day costing anchored 30 Apr 2026."},"periods":{"today":{"sales_vol":325.0,"rod":87.69,"billet":301.55,"billet_prod":301.55,"sc_consumed":328.7,"hms_consumed":290.7,"bun_consumed":38.0,"total_scrap_consumed":328.7,"scrap_purchased_mt":112.1,"delivery":209.7,"trucks":14,"pct_delivered":64.5,"avg_price":80177,"scrap_per_billet_pt":54170,"scrap_per_rod_pt":54170,"scrap_consump_pt":54170,"other_cost_pt":48308,"elec_pt":27770,"salary_pt":4510,"total_cost_pt":102479,"margin_pt":-22302,"px_sc_diff":30824,"scrap_exp_pt":49352,"scrap_to_billet":1.09,"scrap_to_rod":3.748,"revenue":26057500,"est_rev_sales":26057500,"other_rev":900000,"total_rev":26957500,"gross_margin":6386260,"scrap_exp_total":5531914,"scrap_consump_total":16334832,"scrap_cost_total":16334832,"other_cost_total":4236408,"oc_total":4236408,"electricity":2435298,"gas":0,"oxygen":9740,"salary_total":395515,"salary_rolling":300000,"salary_office":49290,"salary_labour":46225,"maintenance":66000,"simn":827730,"fesi":26355,"simn_pt":9439,"fesi_pt":301,"boric":14625,"quartz":70000,"boric_pt":167,"quartz_pt":798,"internal_bundle":0},"mtd":{"sales_vol":4793.3,"rod":5799.62,"billet":6805.17,"billet_prod":6805.17,"sc_consumed":7612.9,"hms_consumed":6627.4,"bun_consumed":985.5,"total_scrap_consumed":7612.9,"scrap_purchased_mt":7225.0,"delivery":5838.7,"trucks":368,"pct_delivered":121.8,"avg_price":83229,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"scrap_consump_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"margin_pt":3880,"px_sc_diff":30789,"scrap_exp_pt":52440,"scrap_to_billet":1.119,"scrap_to_rod":1.313,"revenue":398939590,"est_rev_sales":398939590,"other_rev":11705980,"total_rev":410645570,"gross_margin":-108243906,"scrap_exp_total":378875561,"scrap_consump_total":397234243,"scrap_cost_total":397234243,"other_cost_total":121655233,"oc_total":121655233,"electricity":60446708,"gas":6974576,"oxygen":292200,"salary_total":11865450,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"simn":18200880,"fesi":678615,"simn_pt":3138,"fesi_pt":117,"boric":497260,"quartz":2481250,"boric_pt":86,"quartz_pt":428,"internal_bundle":0},"7d":{"sales_vol":670.9,"rod":1308.66,"billet":1828.17,"billet_prod":1828.17,"sc_consumed":1963.3,"hms_consumed":1753.8,"bun_consumed":209.5,"total_scrap_consumed":1963.3,"scrap_purchased_mt":1500.3,"delivery":1305.47,"trucks":84,"pct_delivered":194.6,"avg_price":81558,"scrap_per_billet_pt":54020,"scrap_per_rod_pt":54020,"scrap_consump_pt":54020,"other_cost_pt":23652,"elec_pt":12306,"salary_pt":2116,"total_cost_pt":77673,"margin_pt":3885,"px_sc_diff":31064,"scrap_exp_pt":50494,"scrap_to_billet":1.074,"scrap_to_rod":1.5,"revenue":54714790,"est_rev_sales":54714790,"other_rev":4978040,"total_rev":59692830,"gross_margin":-70018635,"scrap_exp_total":75753938,"scrap_consump_total":98758277,"scrap_cost_total":98758277,"other_cost_total":30953188,"oc_total":30953188,"electricity":16104002,"gas":1251336,"oxygen":68180,"salary_total":2768605,"salary_rolling":2100000,"salary_office":345030,"salary_labour":323575,"maintenance":462000,"simn":5062770,"fesi":181335,"simn_pt":3869,"fesi_pt":139,"boric":131625,"quartz":645000,"boric_pt":101,"quartz_pt":493,"internal_bundle":0},"10d":{"sales_vol":1518.4,"rod":1901.99,"billet":2367.99,"billet_prod":2367.99,"sc_consumed":2538.2,"hms_consumed":2268.7,"bun_consumed":269.5,"total_scrap_consumed":2538.2,"scrap_purchased_mt":2352.0,"delivery":1981.27,"trucks":127,"pct_delivered":130.5,"avg_price":82392,"scrap_per_billet_pt":54301,"scrap_per_rod_pt":54301,"scrap_consump_pt":54301,"other_cost_pt":21910,"elec_pt":11055,"salary_pt":2079,"total_cost_pt":76211,"margin_pt":6180,"px_sc_diff":31286,"scrap_exp_pt":51106,"scrap_to_billet":1.072,"scrap_to_rod":1.334,"revenue":125101040,"est_rev_sales":125101040,"other_rev":8742140,"total_rev":133843180,"gross_margin":-36414215,"scrap_exp_total":120198292,"scrap_consump_total":128584802,"scrap_cost_total":128584802,"other_cost_total":41672593,"oc_total":41672593,"electricity":21026010,"gas":2105586,"oxygen":97400,"salary_total":3955150,"salary_rolling":3000000,"salary_office":492900,"salary_labour":462250,"maintenance":660000,"simn":6412230,"fesi":250215,"simn_pt":3371,"fesi_pt":132,"boric":190125,"quartz":930625,"boric_pt":100,"quartz_pt":489,"internal_bundle":0},"14d":{"sales_vol":2889.0,"rod":2723.15,"billet":3131.52,"billet_prod":3131.52,"sc_consumed":3349.6,"hms_consumed":2974.3,"bun_consumed":375.3,"total_scrap_consumed":3349.6,"scrap_purchased_mt":3228.2,"delivery":2821.97,"trucks":182,"pct_delivered":97.7,"avg_price":81937,"scrap_per_billet_pt":54241,"scrap_per_rod_pt":54241,"scrap_consump_pt":54241,"other_cost_pt":20936,"elec_pt":10378,"salary_pt":2033,"total_cost_pt":75177,"margin_pt":6760,"px_sc_diff":30846,"scrap_exp_pt":51091,"scrap_to_billet":1.07,"scrap_to_rod":1.23,"revenue":236712790,"est_rev_sales":236712790,"other_rev":8772940,"total_rev":245485730,"gross_margin":18617180,"scrap_exp_total":164930317,"scrap_consump_total":169857416,"scrap_cost_total":169857416,"other_cost_total":57011134,"oc_total":57011134,"electricity":28261113,"gas":3307248,"oxygen":136360,"salary_total":5537210,"salary_rolling":4200000,"salary_office":690060,"salary_labour":647150,"maintenance":924000,"simn":8512920,"fesi":333690,"simn_pt":3126,"fesi_pt":123,"boric":243750,"quartz":1193125,"boric_pt":90,"quartz_pt":438,"internal_bundle":0},"30d":{"sales_vol":4793.3,"rod":5799.62,"billet":6805.17,"billet_prod":6805.17,"sc_consumed":7612.9,"hms_consumed":6627.4,"bun_consumed":985.5,"total_scrap_consumed":7612.9,"scrap_purchased_mt":7225.0,"delivery":5838.7,"trucks":368,"pct_delivered":121.8,"avg_price":83229,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"scrap_consump_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"margin_pt":3880,"px_sc_diff":30789,"scrap_exp_pt":52440,"scrap_to_billet":1.119,"scrap_to_rod":1.313,"revenue":398939590,"est_rev_sales":398939590,"other_rev":11705980,"total_rev":410645570,"gross_margin":-108243906,"scrap_exp_total":378875561,"scrap_consump_total":397234243,"scrap_cost_total":397234243,"other_cost_total":121655233,"oc_total":121655233,"electricity":60446708,"gas":6974576,"oxygen":292200,"salary_total":11865450,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"simn":18200880,"fesi":678615,"simn_pt":3138,"fesi_pt":117,"boric":497260,"quartz":2481250,"boric_pt":86,"quartz_pt":428,"internal_bundle":0}},"cash_periods":{"7d":{"sent":87125529,"received":82996930,"net":-4128599},"10d":{"sent":152754955,"received":138761980,"net":-13992975},"14d":{"sent":222796910,"received":215173380,"net":-7623530},"30d":{"sent":485291837,"received":473227480,"net":-12064357},"mtd":{"sent":485291837,"received":473227480,"net":-12064357},"ytd":{"sent":1960076028,"received":1925901940,"net":-34174088}},"competitors":{"hkg_today":81558,"others_avg":84800,"bsrm":95000,"hkg_vs_others":-3242,"hkg_vs_bsrm":-13442},"stocks":{"hms":382.902,"bundle":82.43,"billet":702.356,"rod":167.612,"simn":19.565,"fesi":2.45},"monthly":[{"month":"2026-01","label":"Jan 2026","month_name":"January","rod":7013.35,"sales_vol":7709.4,"billet_produced":7744.18,"scrap_consumed":8458.3,"delivery":7047.12,"trucks":397,"revenue":560645855,"other_revenue":14743154,"total_revenue":575389009,"avg_price":72722,"cash_received":525044050,"scrap_cost_total":393433759,"other_cost_total":135699177,"electricity":71130937,"salary_total":10843707,"scrap_per_billet_pt":50804,"scrap_per_rod_pt":50804,"other_cost_pt":19349,"elec_pt":10142,"salary_pt":1546,"total_cost_pt":70152,"scrap_consump_pt":50804,"margin_pt":2570,"gross_margin":46256073,"cash_paid":544585373,"cash_net":-19541323,"scrap_exp_total":389913056,"scrap_exp_pt":47007,"px_sc_diff":25715,"top_customers":[{"name":"Halima Steel Corp","mt":6791.0,"rev":493339000},{"name":"Mamun & Brothers","mt":155.6,"rev":11242375},{"name":"Mandal Hardare","mt":110.0,"rev":8098200},{"name":"Kabir Trading","mt":91.0,"rev":6716000},{"name":"Naofa Trading","mt":84.0,"rev":6105400},{"name":"Khorshed Alam & Brothers","mt":73.0,"rev":5278000}],"salesmen":[{"name":"Mahfuz Sir","mt":6866.9,"rev":499000880,"avg_px":72668},{"name":"Nadim","mt":475.6,"rev":34819075,"avg_px":73219},{"name":"Meraj","mt":332.0,"rev":24214400,"avg_px":72935},{"name":"Farhan","mt":14.0,"rev":1022000,"avg_px":73000},{"name":"Factory","mt":13.0,"rev":981500,"avg_px":75500},{"name":"Atik Sir","mt":8.0,"rev":608000,"avg_px":76000},{"name":"Saiful Sir","mt":0.0,"rev":0,"avg_px":0}],"regions":[{"name":"Sylhet","mt":1875.5,"rev":136390111,"trucks":83},{"name":"Sirajganj","mt":762.0,"rev":55414164,"trucks":42},{"name":"Jessore","mt":499.9,"rev":36353728,"trucks":31},{"name":"Cumilla","mt":422.4,"rev":30717773,"trucks":27},{"name":"Pabna","mt":388.0,"rev":28216136,"trucks":18},{"name":"Barishal","mt":293.0,"rev":21307546,"trucks":18},{"name":"Jhenaidah","mt":234.0,"rev":17016948,"trucks":13},{"name":"Meherpur","mt":201.0,"rev":14617122,"trucks":13}],"cost_breakdown":{"electricity":71130937,"gas":7028658,"oxygen":286440,"lpg":387004,"furnace_oil":0,"salary_rolling":7932063,"salary_office":1478669,"salary_labour":1432975,"maintenance":258354,"transport":0,"admin":2849985,"vat":14027006,"simn":20266380,"fesi":865515,"boric":565500,"quartz":2758125},"competitors":{"hkg":72722,"bsrm":77194,"salam":73645,"ricl":73645,"jsrm":73645,"rani":73645,"sas":73645,"market":74237,"others_avg":74236},"other_rev_breakdown":[{"item":"Ovel","mt":174.7,"rev":10880004,"txns":9},{"item":"Fly Ash","mt":72.1,"rev":2409550,"txns":3},{"item":"Cut Pcs","mt":18.0,"rev":1170000,"txns":1},{"item":"SS Bangla","mt":3.0,"rev":283600,"txns":2}]},{"month":"2026-02","label":"Feb 2026","month_name":"February","rod":5929.22,"sales_vol":5113.7,"billet_produced":6730.53,"scrap_consumed":7344.0,"delivery":5928.34,"trucks":332,"revenue":398279610,"other_revenue":16834876,"total_revenue":415114486,"avg_price":77885,"cash_received":465247510,"scrap_cost_total":359770412,"other_cost_total":122234650,"electricity":61794635,"salary_total":10918572,"scrap_per_billet_pt":53453,"scrap_per_rod_pt":53453,"other_cost_pt":20616,"elec_pt":10422,"salary_pt":1841,"total_cost_pt":74069,"scrap_consump_pt":53453,"margin_pt":3816,"gross_margin":-66890576,"cash_paid":477931828,"cash_net":-12684318,"scrap_exp_total":353906460,"scrap_exp_pt":49778,"px_sc_diff":28108,"top_customers":[{"name":"Halima Steel Corp","mt":4334.0,"rev":337228500},{"name":"Mamun & Brothers","mt":190.0,"rev":14807200},{"name":"Trusr Iron & Steel Store","mt":82.0,"rev":6501200},{"name":"Faruk Enterprise","mt":70.0,"rev":5418000},{"name":"Anowara Group","mt":50.0,"rev":3970000},{"name":"Mandal Hardware","mt":44.0,"rev":3388000}],"salesmen":[{"name":"Mahfuz Sir","mt":4405.1,"rev":342848025,"avg_px":77829},{"name":"Nadim","mt":395.8,"rev":30945650,"avg_px":78185},{"name":"Meraj","mt":291.7,"rev":22813750,"avg_px":78210},{"name":"Atik Sir","mt":12.0,"rev":960000,"avg_px":80000},{"name":"Zahir Sir","mt":9.0,"rev":712185,"avg_px":79000},{"name":"Saiful Sir","mt":0.0,"rev":0,"avg_px":0},{"name":"Factory","mt":0.0,"rev":0,"avg_px":0}],"regions":[{"name":"Sylhet","mt":1349.0,"rev":105066865,"trucks":56},{"name":"Sirajganj","mt":534.0,"rev":41590590,"trucks":29},{"name":"Jessore","mt":311.0,"rev":24222235,"trucks":19},{"name":"Cumilla","mt":299.3,"rev":23310980,"trucks":19},{"name":"Bogura","mt":265.0,"rev":20639525,"trucks":19},{"name":"Pabna","mt":223.0,"rev":17368355,"trucks":12},{"name":"Chuadanga","mt":203.5,"rev":15849598,"trucks":12},{"name":"Jhenaidah","mt":186.0,"rev":14486610,"trucks":12}],"cost_breakdown":{"electricity":61794635,"gas":6664664,"oxygen":222250,"lpg":280675,"furnace_oil":0,"salary_rolling":8147440,"salary_office":1478680,"salary_labour":1292452,"maintenance":233352,"transport":0,"admin":4799984,"vat":11852430,"simn":18370710,"fesi":595455,"boric":482625,"quartz":2519375},"competitors":{"hkg":77885,"bsrm":84929,"salam":82821,"ricl":79964,"jsrm":79964,"rani":79964,"sas":79964,"market":81268,"others_avg":81268},"other_rev_breakdown":[{"item":"Ovel","mt":201.4,"rev":12806876,"txns":10},{"item":"Cut Pcs","mt":60.0,"rev":4028000,"txns":3}]},{"month":"2026-03","label":"Mar 2026","month_name":"March","rod":5104.33,"sales_vol":5850.0,"billet_produced":5644.33,"scrap_consumed":6132.1,"delivery":5076.45,"trucks":292,"revenue":485067200,"other_revenue":13724870,"total_revenue":498792070,"avg_price":82917,"cash_received":462382900,"scrap_cost_total":315580056,"other_cost_total":108446321,"electricity":52061605,"salary_total":13717438,"scrap_per_billet_pt":55911,"scrap_per_rod_pt":55911,"other_cost_pt":21246,"elec_pt":10199,"salary_pt":2687,"total_cost_pt":77157,"scrap_consump_pt":55911,"margin_pt":5761,"gross_margin":74765693,"cash_paid":452266990,"cash_net":10115910,"scrap_exp_total":296313666,"scrap_exp_pt":51553,"px_sc_diff":31365,"top_customers":[{"name":"Halima Steel Corp","mt":5041.0,"rev":418102000},{"name":"Mandal Hardware","mt":140.0,"rev":11757000},{"name":"Mamun & Brothers","mt":114.0,"rev":9365000},{"name":"Trusr Iron & Steel Store","mt":104.0,"rev":8294000},{"name":"Khorshed Alam & Brothers","mt":90.0,"rev":7560000},{"name":"Naofa Trading","mt":84.0,"rev":7042000}],"salesmen":[{"name":"Mahfuz Sir","mt":4541.0,"rev":374852000,"avg_px":82548},{"name":"Factory","mt":505.0,"rev":43672000,"avg_px":86479},{"name":"Nadim","mt":462.0,"rev":38168000,"avg_px":82615},{"name":"Meraj","mt":342.0,"rev":28375200,"avg_px":82968}],"regions":[{"name":"Sirajganj","mt":606.0,"rev":50247702,"trucks":28},{"name":"Sylhet","mt":458.0,"rev":37975986,"trucks":20},{"name":"Jessore","mt":297.0,"rev":24626349,"trucks":20},{"name":"Cumilla","mt":293.6,"rev":24344431,"trucks":17},{"name":"Chandpur","mt":265.4,"rev":22006172,"trucks":13},{"name":"Barishal","mt":243.5,"rev":20190290,"trucks":16},{"name":"Jhenaidah","mt":226.0,"rev":18739242,"trucks":14},{"name":"Brahmanbaria","mt":200.0,"rev":16583400,"trucks":9}],"cost_breakdown":{"electricity":52061605,"gas":7134450,"oxygen":204540,"lpg":297570,"furnace_oil":0,"salary_rolling":9349972,"salary_office":2218019,"salary_labour":2149447,"maintenance":258354,"transport":0,"admin":2929996,"vat":10207814,"simn":14507460,"fesi":541485,"boric":453375,"quartz":2439375},"competitors":{"hkg":82917,"bsrm":92900,"salam":89645,"ricl":87935,"jsrm":88258,"rani":86226,"sas":86419,"market":88564,"others_avg":88564},"other_rev_breakdown":[{"item":"Ovel","mt":117.3,"rev":7598370,"txns":6},{"item":"Fly Ash","mt":30.0,"rev":2850000,"txns":1},{"item":"Cut Pcs","mt":31.0,"rev":2294000,"txns":2},{"item":"Scrap Soil","mt":10.0,"rev":700000,"txns":1},{"item":"SS Bangla","mt":3.0,"rev":282500,"txns":2}]},{"month":"2026-04","label":"Apr 2026","month_name":"April","rod":5799.62,"sales_vol":4793.3,"billet_produced":6805.17,"scrap_consumed":7612.9,"delivery":5838.7,"trucks":368,"revenue":398939590,"other_revenue":11705980,"total_revenue":410645570,"avg_price":83229,"cash_received":473227480,"scrap_cost_total":397234243,"other_cost_total":121655233,"electricity":60446708,"salary_total":11865450,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"scrap_consump_pt":58372,"margin_pt":3880,"gross_margin":-108243906,"cash_paid":485291837,"cash_net":-12064357,"scrap_exp_total":378875561,"scrap_exp_pt":52440,"px_sc_diff":30789,"top_customers":[{"name":"Halima Steel Corp","mt":3642.0,"rev":301429000},{"name":"Mazidsons Construction Ltd","mt":239.5,"rev":20913850},{"name":"Mohammadi Trading","mt":200.8,"rev":16845500},{"name":"Halima Steel Corp.","mt":200.0,"rev":16600000},{"name":"Naofa Trading","mt":71.0,"rev":6086500},{"name":"Mokka Traders","mt":70.0,"rev":5992000}],"salesmen":[{"name":"Mahfuz Sir","mt":3918.4,"rev":325534150,"avg_px":83078},{"name":"Meraj","mt":424.5,"rev":35849100,"avg_px":84450},{"name":"Nadim","mt":231.0,"rev":19270600,"avg_px":83423},{"name":"Factory","mt":209.4,"rev":17408740,"avg_px":83148},{"name":"Atik Sir","mt":10.0,"rev":877000,"avg_px":87700}],"regions":[{"name":"Sylhet","mt":842.0,"rev":70078818,"trucks":37},{"name":"Cumilla","mt":685.0,"rev":57008536,"trucks":42},{"name":"Sirajganj","mt":294.0,"rev":24469326,"trucks":17},{"name":"Jessore","mt":249.1,"rev":20729847,"trucks":16},{"name":"Noakhali","mt":226.9,"rev":18884660,"trucks":18},{"name":"Chuadanga","mt":214.0,"rev":17811006,"trucks":14},{"name":"Barishal","mt":189.0,"rev":15730281,"trucks":14},{"name":"Chandpur","mt":189.0,"rev":15730281,"trucks":13}],"cost_breakdown":{"electricity":60446708,"gas":6974576,"oxygen":292200,"lpg":425100,"furnace_oil":0,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"transport":60000,"admin":2835480,"vat":11599238,"simn":18200880,"fesi":678615,"boric":497260,"quartz":2481250},"competitors":{"hkg":83229,"bsrm":95900,"salam":90183,"ricl":87617,"jsrm":87433,"rani":85133,"sas":85850,"market":88686,"others_avg":88686},"other_rev_breakdown":[{"item":"Ovel","mt":121.8,"rev":7888380,"txns":6},{"item":"Cut Pcs","mt":41.0,"rev":2917600,"txns":4},{"item":"Steel Kachra","mt":100.0,"rev":900000,"txns":1}]}],"top_customers":[{"name":"Halima Steel Corp","vol":19808,"rev":1550098500,"avg_px":78256},{"name":"Mamun & Brothers","vol":474,"rev":36632575,"avg_px":77357},{"name":"Naofa Trading","vol":281,"rev":22581300,"avg_px":80360},{"name":"Mazidsons Construction Ltd","vol":240,"rev":20913850,"avg_px":87323},{"name":"Trusr Iron & Steel Store","vol":254,"rev":20216800,"avg_px":79594},{"name":"Mohammadi Trading","vol":201,"rev":16845500,"avg_px":83892},{"name":"Halima Steel Corp.","vol":200,"rev":16600000,"avg_px":83000},{"name":"Mandal Hardware","vol":191,"rev":15757500,"avg_px":82500},{"name":"Khorshed Alam & Brothers","vol":193,"rev":15259000,"avg_px":79062},{"name":"Madani Traders","vol":139,"rev":11217600,"avg_px":80702}],"salesmen":[{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"txns":110,"regions":11,"customers":8,"avg_px":78161},{"name":"Nadim","vol":1564.3,"rev":123203325,"txns":81,"regions":18,"customers":19,"avg_px":78757},{"name":"Meraj","vol":1390.2,"rev":111252450,"txns":80,"regions":6,"customers":14,"avg_px":80026},{"name":"Factory","vol":727.4,"rev":62062240,"txns":25,"regions":4,"customers":19,"avg_px":85324},{"name":"Atik Sir","vol":30.0,"rev":2445000,"txns":3,"regions":2,"customers":2,"avg_px":81500},{"name":"Farhan","vol":14.0,"rev":1022000,"txns":1,"regions":1,"customers":1,"avg_px":73000},{"name":"Zahir Sir","vol":9.0,"rev":712185,"txns":1,"regions":1,"customers":1,"avg_px":79000},{"name":"Saiful Sir","vol":0.0,"rev":0,"txns":24,"regions":2,"customers":4,"avg_px":0}],"revenue_data":{"ytd":{"other_rev":57008880,"other_sales":51,"top_regions":[["Sylhet",4524.5,355332309],["Sirajganj",2196.0,172463200],["Cumilla",1700.3,133530183],["Jessore",1357.0,106569849],["Pabna",941.0,73901581]]},"rates":{"mahfuz":78161,"meraj":80026,"nadim":78757,"halima":78304,"others_rod":79875},"top_repeat_customers":[{"name":"Halima Steel Corp","vol":19808,"rev":1550098500,"txns":90,"avg":78256},{"name":"Mamun & Brothers","vol":474,"rev":36632575,"txns":19,"avg":77357},{"name":"Naofa Trading","vol":281,"rev":22581300,"txns":17,"avg":80360},{"name":"Mazidsons Construction Ltd","vol":240,"rev":20913850,"txns":9,"avg":87323},{"name":"Trusr Iron & Steel Store","vol":254,"rev":20216800,"txns":13,"avg":79594},{"name":"Mohammadi Trading","vol":201,"rev":16845500,"txns":5,"avg":83892},{"name":"Halima Steel Corp.","vol":200,"rev":16600000,"txns":1,"avg":83000},{"name":"Mandal Hardware","vol":191,"rev":15757500,"txns":9,"avg":82500},{"name":"Khorshed Alam & Brothers","vol":193,"rev":15259000,"txns":12,"avg":79062},{"name":"Madani Traders","vol":139,"rev":11217600,"txns":9,"avg":80702}],"rod_inventory":167.612,"scrap_diff":{"curr":52440,"prev":51553,"diff":887},"halima_vs_others":{"halima_avg":78304,"halima_vol":20008,"others_avg":79875,"others_vol":3458},"mtd_other_rev":11705980,"regions_ytd":[{"name":"Sylhet","vol":4524.5,"rev":355332309,"trucks":196,"customers":5,"avg_px":78535},{"name":"Sirajganj","vol":2196.0,"rev":172463200,"trucks":116,"customers":5,"avg_px":78535},{"name":"Cumilla","vol":1700.3,"rev":133530183,"trucks":105,"customers":19,"avg_px":78535},{"name":"Jessore","vol":1357.0,"rev":106569849,"trucks":86,"customers":5,"avg_px":78535},{"name":"Pabna","vol":941.0,"rev":73901581,"trucks":48,"customers":3,"avg_px":78535},{"name":"Barishal","vol":899.5,"rev":70642372,"trucks":60,"customers":5,"avg_px":78535},{"name":"Jhenaidah","vol":795.0,"rev":62435448,"trucks":49,"customers":3,"avg_px":78535},{"name":"Chuadanga","vol":732.5,"rev":57527001,"trucks":45,"customers":3,"avg_px":78535},{"name":"Chandpur","vol":642.4,"rev":50450984,"trucks":39,"customers":6,"avg_px":78535},{"name":"Bogura","vol":615.0,"rev":48299120,"trucks":44,"customers":4,"avg_px":78535},{"name":"Noakhali","vol":561.0,"rev":44058222,"trucks":44,"customers":5,"avg_px":78535},{"name":"Meherpur","vol":543.0,"rev":42644589,"trucks":33,"customers":2,"avg_px":78535},{"name":"Brahmanbaria","vol":532.0,"rev":41780702,"trucks":24,"customers":3,"avg_px":78535},{"name":"Jamalpur","vol":399.0,"rev":31335527,"trucks":17,"customers":4,"avg_px":78535},{"name":"Satkhira","vol":397.0,"rev":31178457,"trucks":20,"customers":5,"avg_px":78535},{"name":"Khulna","vol":366.0,"rev":28743867,"trucks":25,"customers":4,"avg_px":78535},{"name":"Rajbari","vol":301.0,"rev":23639082,"trucks":14,"customers":2,"avg_px":78535},{"name":"Munshiganj","vol":294.5,"rev":23128603,"trucks":23,"customers":2,"avg_px":78535},{"name":"Naogaon","vol":290.0,"rev":22775195,"trucks":21,"customers":3,"avg_px":78535},{"name":"Lakshmipur","vol":275.7,"rev":21652142,"trucks":19,"customers":6,"avg_px":78535},{"name":"Rajshahi","vol":271.0,"rev":21283027,"trucks":16,"customers":6,"avg_px":78535},{"name":"Patuakhali","vol":261.0,"rev":20497675,"trucks":19,"customers":3,"avg_px":78535},{"name":"Mymensingh","vol":258.0,"rev":20262855,"trucks":13,"customers":7,"avg_px":78535},{"name":"Dinajpur","vol":249.0,"rev":19555254,"trucks":16,"customers":3,"avg_px":78535},{"name":"Natore","vol":233.0,"rev":18298691,"trucks":16,"customers":3,"avg_px":78535},{"name":"Feni","vol":225.2,"rev":17686117,"trucks":14,"customers":7,"avg_px":78535},{"name":"Dhaka","vol":225.1,"rev":17674337,"trucks":15,"customers":8,"avg_px":78535},{"name":"Joypurhat","vol":219.5,"rev":17238467,"trucks":14,"customers":4,"avg_px":78535},{"name":"Bhairab","vol":205.0,"rev":16099707,"trucks":9,"customers":2,"avg_px":78535},{"name":"Saidpur","vol":198.0,"rev":15549961,"trucks":13,"customers":2,"avg_px":78535},{"name":"Sherpur","vol":186.0,"rev":14607539,"trucks":8,"customers":3,"avg_px":78535},{"name":"Barguna","vol":180.0,"rev":14136328,"trucks":13,"customers":3,"avg_px":78535},{"name":"Kushtia","vol":163.0,"rev":12801230,"trucks":8,"customers":2,"avg_px":78535},{"name":"B-Baria","vol":160.0,"rev":12565625,"trucks":7,"customers":1,"avg_px":78535},{"name":"Laxmipur","vol":159.0,"rev":12487090,"trucks":11,"customers":5,"avg_px":78535},{"name":"Rangpur","vol":152.0,"rev":11937344,"trucks":11,"customers":1,"avg_px":78535},{"name":"Lalmonirhat","vol":144.0,"rev":11309062,"trucks":10,"customers":3,"avg_px":78535},{"name":"Bhola","vol":143.0,"rev":11230527,"trucks":8,"customers":3,"avg_px":78535},{"name":"Magura","vol":135.0,"rev":10602246,"trucks":9,"customers":5,"avg_px":78535},{"name":"Netrokona","vol":126.0,"rev":9895430,"trucks":7,"customers":3,"avg_px":78535},{"name":"Narayanganj","vol":104.2,"rev":8183363,"trucks":11,"customers":4,"avg_px":78535},{"name":"Faridpur","vol":103.0,"rev":8089121,"trucks":7,"customers":1,"avg_px":78535},{"name":"Sirajgonj","vol":88.0,"rev":6911094,"trucks":5,"customers":1,"avg_px":78535},{"name":"Gaibandha","vol":84.0,"rev":6596953,"trucks":6,"customers":2,"avg_px":78535},{"name":"Habiganj","vol":71.3,"rev":5599557,"trucks":4,"customers":3,"avg_px":78535},{"name":"Sunamganj","vol":67.0,"rev":5261855,"trucks":3,"customers":1,"avg_px":78535},{"name":"Faridganj","vol":57.0,"rev":4476504,"trucks":4,"customers":1,"avg_px":78535},{"name":"N-Gonj","vol":55.0,"rev":4319434,"trucks":2,"customers":1,"avg_px":78535},{"name":"Munshigonj","vol":54.0,"rev":4240898,"trucks":4,"customers":1,"avg_px":78535},{"name":"Tangail","vol":46.0,"rev":3612617,"trucks":2,"customers":1,"avg_px":78535},{"name":"Bhairob","vol":45.0,"rev":3534082,"trucks":2,"customers":1,"avg_px":78535},{"name":"Sonargaon","vol":43.3,"rev":3402928,"trucks":19,"customers":10,"avg_px":78535},{"name":"Nilphamari","vol":42.0,"rev":3298477,"trucks":3,"customers":2,"avg_px":78535},{"name":"Narail","vol":38.9,"rev":3051091,"trucks":3,"customers":1,"avg_px":78535},{"name":"Keraniganj","vol":30.0,"rev":2356055,"trucks":1,"customers":1,"avg_px":78535},{"name":"Kaliganj","vol":30.0,"rev":2356055,"trucks":2,"customers":1,"avg_px":78535},{"name":"Gopalganj","vol":29.0,"rev":2277519,"trucks":2,"customers":1,"avg_px":78535},{"name":"Mymensing","vol":29.0,"rev":2277519,"trucks":3,"customers":3,"avg_px":78535},{"name":"Chapai","vol":28.5,"rev":2238252,"trucks":2,"customers":1,"avg_px":78535},{"name":"Hajiganj","vol":28.0,"rev":2198984,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gaibanda","vol":28.0,"rev":2198984,"trucks":2,"customers":1,"avg_px":78535},{"name":"Chandpur.","vol":27.0,"rev":2120449,"trucks":2,"customers":1,"avg_px":78535},{"name":"Badda","vol":26.0,"rev":2041914,"trucks":2,"customers":1,"avg_px":78535},{"name":"Madaripur","vol":25.9,"rev":2034061,"trucks":2,"customers":2,"avg_px":78535},{"name":"Pirojpur","vol":25.9,"rev":2031704,"trucks":2,"customers":2,"avg_px":78535},{"name":"Manikganj","vol":23.0,"rev":1806309,"trucks":1,"customers":1,"avg_px":78535},{"name":"Noakhalia","vol":22.5,"rev":1767041,"trucks":2,"customers":1,"avg_px":78535},{"name":"Jatrabari","vol":20.0,"rev":1570703,"trucks":2,"customers":2,"avg_px":78535},{"name":"Gawsia","vol":18.0,"rev":1413633,"trucks":1,"customers":1,"avg_px":78535},{"name":"Mirpur","vol":16.0,"rev":1256562,"trucks":1,"customers":1,"avg_px":78535},{"name":"Kustia","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Faramgate","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Muladi","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chundanga","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Haidarganj","vol":14.3,"rev":1123053,"trucks":1,"customers":1,"avg_px":78535},{"name":"Shariatpur","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Cox's Bazar","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Benapol","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chapainawabganj","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Panchagarh","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Haziganj","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Borguna","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chattagram","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Norail","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Patuakahli","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Syedpur","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Pabna.","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gazipur","vol":13.9,"rev":1091639,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gopalgonj","vol":13.8,"rev":1083785,"trucks":1,"customers":1,"avg_px":78535},{"name":"Companiganj","vol":12.3,"rev":965982,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gopalgoj","vol":12.0,"rev":942422,"trucks":1,"customers":1,"avg_px":78535},{"name":"Narial","vol":11.5,"rev":903154,"trucks":1,"customers":1,"avg_px":78535},{"name":"Basundhara","vol":10.0,"rev":785352,"trucks":1,"customers":1,"avg_px":78535},{"name":"Lagolbond","vol":5.0,"rev":392676,"trucks":1,"customers":1,"avg_px":78535},{"name":"Factory","vol":3.5,"rev":274873,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gajaria","vol":2.9,"rev":225396,"trucks":1,"customers":1,"avg_px":78535},{"name":"Saonargaon","vol":2.1,"rev":164924,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chaiti","vol":0.8,"rev":62828,"trucks":1,"customers":1,"avg_px":78535}],"salesmen_ytd":[{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"txns":110,"regions":11,"customers":8,"avg_px":78161},{"name":"Nadim","vol":1564.3,"rev":123203325,"txns":81,"regions":18,"customers":19,"avg_px":78757},{"name":"Meraj","vol":1390.2,"rev":111252450,"txns":80,"regions":6,"customers":14,"avg_px":80026},{"name":"Factory","vol":727.4,"rev":62062240,"txns":25,"regions":4,"customers":19,"avg_px":85324},{"name":"Atik Sir","vol":30.0,"rev":2445000,"txns":3,"regions":2,"customers":2,"avg_px":81500},{"name":"Farhan","vol":14.0,"rev":1022000,"txns":1,"regions":1,"customers":1,"avg_px":73000},{"name":"Zahir Sir","vol":9.0,"rev":712185,"txns":1,"regions":1,"customers":1,"avg_px":79000},{"name":"Saiful Sir","vol":0.0,"rev":0,"txns":24,"regions":2,"customers":4,"avg_px":0}]},"stock_prices":{"hms":50700,"bundle":42029,"billet":79349,"rod":83229,"simn":149415,"fesi":101172},"inventory_meta":{"hms_days":1.5,"bun_days":2.8,"rod_days":0.9,"rod_daily_sales":186.5,"total_inv_val":95730183,"opening_inv_val":50244893,"inv_change_ytd":45485290,"opening_stocks":{"hms":197.322,"bundle":150.0,"billet":208.483,"rod":264.057,"simn":6.64,"fesi":1.45}},"ytd_breakdown":{"revenue":1899941135,"rod_rev":1842932255,"other_rev":57008880,"scrap":1466018469,"electricity":245433885,"salary":47345167,"other":195256329,"remaining":-54112715},"salesman_margins":{"Mahfuz":{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"avg_px":78161,"cost_pt":79349,"margin_pt":-1188,"txns":110,"regions":11,"customers":8},"Nadim":{"name":"Nadim","vol":1564.3,"rev":123203325,"avg_px":78757,"cost_pt":79349,"margin_pt":-592,"txns":81,"regions":18,"customers":19},"Meraj":{"name":"Meraj","vol":1390.2,"rev":111252450,"avg_px":80026,"cost_pt":79349,"margin_pt":677,"txns":80,"regions":6,"customers":14},"Factory":{"name":"Factory","vol":727.4,"rev":62062240,"avg_px":85324,"cost_pt":79349,"margin_pt":5975,"txns":25,"regions":4,"customers":19},"Atik":{"name":"Atik Sir","vol":30.0,"rev":2445000,"avg_px":81500,"cost_pt":79349,"margin_pt":2151,"txns":3,"regions":2,"customers":2},"Farhan":{"name":"Farhan","vol":14.0,"rev":1022000,"avg_px":73000,"cost_pt":79349,"margin_pt":-6349,"txns":1,"regions":1,"customers":1},"Zahir":{"name":"Zahir Sir","vol":9.0,"rev":712185,"avg_px":79000,"cost_pt":79349,"margin_pt":-349,"txns":1,"regions":1,"customers":1},"Saiful":{"name":"Saiful Sir","vol":0.0,"rev":0,"avg_px":0,"cost_pt":79349,"margin_pt":0,"txns":24,"regions":2,"customers":4}},"recent_sales":[{"d":"2026-04-30","cust":"Mohammadi Trading","mt":10.0,"price":82000.0,"value":820000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-30","cust":"Monir Steel House","mt":15.0,"price":82500.0,"value":1237500.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-30","cust":"Halima Steel Corp","mt":300.0,"price":80000.0,"value":24000000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-29","cust":"Monir Steel House","mt":15.0,"price":83000.0,"value":1245000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-28","cust":"Halima Steel Corp","mt":100.0,"price":82000.0,"value":8200000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-27","cust":"Khorshed Alam & Brothers","mt":15.0,"price":84200.0,"value":1263000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-27","cust":"kholilur Rahman","mt":2.87,"price":87000.0,"value":249690.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-27","cust":"Trusr Iron & Steel Store","mt":12.0,"price":84300.0,"value":1011600.0,"salesman":"Nadim","region":"Jeshore"},{"d":"2026-04-26","cust":"Md Iqbal","mt":1.0,"price":88000.0,"value":88000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-26","cust":"Halima Steel Corp","mt":200.0,"price":83000.0,"value":16600000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-23","cust":"Halima Steel Corp","mt":300.0,"price":83500.0,"value":25050000.0,"salesman":"Mahfuz Sir","region":"Mymensingh"},{"d":"2026-04-23","cust":"Md. Faruk Hossain","mt":3.5,"price":83500.0,"value":292250.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-22","cust":"Sundorbon Steel Corp.","mt":25.0,"price":84000.0,"value":2100000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-22","cust":"Halima Steel Corp.","mt":200.0,"price":83000.0,"value":16600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-22","cust":"Anowara Group","mt":5.0,"price":83600.0,"value":418000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-21","cust":"Shahin Traders","mt":14.0,"price":84000.0,"value":1176000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-21","cust":"Halima Steel Corp","mt":300.0,"price":82500.0,"value":24750000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-20","cust":"Mazidsons Construction Ltd","mt":39.5,"price":86300.0,"value":3408850.0,"salesman":"Mahfuz Sir","region":"Rajshahi"},{"d":"2026-04-20","cust":"Halima Steel Corp","mt":300.0,"price":81500.0,"value":24450000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-20","cust":"Halima Steel Corp","mt":200.0,"price":82000.0,"value":16400000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":150.0,"price":81500.0,"value":12225000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Ayesha Enterprise","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Ayesha Enterprise","mt":14.7,"price":83000.0,"value":1220100.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Mohammadi Trading","mt":54.0,"price":83000.0,"value":4482000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Mohammadi Trading","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Md. Sezan","mt":1.0,"price":89000.0,"value":89000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-19","cust":"Alek Chan","mt":0.4,"price":87000.0,"value":34800.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-19","cust":"Anaf Enterprise","mt":5.0,"price":8600.0,"value":43000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-19","cust":"Mokka Traders","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Nadim","region":"Rajshahi"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":300.0,"price":81500.0,"value":24450000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":200.0,"price":80000.0,"value":16000000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Modina Traging Corp - Sherpur","mt":22.0,"price":83500.0,"value":1837000.0,"salesman":"Nadim","region":"Sherpur"},{"d":"2026-04-16","cust":"Anowara Group","mt":10.0,"price":86500.0,"value":865000.0,"salesman":"Mahfuz Sir","region":"Dhaka"},{"d":"2026-04-16","cust":"Roja Traders","mt":20.0,"price":84500.0,"value":1690000.0,"salesman":"Nadim","region":"Netrokona"},{"d":"2026-04-16","cust":"Naofa Trading","mt":28.0,"price":83500.0,"value":2338000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-16","cust":"Halima Steel Corp","mt":300.0,"price":82000.0,"value":24600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-15","cust":"Mazidsons Construction Ltd","mt":25.0,"price":86700.0,"value":2167500.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-15","cust":"Trusr Iron & Steel Store","mt":28.0,"price":85000.0,"value":2380000.0,"salesman":"Nadim","region":"Magura"},{"d":"2026-04-15","cust":"Mohammadi Trading","mt":57.0,"price":84500.0,"value":4816500.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":88100.0,"value":2202500.0,"salesman":"Mahfuz Sir","region":"Sirajgonj"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":88100.0,"value":2202500.0,"salesman":"Mahfuz Sir","region":"Sirajgonj"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87500.0,"value":2187500.0,"salesman":"Mahfuz Sir","region":"Joypurhat"},{"d":"2026-04-13","cust":"Halima Steel Corp","mt":100.0,"price":83500.0,"value":8350000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-13","cust":"Anaf Enterprise","mt":5.0,"price":85800.0,"value":429000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-13","cust":"Md. Kholilur Rahman","mt":0.6,"price":90000.0,"value":54000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-12","cust":"Md. Rasel Ahmed","mt":1.0,"price":89000.0,"value":89000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-12","cust":"Madani Traders","mt":13.0,"price":86000.0,"value":1118000.0,"salesman":"Meraj","region":"Feni"},{"d":"2026-04-12","cust":"Mohammadi Trading","mt":51.8,"price":85000.0,"value":4403000.0,"salesman":"Meraj","region":"Cumiila"},{"d":"2026-04-12","cust":"Halima Steel Corp","mt":150.0,"price":84000.0,"value":12600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-09","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87300.0,"value":2182500.0,"salesman":"Mahfuz Sir","region":"Lalmonirhat"},{"d":"2026-04-09","cust":"Dhanshiri Enterprise","mt":10.0,"price":87700.0,"value":877000.0,"salesman":"Atik Sir","region":"Dhaka"},{"d":"2026-04-09","cust":"Shahin Traders","mt":28.0,"price":86000.0,"value":2408000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-09","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87300.0,"value":2182500.0,"salesman":"Mahfuz Sir","region":"Dinajpur"},{"d":"2026-04-09","cust":"Mr. Rafiqul Islam","mt":10.9,"price":87000.0,"value":948300.0,"salesman":"Mahfuz Sir","region":"Faridpur"},{"d":"2026-04-07","cust":"Mokka Traders","mt":14.0,"price":87000.0,"value":1218000.0,"salesman":"Nadim","region":"Rajshahi"},{"d":"2026-04-07","cust":"Mamun & Brothers","mt":14.0,"price":87000.0,"value":1218000.0,"salesman":"Nadim","region":"Khulna"},{"d":"2026-04-07","cust":"Naofa Trading","mt":28.0,"price":87000.0,"value":2436000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-07","cust":"Halima Steel Corp","mt":300.0,"price":85000.0,"value":25500000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-07","cust":"R.I Enterprise","mt":15.0,"price":87200.0,"value":1308000.0,"salesman":"Meraj","region":"Feni"},{"d":"2026-04-06","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87500.0,"value":2187500.0,"salesman":"Mahfuz Sir","region":"Joypurhat"}],"recent_deliveries":[{"d":"2026-04-30","truck":"DMT-22-9892","mt":25.0,"cust":"Halima Steel Corpor.","region":"Sherpur"},{"d":"2026-04-30","truck":"DMT-18-2857","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"DMT-13-0079","mt":14.0,"cust":"Halima Steel Corpor.","region":"Chandpur"},{"d":"2026-04-30","truck":"DMT-18-2809","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"CHU-T-11-0699","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-13-0304","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"RAN-MT-11-0107","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-30","truck":"DMT-22-6604","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-20-8496","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"JHE-T-11-1644","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-11-7121","mt":13.8,"cust":"Halima Steel Corpor.","region":"Gopalgonj"},{"d":"2026-04-30","truck":"DMT-16-5943","mt":12.0,"cust":"Halima Steel Corpor.","region":"Badda"},{"d":"2026-04-30","truck":"DMT-18-2802","mt":13.9,"cust":"Halima Steel Corpor.","region":"Noakhali"},{"d":"2026-04-30","truck":"DMT-16-6040","mt":15.0,"cust":"Monir Steel House","region":"Dhaka"},{"d":"2026-04-29","truck":"DMT-24-4281","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bogura"},{"d":"2026-04-29","truck":"JES-T-11-3781","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-29","truck":"DMT-12-8168","mt":14.0,"cust":"Halima Steel Corpor.","region":"Lalmonirhat"},{"d":"2026-04-29","truck":"DMT-11-5557","mt":14.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-29","truck":"KHU-MT-11-1232","mt":15.0,"cust":"Halima Steel Corpor.","region":"Magura"},{"d":"2026-04-29","truck":"DMT-14-7043","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rajshahi"},{"d":"2026-04-29","truck":"DMT-12-8155","mt":15.0,"cust":"Monir Steel House","region":"Dhaka"},{"d":"2026-04-28","truck":"DMT-24-6163","mt":15.0,"cust":"Halima Steel Corpor.","region":"Jhenaidah"},{"d":"2026-04-28","truck":"DMT-15-7948","mt":13.0,"cust":"Halima Steel Corpor.","region":"Chandpur."},{"d":"2026-04-28","truck":"DMT-18-8578","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-28","truck":"DMT-22-8508","mt":14.0,"cust":"Halima Steel Corpor.","region":"Chandpur."},{"d":"2026-04-28","truck":"DMT-16-5943","mt":16.0,"cust":"Halima Steel Corpor.","region":"Mirpur"},{"d":"2026-04-28","truck":"DMT-22-3820","mt":11.0,"cust":"Halima Steel Corpor.","region":"Barishal"},{"d":"2026-04-28","truck":"DMT-18-1743","mt":14.0,"cust":"Halima Steel Corpor.","region":"Laxmipur"},{"d":"2026-04-28","truck":"KHU-MT-11-1989","mt":22.0,"cust":"Halima Steel Corpor.","region":"B-Baria"},{"d":"2026-04-28","truck":"DMT-24-5063","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rajshahi"},{"d":"2026-04-28","truck":"CMT-11-9625","mt":13.8,"cust":"Halima Steel Corpor.","region":"Noakhali"},{"d":"2026-04-28","truck":"DMT-20-9120","mt":14.0,"cust":"Halima Steel Corpor.","region":"Barguna"},{"d":"2026-04-28","truck":"DMT-20-2335","mt":14.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-28","truck":"DMT-22-1544","mt":12.0,"cust":"Trust Iron & Steel","region":"Jessore"},{"d":"2026-04-28","truck":"DMT-12-3861","mt":15.0,"cust":"Khorshed Alam &","region":"Laxmipur"},{"d":"2026-04-28","truck":"DMN-12-6553","mt":2.87,"cust":"Md.Kholilur Rahman","region":"Gajaria"},{"d":"2026-04-27","truck":"DMT-16-0845","mt":15.0,"cust":"Halima Steel Corpor.","region":"Madaripur"},{"d":"2026-04-27","truck":"JES-T-11-5126","mt":22.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-27","truck":"DMT-16-6366","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-27","truck":"DMT-18-1695","mt":23.0,"cust":"Halima Steel Corpor.","region":"B-Baria"},{"d":"2026-04-27","truck":"DMT-15-8090","mt":15.0,"cust":"Halima Steel Corpor.","region":"Jhenaidah"},{"d":"2026-04-27","truck":"DMT-20-4486","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-27","truck":"JES-T-11-6256","mt":11.5,"cust":"Halima Steel Corpor.","region":"Narial"},{"d":"2026-04-27","truck":"DMT-20-4599","mt":14.0,"cust":"Halima Steel Corpor.","region":"Dinajpur"},{"d":"2026-04-27","truck":"BOG-T-11-2023","mt":14.0,"cust":"Halima Steel Corpor.","region":"Naogaon"},{"d":"2026-04-27","truck":"DMT-15-8707","mt":12.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-27","truck":"DMT-11-7569","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-27","truck":"JES-T-11-3767","mt":23.0,"cust":"Halima Steel Corpor.","region":"Satkhira"},{"d":"2026-04-27","truck":"DMT-16-5455","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bogura"},{"d":"2026-04-27","truck":"DMT-24-6972","mt":13.0,"cust":"Mohammadi Trading","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-20-7183","mt":32.0,"cust":"Halima Steel Corpor.","region":"Sirajgonj"},{"d":"2026-04-26","truck":"DMT-18-3210","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-26","truck":"DMT-16-0369","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-26","truck":"DMT-12-5668","mt":14.0,"cust":"Halima Steel Corpor.","region":"Naogaon"},{"d":"2026-04-26","truck":"DMT-24-2218","mt":15.0,"cust":"Halima Steel Corpor.","region":"Meherpur"},{"d":"2026-04-26","truck":"DMT-14-9633","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bhola"},{"d":"2026-04-26","truck":"DMT-16-6294","mt":28.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-12-7868","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-26","truck":"DMT-16-2238","mt":28.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-15-6182","mt":14.0,"cust":"Mohammadi Trading","region":"Cumilla"}]};
+var EMBEDDED={"meta":{"latest_date":"30 Apr 2026","latest_date_iso":"2026-04-30","mtd_start":"01 Apr 2026","generated":"06 May 2026 17:04","data_note":"Rebuilt with corrected per-day costing anchored 30 Apr 2026."},"periods":{"today":{"sales_vol":325.0,"rod":87.69,"billet":301.55,"billet_prod":301.55,"sc_consumed":328.7,"hms_consumed":290.7,"bun_consumed":38.0,"total_scrap_consumed":328.7,"scrap_purchased_mt":112.1,"delivery":209.7,"trucks":14,"pct_delivered":64.5,"avg_price":80177,"scrap_per_billet_pt":54170,"scrap_per_rod_pt":54170,"scrap_consump_pt":54170,"other_cost_pt":48308,"elec_pt":27770,"salary_pt":4510,"total_cost_pt":102479,"margin_pt":-22302,"px_sc_diff":30824,"scrap_exp_pt":49352,"scrap_to_billet":1.09,"scrap_to_rod":3.748,"revenue":26057500,"est_rev_sales":26057500,"other_rev":900000,"total_rev":26957500,"gross_margin":6386260,"scrap_exp_total":5531914,"scrap_consump_total":16334832,"scrap_cost_total":16334832,"other_cost_total":4236408,"oc_total":4236408,"electricity":2435298,"gas":0,"oxygen":9740,"salary_total":395515,"salary_rolling":300000,"salary_office":49290,"salary_labour":46225,"maintenance":66000,"simn":827730,"fesi":26355,"simn_pt":9439,"fesi_pt":301,"boric":14625,"quartz":70000,"boric_pt":167,"quartz_pt":798,"internal_bundle":0},"mtd":{"sales_vol":4793.3,"rod":5799.62,"billet":6805.17,"billet_prod":6805.17,"sc_consumed":7612.9,"hms_consumed":6627.4,"bun_consumed":985.5,"total_scrap_consumed":7612.9,"scrap_purchased_mt":7225.0,"delivery":5838.7,"trucks":368,"pct_delivered":121.8,"avg_price":83229,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"scrap_consump_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"margin_pt":3880,"px_sc_diff":30789,"scrap_exp_pt":52440,"scrap_to_billet":1.119,"scrap_to_rod":1.313,"revenue":398939590,"est_rev_sales":398939590,"other_rev":11705980,"total_rev":410645570,"gross_margin":-108243906,"scrap_exp_total":378875561,"scrap_consump_total":397234243,"scrap_cost_total":397234243,"other_cost_total":121655233,"oc_total":121655233,"electricity":60446708,"gas":6974576,"oxygen":292200,"salary_total":11865450,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"simn":18200880,"fesi":678615,"simn_pt":3138,"fesi_pt":117,"boric":497260,"quartz":2481250,"boric_pt":86,"quartz_pt":428,"internal_bundle":0},"7d":{"sales_vol":670.9,"rod":1308.66,"billet":1828.17,"billet_prod":1828.17,"sc_consumed":1963.3,"hms_consumed":1753.8,"bun_consumed":209.5,"total_scrap_consumed":1963.3,"scrap_purchased_mt":1500.3,"delivery":1305.47,"trucks":84,"pct_delivered":194.6,"avg_price":81558,"scrap_per_billet_pt":54020,"scrap_per_rod_pt":54020,"scrap_consump_pt":54020,"other_cost_pt":23652,"elec_pt":12306,"salary_pt":2116,"total_cost_pt":77673,"margin_pt":3885,"px_sc_diff":31064,"scrap_exp_pt":50494,"scrap_to_billet":1.074,"scrap_to_rod":1.5,"revenue":54714790,"est_rev_sales":54714790,"other_rev":4978040,"total_rev":59692830,"gross_margin":-70018635,"scrap_exp_total":75753938,"scrap_consump_total":98758277,"scrap_cost_total":98758277,"other_cost_total":30953188,"oc_total":30953188,"electricity":16104002,"gas":1251336,"oxygen":68180,"salary_total":2768605,"salary_rolling":2100000,"salary_office":345030,"salary_labour":323575,"maintenance":462000,"simn":5062770,"fesi":181335,"simn_pt":3869,"fesi_pt":139,"boric":131625,"quartz":645000,"boric_pt":101,"quartz_pt":493,"internal_bundle":0},"10d":{"sales_vol":1518.4,"rod":1901.99,"billet":2367.99,"billet_prod":2367.99,"sc_consumed":2538.2,"hms_consumed":2268.7,"bun_consumed":269.5,"total_scrap_consumed":2538.2,"scrap_purchased_mt":2352.0,"delivery":1981.27,"trucks":127,"pct_delivered":130.5,"avg_price":82392,"scrap_per_billet_pt":54301,"scrap_per_rod_pt":54301,"scrap_consump_pt":54301,"other_cost_pt":21910,"elec_pt":11055,"salary_pt":2079,"total_cost_pt":76211,"margin_pt":6180,"px_sc_diff":31286,"scrap_exp_pt":51106,"scrap_to_billet":1.072,"scrap_to_rod":1.334,"revenue":125101040,"est_rev_sales":125101040,"other_rev":8742140,"total_rev":133843180,"gross_margin":-36414215,"scrap_exp_total":120198292,"scrap_consump_total":128584802,"scrap_cost_total":128584802,"other_cost_total":41672593,"oc_total":41672593,"electricity":21026010,"gas":2105586,"oxygen":97400,"salary_total":3955150,"salary_rolling":3000000,"salary_office":492900,"salary_labour":462250,"maintenance":660000,"simn":6412230,"fesi":250215,"simn_pt":3371,"fesi_pt":132,"boric":190125,"quartz":930625,"boric_pt":100,"quartz_pt":489,"internal_bundle":0},"14d":{"sales_vol":2889.0,"rod":2723.15,"billet":3131.52,"billet_prod":3131.52,"sc_consumed":3349.6,"hms_consumed":2974.3,"bun_consumed":375.3,"total_scrap_consumed":3349.6,"scrap_purchased_mt":3228.2,"delivery":2821.97,"trucks":182,"pct_delivered":97.7,"avg_price":81937,"scrap_per_billet_pt":54241,"scrap_per_rod_pt":54241,"scrap_consump_pt":54241,"other_cost_pt":20936,"elec_pt":10378,"salary_pt":2033,"total_cost_pt":75177,"margin_pt":6760,"px_sc_diff":30846,"scrap_exp_pt":51091,"scrap_to_billet":1.07,"scrap_to_rod":1.23,"revenue":236712790,"est_rev_sales":236712790,"other_rev":8772940,"total_rev":245485730,"gross_margin":18617180,"scrap_exp_total":164930317,"scrap_consump_total":169857416,"scrap_cost_total":169857416,"other_cost_total":57011134,"oc_total":57011134,"electricity":28261113,"gas":3307248,"oxygen":136360,"salary_total":5537210,"salary_rolling":4200000,"salary_office":690060,"salary_labour":647150,"maintenance":924000,"simn":8512920,"fesi":333690,"simn_pt":3126,"fesi_pt":123,"boric":243750,"quartz":1193125,"boric_pt":90,"quartz_pt":438,"internal_bundle":0},"30d":{"sales_vol":4793.3,"rod":5799.62,"billet":6805.17,"billet_prod":6805.17,"sc_consumed":7612.9,"hms_consumed":6627.4,"bun_consumed":985.5,"total_scrap_consumed":7612.9,"scrap_purchased_mt":7225.0,"delivery":5838.7,"trucks":368,"pct_delivered":121.8,"avg_price":83229,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"scrap_consump_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"margin_pt":3880,"px_sc_diff":30789,"scrap_exp_pt":52440,"scrap_to_billet":1.119,"scrap_to_rod":1.313,"revenue":398939590,"est_rev_sales":398939590,"other_rev":11705980,"total_rev":410645570,"gross_margin":-108243906,"scrap_exp_total":378875561,"scrap_consump_total":397234243,"scrap_cost_total":397234243,"other_cost_total":121655233,"oc_total":121655233,"electricity":60446708,"gas":6974576,"oxygen":292200,"salary_total":11865450,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"simn":18200880,"fesi":678615,"simn_pt":3138,"fesi_pt":117,"boric":497260,"quartz":2481250,"boric_pt":86,"quartz_pt":428,"internal_bundle":0}},"cash_periods":{"7d":{"sent":87125529,"received":82996930,"net":-4128599},"10d":{"sent":152754955,"received":138761980,"net":-13992975},"14d":{"sent":222796910,"received":215173380,"net":-7623530},"30d":{"sent":485291837,"received":473227480,"net":-12064357},"mtd":{"sent":485291837,"received":473227480,"net":-12064357},"ytd":{"sent":1960076028,"received":1925901940,"net":-34174088}},"competitors":{"hkg_today":81558,"others_avg":84800,"bsrm":95000,"hkg_vs_others":-3242,"hkg_vs_bsrm":-13442},"stocks":{"hms":382.902,"bundle":82.43,"billet":702.356,"rod":167.612,"simn":19.565,"fesi":2.45},"monthly":[{"month":"2026-01","label":"Jan 2026","month_name":"January","rod":7013.35,"sales_vol":7709.4,"billet_produced":7744.18,"scrap_consumed":8458.3,"delivery":7047.12,"trucks":397,"revenue":560645855,"other_revenue":14743154,"total_revenue":575389009,"avg_price":72722,"cash_received":525044050,"scrap_cost_total":393433759,"other_cost_total":135699177,"electricity":71130937,"salary_total":10843707,"scrap_per_billet_pt":50804,"scrap_per_rod_pt":50804,"other_cost_pt":19349,"elec_pt":10142,"salary_pt":1546,"total_cost_pt":70152,"scrap_consump_pt":50804,"margin_pt":2570,"gross_margin":46256073,"cash_paid":544585373,"cash_net":-19541323,"scrap_exp_total":389913056,"scrap_exp_pt":47007,"px_sc_diff":25715,"top_customers":[{"name":"Halima Steel Corp","mt":6791.0,"rev":493339000},{"name":"Mamun & Brothers","mt":155.6,"rev":11242375},{"name":"Mandal Hardare","mt":110.0,"rev":8098200},{"name":"Kabir Trading","mt":91.0,"rev":6716000},{"name":"Naofa Trading","mt":84.0,"rev":6105400},{"name":"Khorshed Alam & Brothers","mt":73.0,"rev":5278000}],"salesmen":[{"name":"Mahfuz Sir","mt":6866.9,"rev":499000880,"avg_px":72668},{"name":"Nadim","mt":475.6,"rev":34819075,"avg_px":73219},{"name":"Meraj","mt":332.0,"rev":24214400,"avg_px":72935},{"name":"Farhan","mt":14.0,"rev":1022000,"avg_px":73000},{"name":"Factory","mt":13.0,"rev":981500,"avg_px":75500},{"name":"Atik Sir","mt":8.0,"rev":608000,"avg_px":76000},{"name":"Saiful Sir","mt":0.0,"rev":0,"avg_px":0}],"regions":[{"name":"Sylhet","mt":1875.5,"rev":136390111,"trucks":83},{"name":"Sirajganj","mt":762.0,"rev":55414164,"trucks":42},{"name":"Jessore","mt":499.9,"rev":36353728,"trucks":31},{"name":"Cumilla","mt":422.4,"rev":30717773,"trucks":27},{"name":"Pabna","mt":388.0,"rev":28216136,"trucks":18},{"name":"Barishal","mt":293.0,"rev":21307546,"trucks":18},{"name":"Jhenaidah","mt":234.0,"rev":17016948,"trucks":13},{"name":"Meherpur","mt":201.0,"rev":14617122,"trucks":13}],"cost_breakdown":{"electricity":71130937,"gas":7028658,"oxygen":286440,"lpg":387004,"furnace_oil":0,"salary_rolling":7932063,"salary_office":1478669,"salary_labour":1432975,"maintenance":258354,"transport":0,"admin":2849985,"vat":14027006,"simn":20266380,"fesi":865515,"boric":565500,"quartz":2758125},"competitors":{"hkg":72722,"bsrm":77194,"salam":73645,"ricl":73645,"jsrm":73645,"rani":73645,"sas":73645,"market":74237,"others_avg":74236},"other_rev_breakdown":[{"item":"Ovel","mt":174.7,"rev":10880004,"txns":9},{"item":"Fly Ash","mt":72.1,"rev":2409550,"txns":3},{"item":"Cut Pcs","mt":18.0,"rev":1170000,"txns":1},{"item":"SS Bangla","mt":3.0,"rev":283600,"txns":2}]},{"month":"2026-02","label":"Feb 2026","month_name":"February","rod":5929.22,"sales_vol":5113.7,"billet_produced":6730.53,"scrap_consumed":7344.0,"delivery":5928.34,"trucks":332,"revenue":398279610,"other_revenue":16834876,"total_revenue":415114486,"avg_price":77885,"cash_received":465247510,"scrap_cost_total":359770412,"other_cost_total":122234650,"electricity":61794635,"salary_total":10918572,"scrap_per_billet_pt":53453,"scrap_per_rod_pt":53453,"other_cost_pt":20616,"elec_pt":10422,"salary_pt":1841,"total_cost_pt":74069,"scrap_consump_pt":53453,"margin_pt":3816,"gross_margin":-66890576,"cash_paid":477931828,"cash_net":-12684318,"scrap_exp_total":353906460,"scrap_exp_pt":49778,"px_sc_diff":28108,"top_customers":[{"name":"Halima Steel Corp","mt":4334.0,"rev":337228500},{"name":"Mamun & Brothers","mt":190.0,"rev":14807200},{"name":"Trusr Iron & Steel Store","mt":82.0,"rev":6501200},{"name":"Faruk Enterprise","mt":70.0,"rev":5418000},{"name":"Anowara Group","mt":50.0,"rev":3970000},{"name":"Mandal Hardware","mt":44.0,"rev":3388000}],"salesmen":[{"name":"Mahfuz Sir","mt":4405.1,"rev":342848025,"avg_px":77829},{"name":"Nadim","mt":395.8,"rev":30945650,"avg_px":78185},{"name":"Meraj","mt":291.7,"rev":22813750,"avg_px":78210},{"name":"Atik Sir","mt":12.0,"rev":960000,"avg_px":80000},{"name":"Zahir Sir","mt":9.0,"rev":712185,"avg_px":79000},{"name":"Saiful Sir","mt":0.0,"rev":0,"avg_px":0},{"name":"Factory","mt":0.0,"rev":0,"avg_px":0}],"regions":[{"name":"Sylhet","mt":1349.0,"rev":105066865,"trucks":56},{"name":"Sirajganj","mt":534.0,"rev":41590590,"trucks":29},{"name":"Jessore","mt":311.0,"rev":24222235,"trucks":19},{"name":"Cumilla","mt":299.3,"rev":23310980,"trucks":19},{"name":"Bogura","mt":265.0,"rev":20639525,"trucks":19},{"name":"Pabna","mt":223.0,"rev":17368355,"trucks":12},{"name":"Chuadanga","mt":203.5,"rev":15849598,"trucks":12},{"name":"Jhenaidah","mt":186.0,"rev":14486610,"trucks":12}],"cost_breakdown":{"electricity":61794635,"gas":6664664,"oxygen":222250,"lpg":280675,"furnace_oil":0,"salary_rolling":8147440,"salary_office":1478680,"salary_labour":1292452,"maintenance":233352,"transport":0,"admin":4799984,"vat":11852430,"simn":18370710,"fesi":595455,"boric":482625,"quartz":2519375},"competitors":{"hkg":77885,"bsrm":84929,"salam":82821,"ricl":79964,"jsrm":79964,"rani":79964,"sas":79964,"market":81268,"others_avg":81268},"other_rev_breakdown":[{"item":"Ovel","mt":201.4,"rev":12806876,"txns":10},{"item":"Cut Pcs","mt":60.0,"rev":4028000,"txns":3}]},{"month":"2026-03","label":"Mar 2026","month_name":"March","rod":5104.33,"sales_vol":5850.0,"billet_produced":5644.33,"scrap_consumed":6132.1,"delivery":5076.45,"trucks":292,"revenue":485067200,"other_revenue":13724870,"total_revenue":498792070,"avg_price":82917,"cash_received":462382900,"scrap_cost_total":315580056,"other_cost_total":108446321,"electricity":52061605,"salary_total":13717438,"scrap_per_billet_pt":55911,"scrap_per_rod_pt":55911,"other_cost_pt":21246,"elec_pt":10199,"salary_pt":2687,"total_cost_pt":77157,"scrap_consump_pt":55911,"margin_pt":5761,"gross_margin":74765693,"cash_paid":452266990,"cash_net":10115910,"scrap_exp_total":296313666,"scrap_exp_pt":51553,"px_sc_diff":31365,"top_customers":[{"name":"Halima Steel Corp","mt":5041.0,"rev":418102000},{"name":"Mandal Hardware","mt":140.0,"rev":11757000},{"name":"Mamun & Brothers","mt":114.0,"rev":9365000},{"name":"Trusr Iron & Steel Store","mt":104.0,"rev":8294000},{"name":"Khorshed Alam & Brothers","mt":90.0,"rev":7560000},{"name":"Naofa Trading","mt":84.0,"rev":7042000}],"salesmen":[{"name":"Mahfuz Sir","mt":4541.0,"rev":374852000,"avg_px":82548},{"name":"Factory","mt":505.0,"rev":43672000,"avg_px":86479},{"name":"Nadim","mt":462.0,"rev":38168000,"avg_px":82615},{"name":"Meraj","mt":342.0,"rev":28375200,"avg_px":82968}],"regions":[{"name":"Sirajganj","mt":606.0,"rev":50247702,"trucks":28},{"name":"Sylhet","mt":458.0,"rev":37975986,"trucks":20},{"name":"Jessore","mt":297.0,"rev":24626349,"trucks":20},{"name":"Cumilla","mt":293.6,"rev":24344431,"trucks":17},{"name":"Chandpur","mt":265.4,"rev":22006172,"trucks":13},{"name":"Barishal","mt":243.5,"rev":20190290,"trucks":16},{"name":"Jhenaidah","mt":226.0,"rev":18739242,"trucks":14},{"name":"Brahmanbaria","mt":200.0,"rev":16583400,"trucks":9}],"cost_breakdown":{"electricity":52061605,"gas":7134450,"oxygen":204540,"lpg":297570,"furnace_oil":0,"salary_rolling":9349972,"salary_office":2218019,"salary_labour":2149447,"maintenance":258354,"transport":0,"admin":2929996,"vat":10207814,"simn":14507460,"fesi":541485,"boric":453375,"quartz":2439375},"competitors":{"hkg":82917,"bsrm":92900,"salam":89645,"ricl":87935,"jsrm":88258,"rani":86226,"sas":86419,"market":88564,"others_avg":88564},"other_rev_breakdown":[{"item":"Ovel","mt":117.3,"rev":7598370,"txns":6},{"item":"Fly Ash","mt":30.0,"rev":2850000,"txns":1},{"item":"Cut Pcs","mt":31.0,"rev":2294000,"txns":2},{"item":"Scrap Soil","mt":10.0,"rev":700000,"txns":1},{"item":"SS Bangla","mt":3.0,"rev":282500,"txns":2}]},{"month":"2026-04","label":"Apr 2026","month_name":"April","rod":5799.62,"sales_vol":4793.3,"billet_produced":6805.17,"scrap_consumed":7612.9,"delivery":5838.7,"trucks":368,"revenue":398939590,"other_revenue":11705980,"total_revenue":410645570,"avg_price":83229,"cash_received":473227480,"scrap_cost_total":397234243,"other_cost_total":121655233,"electricity":60446708,"salary_total":11865450,"scrap_per_billet_pt":58372,"scrap_per_rod_pt":58372,"other_cost_pt":20976,"elec_pt":10423,"salary_pt":2046,"total_cost_pt":79349,"scrap_consump_pt":58372,"margin_pt":3880,"gross_margin":-108243906,"cash_paid":485291837,"cash_net":-12064357,"scrap_exp_total":378875561,"scrap_exp_pt":52440,"px_sc_diff":30789,"top_customers":[{"name":"Halima Steel Corp","mt":3642.0,"rev":301429000},{"name":"Mazidsons Construction Ltd","mt":239.5,"rev":20913850},{"name":"Mohammadi Trading","mt":200.8,"rev":16845500},{"name":"Halima Steel Corp.","mt":200.0,"rev":16600000},{"name":"Naofa Trading","mt":71.0,"rev":6086500},{"name":"Mokka Traders","mt":70.0,"rev":5992000}],"salesmen":[{"name":"Mahfuz Sir","mt":3918.4,"rev":325534150,"avg_px":83078},{"name":"Meraj","mt":424.5,"rev":35849100,"avg_px":84450},{"name":"Nadim","mt":231.0,"rev":19270600,"avg_px":83423},{"name":"Factory","mt":209.4,"rev":17408740,"avg_px":83148},{"name":"Atik Sir","mt":10.0,"rev":877000,"avg_px":87700}],"regions":[{"name":"Sylhet","mt":842.0,"rev":70078818,"trucks":37},{"name":"Cumilla","mt":685.0,"rev":57008536,"trucks":42},{"name":"Sirajganj","mt":294.0,"rev":24469326,"trucks":17},{"name":"Jessore","mt":249.1,"rev":20729847,"trucks":16},{"name":"Noakhali","mt":226.9,"rev":18884660,"trucks":18},{"name":"Chuadanga","mt":214.0,"rev":17811006,"trucks":14},{"name":"Barishal","mt":189.0,"rev":15730281,"trucks":14},{"name":"Chandpur","mt":189.0,"rev":15730281,"trucks":13}],"cost_breakdown":{"electricity":60446708,"gas":6974576,"oxygen":292200,"lpg":425100,"furnace_oil":0,"salary_rolling":9000000,"salary_office":1478700,"salary_labour":1386750,"maintenance":1634004,"transport":60000,"admin":2835480,"vat":11599238,"simn":18200880,"fesi":678615,"boric":497260,"quartz":2481250},"competitors":{"hkg":83229,"bsrm":95900,"salam":90183,"ricl":87617,"jsrm":87433,"rani":85133,"sas":85850,"market":88686,"others_avg":88686},"other_rev_breakdown":[{"item":"Ovel","mt":121.8,"rev":7888380,"txns":6},{"item":"Cut Pcs","mt":41.0,"rev":2917600,"txns":4},{"item":"Steel Kachra","mt":100.0,"rev":900000,"txns":1}]}],"top_customers":[{"name":"Halima Steel Corp","vol":19808,"rev":1550098500,"avg_px":78256},{"name":"Mamun & Brothers","vol":474,"rev":36632575,"avg_px":77357},{"name":"Naofa Trading","vol":281,"rev":22581300,"avg_px":80360},{"name":"Mazidsons Construction Ltd","vol":240,"rev":20913850,"avg_px":87323},{"name":"Trusr Iron & Steel Store","vol":254,"rev":20216800,"avg_px":79594},{"name":"Mohammadi Trading","vol":201,"rev":16845500,"avg_px":83892},{"name":"Halima Steel Corp.","vol":200,"rev":16600000,"avg_px":83000},{"name":"Mandal Hardware","vol":191,"rev":15757500,"avg_px":82500},{"name":"Khorshed Alam & Brothers","vol":193,"rev":15259000,"avg_px":79062},{"name":"Madani Traders","vol":139,"rev":11217600,"avg_px":80702}],"salesmen":[{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"txns":110,"regions":11,"customers":8,"avg_px":78161},{"name":"Nadim","vol":1564.3,"rev":123203325,"txns":81,"regions":18,"customers":19,"avg_px":78757},{"name":"Meraj","vol":1390.2,"rev":111252450,"txns":80,"regions":6,"customers":14,"avg_px":80026},{"name":"Factory","vol":727.4,"rev":62062240,"txns":25,"regions":4,"customers":19,"avg_px":85324},{"name":"Atik Sir","vol":30.0,"rev":2445000,"txns":3,"regions":2,"customers":2,"avg_px":81500},{"name":"Farhan","vol":14.0,"rev":1022000,"txns":1,"regions":1,"customers":1,"avg_px":73000},{"name":"Zahir Sir","vol":9.0,"rev":712185,"txns":1,"regions":1,"customers":1,"avg_px":79000},{"name":"Saiful Sir","vol":0.0,"rev":0,"txns":24,"regions":2,"customers":4,"avg_px":0}],"revenue_data":{"ytd":{"other_rev":57008880,"other_sales":51,"top_regions":[["Sylhet",4524.5,355332309],["Sirajganj",2196.0,172463200],["Cumilla",1700.3,133530183],["Jessore",1357.0,106569849],["Pabna",941.0,73901581]]},"rates":{"mahfuz":78161,"meraj":80026,"nadim":78757,"halima":78304,"others_rod":79875},"top_repeat_customers":[{"name":"Halima Steel Corp","vol":19808,"rev":1550098500,"txns":90,"avg":78256},{"name":"Mamun & Brothers","vol":474,"rev":36632575,"txns":19,"avg":77357},{"name":"Naofa Trading","vol":281,"rev":22581300,"txns":17,"avg":80360},{"name":"Mazidsons Construction Ltd","vol":240,"rev":20913850,"txns":9,"avg":87323},{"name":"Trusr Iron & Steel Store","vol":254,"rev":20216800,"txns":13,"avg":79594},{"name":"Mohammadi Trading","vol":201,"rev":16845500,"txns":5,"avg":83892},{"name":"Halima Steel Corp.","vol":200,"rev":16600000,"txns":1,"avg":83000},{"name":"Mandal Hardware","vol":191,"rev":15757500,"txns":9,"avg":82500},{"name":"Khorshed Alam & Brothers","vol":193,"rev":15259000,"txns":12,"avg":79062},{"name":"Madani Traders","vol":139,"rev":11217600,"txns":9,"avg":80702}],"rod_inventory":167.612,"scrap_diff":{"curr":52440,"prev":51553,"diff":887},"halima_vs_others":{"halima_avg":78304,"halima_vol":20008,"others_avg":79875,"others_vol":3458},"mtd_other_rev":11705980,"regions_ytd":[{"name":"Sylhet","vol":4524.5,"rev":355332309,"trucks":196,"customers":5,"avg_px":78535},{"name":"Sirajganj","vol":2196.0,"rev":172463200,"trucks":116,"customers":5,"avg_px":78535},{"name":"Cumilla","vol":1700.3,"rev":133530183,"trucks":105,"customers":19,"avg_px":78535},{"name":"Jessore","vol":1357.0,"rev":106569849,"trucks":86,"customers":5,"avg_px":78535},{"name":"Pabna","vol":941.0,"rev":73901581,"trucks":48,"customers":3,"avg_px":78535},{"name":"Barishal","vol":899.5,"rev":70642372,"trucks":60,"customers":5,"avg_px":78535},{"name":"Jhenaidah","vol":795.0,"rev":62435448,"trucks":49,"customers":3,"avg_px":78535},{"name":"Chuadanga","vol":732.5,"rev":57527001,"trucks":45,"customers":3,"avg_px":78535},{"name":"Chandpur","vol":642.4,"rev":50450984,"trucks":39,"customers":6,"avg_px":78535},{"name":"Bogura","vol":615.0,"rev":48299120,"trucks":44,"customers":4,"avg_px":78535},{"name":"Noakhali","vol":561.0,"rev":44058222,"trucks":44,"customers":5,"avg_px":78535},{"name":"Meherpur","vol":543.0,"rev":42644589,"trucks":33,"customers":2,"avg_px":78535},{"name":"Brahmanbaria","vol":532.0,"rev":41780702,"trucks":24,"customers":3,"avg_px":78535},{"name":"Jamalpur","vol":399.0,"rev":31335527,"trucks":17,"customers":4,"avg_px":78535},{"name":"Satkhira","vol":397.0,"rev":31178457,"trucks":20,"customers":5,"avg_px":78535},{"name":"Khulna","vol":366.0,"rev":28743867,"trucks":25,"customers":4,"avg_px":78535},{"name":"Rajbari","vol":301.0,"rev":23639082,"trucks":14,"customers":2,"avg_px":78535},{"name":"Munshiganj","vol":294.5,"rev":23128603,"trucks":23,"customers":2,"avg_px":78535},{"name":"Naogaon","vol":290.0,"rev":22775195,"trucks":21,"customers":3,"avg_px":78535},{"name":"Lakshmipur","vol":275.7,"rev":21652142,"trucks":19,"customers":6,"avg_px":78535},{"name":"Rajshahi","vol":271.0,"rev":21283027,"trucks":16,"customers":6,"avg_px":78535},{"name":"Patuakhali","vol":261.0,"rev":20497675,"trucks":19,"customers":3,"avg_px":78535},{"name":"Mymensingh","vol":258.0,"rev":20262855,"trucks":13,"customers":7,"avg_px":78535},{"name":"Dinajpur","vol":249.0,"rev":19555254,"trucks":16,"customers":3,"avg_px":78535},{"name":"Natore","vol":233.0,"rev":18298691,"trucks":16,"customers":3,"avg_px":78535},{"name":"Feni","vol":225.2,"rev":17686117,"trucks":14,"customers":7,"avg_px":78535},{"name":"Dhaka","vol":225.1,"rev":17674337,"trucks":15,"customers":8,"avg_px":78535},{"name":"Joypurhat","vol":219.5,"rev":17238467,"trucks":14,"customers":4,"avg_px":78535},{"name":"Bhairab","vol":205.0,"rev":16099707,"trucks":9,"customers":2,"avg_px":78535},{"name":"Saidpur","vol":198.0,"rev":15549961,"trucks":13,"customers":2,"avg_px":78535},{"name":"Sherpur","vol":186.0,"rev":14607539,"trucks":8,"customers":3,"avg_px":78535},{"name":"Barguna","vol":180.0,"rev":14136328,"trucks":13,"customers":3,"avg_px":78535},{"name":"Kushtia","vol":163.0,"rev":12801230,"trucks":8,"customers":2,"avg_px":78535},{"name":"B-Baria","vol":160.0,"rev":12565625,"trucks":7,"customers":1,"avg_px":78535},{"name":"Laxmipur","vol":159.0,"rev":12487090,"trucks":11,"customers":5,"avg_px":78535},{"name":"Rangpur","vol":152.0,"rev":11937344,"trucks":11,"customers":1,"avg_px":78535},{"name":"Lalmonirhat","vol":144.0,"rev":11309062,"trucks":10,"customers":3,"avg_px":78535},{"name":"Bhola","vol":143.0,"rev":11230527,"trucks":8,"customers":3,"avg_px":78535},{"name":"Magura","vol":135.0,"rev":10602246,"trucks":9,"customers":5,"avg_px":78535},{"name":"Netrokona","vol":126.0,"rev":9895430,"trucks":7,"customers":3,"avg_px":78535},{"name":"Narayanganj","vol":104.2,"rev":8183363,"trucks":11,"customers":4,"avg_px":78535},{"name":"Faridpur","vol":103.0,"rev":8089121,"trucks":7,"customers":1,"avg_px":78535},{"name":"Sirajgonj","vol":88.0,"rev":6911094,"trucks":5,"customers":1,"avg_px":78535},{"name":"Gaibandha","vol":84.0,"rev":6596953,"trucks":6,"customers":2,"avg_px":78535},{"name":"Habiganj","vol":71.3,"rev":5599557,"trucks":4,"customers":3,"avg_px":78535},{"name":"Sunamganj","vol":67.0,"rev":5261855,"trucks":3,"customers":1,"avg_px":78535},{"name":"Faridganj","vol":57.0,"rev":4476504,"trucks":4,"customers":1,"avg_px":78535},{"name":"N-Gonj","vol":55.0,"rev":4319434,"trucks":2,"customers":1,"avg_px":78535},{"name":"Munshigonj","vol":54.0,"rev":4240898,"trucks":4,"customers":1,"avg_px":78535},{"name":"Tangail","vol":46.0,"rev":3612617,"trucks":2,"customers":1,"avg_px":78535},{"name":"Bhairob","vol":45.0,"rev":3534082,"trucks":2,"customers":1,"avg_px":78535},{"name":"Sonargaon","vol":43.3,"rev":3402928,"trucks":19,"customers":10,"avg_px":78535},{"name":"Nilphamari","vol":42.0,"rev":3298477,"trucks":3,"customers":2,"avg_px":78535},{"name":"Narail","vol":38.9,"rev":3051091,"trucks":3,"customers":1,"avg_px":78535},{"name":"Keraniganj","vol":30.0,"rev":2356055,"trucks":1,"customers":1,"avg_px":78535},{"name":"Kaliganj","vol":30.0,"rev":2356055,"trucks":2,"customers":1,"avg_px":78535},{"name":"Gopalganj","vol":29.0,"rev":2277519,"trucks":2,"customers":1,"avg_px":78535},{"name":"Mymensing","vol":29.0,"rev":2277519,"trucks":3,"customers":3,"avg_px":78535},{"name":"Chapai","vol":28.5,"rev":2238252,"trucks":2,"customers":1,"avg_px":78535},{"name":"Hajiganj","vol":28.0,"rev":2198984,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gaibanda","vol":28.0,"rev":2198984,"trucks":2,"customers":1,"avg_px":78535},{"name":"Chandpur.","vol":27.0,"rev":2120449,"trucks":2,"customers":1,"avg_px":78535},{"name":"Badda","vol":26.0,"rev":2041914,"trucks":2,"customers":1,"avg_px":78535},{"name":"Madaripur","vol":25.9,"rev":2034061,"trucks":2,"customers":2,"avg_px":78535},{"name":"Pirojpur","vol":25.9,"rev":2031704,"trucks":2,"customers":2,"avg_px":78535},{"name":"Manikganj","vol":23.0,"rev":1806309,"trucks":1,"customers":1,"avg_px":78535},{"name":"Noakhalia","vol":22.5,"rev":1767041,"trucks":2,"customers":1,"avg_px":78535},{"name":"Jatrabari","vol":20.0,"rev":1570703,"trucks":2,"customers":2,"avg_px":78535},{"name":"Gawsia","vol":18.0,"rev":1413633,"trucks":1,"customers":1,"avg_px":78535},{"name":"Mirpur","vol":16.0,"rev":1256562,"trucks":1,"customers":1,"avg_px":78535},{"name":"Kustia","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Faramgate","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Muladi","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chundanga","vol":15.0,"rev":1178027,"trucks":1,"customers":1,"avg_px":78535},{"name":"Haidarganj","vol":14.3,"rev":1123053,"trucks":1,"customers":1,"avg_px":78535},{"name":"Shariatpur","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Cox's Bazar","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Benapol","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chapainawabganj","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Panchagarh","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Haziganj","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Borguna","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chattagram","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Norail","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Patuakahli","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Syedpur","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Pabna.","vol":14.0,"rev":1099492,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gazipur","vol":13.9,"rev":1091639,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gopalgonj","vol":13.8,"rev":1083785,"trucks":1,"customers":1,"avg_px":78535},{"name":"Companiganj","vol":12.3,"rev":965982,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gopalgoj","vol":12.0,"rev":942422,"trucks":1,"customers":1,"avg_px":78535},{"name":"Narial","vol":11.5,"rev":903154,"trucks":1,"customers":1,"avg_px":78535},{"name":"Basundhara","vol":10.0,"rev":785352,"trucks":1,"customers":1,"avg_px":78535},{"name":"Lagolbond","vol":5.0,"rev":392676,"trucks":1,"customers":1,"avg_px":78535},{"name":"Factory","vol":3.5,"rev":274873,"trucks":1,"customers":1,"avg_px":78535},{"name":"Gajaria","vol":2.9,"rev":225396,"trucks":1,"customers":1,"avg_px":78535},{"name":"Saonargaon","vol":2.1,"rev":164924,"trucks":1,"customers":1,"avg_px":78535},{"name":"Chaiti","vol":0.8,"rev":62828,"trucks":1,"customers":1,"avg_px":78535}],"salesmen_ytd":[{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"txns":110,"regions":11,"customers":8,"avg_px":78161},{"name":"Nadim","vol":1564.3,"rev":123203325,"txns":81,"regions":18,"customers":19,"avg_px":78757},{"name":"Meraj","vol":1390.2,"rev":111252450,"txns":80,"regions":6,"customers":14,"avg_px":80026},{"name":"Factory","vol":727.4,"rev":62062240,"txns":25,"regions":4,"customers":19,"avg_px":85324},{"name":"Atik Sir","vol":30.0,"rev":2445000,"txns":3,"regions":2,"customers":2,"avg_px":81500},{"name":"Farhan","vol":14.0,"rev":1022000,"txns":1,"regions":1,"customers":1,"avg_px":73000},{"name":"Zahir Sir","vol":9.0,"rev":712185,"txns":1,"regions":1,"customers":1,"avg_px":79000},{"name":"Saiful Sir","vol":0.0,"rev":0,"txns":24,"regions":2,"customers":4,"avg_px":0}]},"stock_prices":{"hms":50700,"bundle":42029,"billet":79349,"rod":83229,"simn":149415,"fesi":101172},"inventory_meta":{"hms_days":1.5,"bun_days":2.8,"rod_days":0.9,"rod_daily_sales":186.5,"total_inv_val":95730183,"opening_inv_val":50244893,"inv_change_ytd":45485290,"opening_stocks":{"hms":197.322,"bundle":150.0,"billet":208.483,"rod":264.057,"simn":6.64,"fesi":1.45}},"inventory_detail":{"as_of":"30 Apr 2026","raw_materials":[{"name":"HMS Scrap","opening":197.322,"purchased":24460.79,"consumed":24475.21,"closing":382.902},{"name":"Bundle Scrap","opening":150.0,"purchased":3934.93,"received":0.0,"consumed":4002.5,"closing":82.43},{"name":"Internal Bundle","opening":0.0,"received":766.5,"consumed":766.5,"closing":0.0,"note":"Bundles produced internally"},{"name":"SiMn Alloy","opening":6.64,"purchased":477.5,"consumed":464.57,"closing":19.565},{"name":"FeSi Alloy","opening":1.45,"purchased":26.5,"consumed":25.5,"closing":2.45}],"wip":{"opening":208.483,"produced":26924.22,"consumed":26022.15,"crack_oval":392.96,"closing":702.356},"finished_rod":{"total_balance":167.61,"rod_500w":139.44,"rod_60g":28.17,"sample_rod":12.92,"ytd_500w_produced":23555.82,"ytd_500w_sold":23646.56,"ytd_60g_produced":273.13,"ytd_60g_sold":244.13,"sizes":[{"size":"8mm","mt":0.0},{"size":"10mm","mt":11490.73},{"size":"12mm","mt":5648.74},{"size":"16mm","mt":4657.72},{"size":"20mm","mt":1486.76},{"size":"22mm","mt":0.0},{"size":"25mm","mt":271.88},{"size":"28mm","mt":0.0},{"size":"32mm","mt":0.0}]},"byproducts":[{"name":"Cut Pieces","closing":0.55,"ytd_generated":155.81,"ytd_delivered":152.0,"note":"Generated as rolling waste; sold to scrap re-rollers"},{"name":"Oval Pieces","closing":27.25,"ytd_generated":631.16,"ytd_delivered":657.53,"note":"Off-spec rod ends; sold separately"}]},"ytd_breakdown":{"revenue":1899941135,"rod_rev":1842932255,"other_rev":57008880,"scrap":1466018469,"electricity":245433885,"salary":47345167,"other":195256329,"remaining":-54112715},"salesman_margins":{"Mahfuz":{"name":"Mahfuz Sir","vol":19731.4,"rev":1542235055,"avg_px":78161,"cost_pt":79349,"margin_pt":-1188,"txns":110,"regions":11,"customers":8},"Nadim":{"name":"Nadim","vol":1564.3,"rev":123203325,"avg_px":78757,"cost_pt":79349,"margin_pt":-592,"txns":81,"regions":18,"customers":19},"Meraj":{"name":"Meraj","vol":1390.2,"rev":111252450,"avg_px":80026,"cost_pt":79349,"margin_pt":677,"txns":80,"regions":6,"customers":14},"Factory":{"name":"Factory","vol":727.4,"rev":62062240,"avg_px":85324,"cost_pt":79349,"margin_pt":5975,"txns":25,"regions":4,"customers":19},"Atik":{"name":"Atik Sir","vol":30.0,"rev":2445000,"avg_px":81500,"cost_pt":79349,"margin_pt":2151,"txns":3,"regions":2,"customers":2},"Farhan":{"name":"Farhan","vol":14.0,"rev":1022000,"avg_px":73000,"cost_pt":79349,"margin_pt":-6349,"txns":1,"regions":1,"customers":1},"Zahir":{"name":"Zahir Sir","vol":9.0,"rev":712185,"avg_px":79000,"cost_pt":79349,"margin_pt":-349,"txns":1,"regions":1,"customers":1},"Saiful":{"name":"Saiful Sir","vol":0.0,"rev":0,"avg_px":0,"cost_pt":79349,"margin_pt":0,"txns":24,"regions":2,"customers":4}},"recent_sales":[{"d":"2026-04-30","cust":"Mohammadi Trading","mt":10.0,"price":82000.0,"value":820000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-30","cust":"Monir Steel House","mt":15.0,"price":82500.0,"value":1237500.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-30","cust":"Halima Steel Corp","mt":300.0,"price":80000.0,"value":24000000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-29","cust":"Monir Steel House","mt":15.0,"price":83000.0,"value":1245000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-28","cust":"Halima Steel Corp","mt":100.0,"price":82000.0,"value":8200000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-27","cust":"Khorshed Alam & Brothers","mt":15.0,"price":84200.0,"value":1263000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-27","cust":"kholilur Rahman","mt":2.87,"price":87000.0,"value":249690.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-27","cust":"Trusr Iron & Steel Store","mt":12.0,"price":84300.0,"value":1011600.0,"salesman":"Nadim","region":"Jeshore"},{"d":"2026-04-26","cust":"Md Iqbal","mt":1.0,"price":88000.0,"value":88000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-26","cust":"Halima Steel Corp","mt":200.0,"price":83000.0,"value":16600000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-23","cust":"Halima Steel Corp","mt":300.0,"price":83500.0,"value":25050000.0,"salesman":"Mahfuz Sir","region":"Mymensingh"},{"d":"2026-04-23","cust":"Md. Faruk Hossain","mt":3.5,"price":83500.0,"value":292250.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-22","cust":"Sundorbon Steel Corp.","mt":25.0,"price":84000.0,"value":2100000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-22","cust":"Halima Steel Corp.","mt":200.0,"price":83000.0,"value":16600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-22","cust":"Anowara Group","mt":5.0,"price":83600.0,"value":418000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-21","cust":"Shahin Traders","mt":14.0,"price":84000.0,"value":1176000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-21","cust":"Halima Steel Corp","mt":300.0,"price":82500.0,"value":24750000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-20","cust":"Mazidsons Construction Ltd","mt":39.5,"price":86300.0,"value":3408850.0,"salesman":"Mahfuz Sir","region":"Rajshahi"},{"d":"2026-04-20","cust":"Halima Steel Corp","mt":300.0,"price":81500.0,"value":24450000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-20","cust":"Halima Steel Corp","mt":200.0,"price":82000.0,"value":16400000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":150.0,"price":81500.0,"value":12225000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Ayesha Enterprise","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Ayesha Enterprise","mt":14.7,"price":83000.0,"value":1220100.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Mohammadi Trading","mt":54.0,"price":83000.0,"value":4482000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Mohammadi Trading","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-19","cust":"Md. Sezan","mt":1.0,"price":89000.0,"value":89000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-19","cust":"Alek Chan","mt":0.4,"price":87000.0,"value":34800.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-19","cust":"Anaf Enterprise","mt":5.0,"price":8600.0,"value":43000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-19","cust":"Mokka Traders","mt":28.0,"price":83000.0,"value":2324000.0,"salesman":"Nadim","region":"Rajshahi"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":300.0,"price":81500.0,"value":24450000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Halima Steel Corp","mt":200.0,"price":80000.0,"value":16000000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-19","cust":"Modina Traging Corp - Sherpur","mt":22.0,"price":83500.0,"value":1837000.0,"salesman":"Nadim","region":"Sherpur"},{"d":"2026-04-16","cust":"Anowara Group","mt":10.0,"price":86500.0,"value":865000.0,"salesman":"Mahfuz Sir","region":"Dhaka"},{"d":"2026-04-16","cust":"Roja Traders","mt":20.0,"price":84500.0,"value":1690000.0,"salesman":"Nadim","region":"Netrokona"},{"d":"2026-04-16","cust":"Naofa Trading","mt":28.0,"price":83500.0,"value":2338000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-16","cust":"Halima Steel Corp","mt":300.0,"price":82000.0,"value":24600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-15","cust":"Mazidsons Construction Ltd","mt":25.0,"price":86700.0,"value":2167500.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-15","cust":"Trusr Iron & Steel Store","mt":28.0,"price":85000.0,"value":2380000.0,"salesman":"Nadim","region":"Magura"},{"d":"2026-04-15","cust":"Mohammadi Trading","mt":57.0,"price":84500.0,"value":4816500.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":88100.0,"value":2202500.0,"salesman":"Mahfuz Sir","region":"Sirajgonj"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":88100.0,"value":2202500.0,"salesman":"Mahfuz Sir","region":"Sirajgonj"},{"d":"2026-04-13","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87500.0,"value":2187500.0,"salesman":"Mahfuz Sir","region":"Joypurhat"},{"d":"2026-04-13","cust":"Halima Steel Corp","mt":100.0,"price":83500.0,"value":8350000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-13","cust":"Anaf Enterprise","mt":5.0,"price":85800.0,"value":429000.0,"salesman":"Nadim","region":"Dhaka"},{"d":"2026-04-13","cust":"Md. Kholilur Rahman","mt":0.6,"price":90000.0,"value":54000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-12","cust":"Md. Rasel Ahmed","mt":1.0,"price":89000.0,"value":89000.0,"salesman":"Factory","region":"Dhaka"},{"d":"2026-04-12","cust":"Madani Traders","mt":13.0,"price":86000.0,"value":1118000.0,"salesman":"Meraj","region":"Feni"},{"d":"2026-04-12","cust":"Mohammadi Trading","mt":51.8,"price":85000.0,"value":4403000.0,"salesman":"Meraj","region":"Cumiila"},{"d":"2026-04-12","cust":"Halima Steel Corp","mt":150.0,"price":84000.0,"value":12600000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-09","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87300.0,"value":2182500.0,"salesman":"Mahfuz Sir","region":"Lalmonirhat"},{"d":"2026-04-09","cust":"Dhanshiri Enterprise","mt":10.0,"price":87700.0,"value":877000.0,"salesman":"Atik Sir","region":"Dhaka"},{"d":"2026-04-09","cust":"Shahin Traders","mt":28.0,"price":86000.0,"value":2408000.0,"salesman":"Meraj","region":"Cumilla"},{"d":"2026-04-09","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87300.0,"value":2182500.0,"salesman":"Mahfuz Sir","region":"Dinajpur"},{"d":"2026-04-09","cust":"Mr. Rafiqul Islam","mt":10.9,"price":87000.0,"value":948300.0,"salesman":"Mahfuz Sir","region":"Faridpur"},{"d":"2026-04-07","cust":"Mokka Traders","mt":14.0,"price":87000.0,"value":1218000.0,"salesman":"Nadim","region":"Rajshahi"},{"d":"2026-04-07","cust":"Mamun & Brothers","mt":14.0,"price":87000.0,"value":1218000.0,"salesman":"Nadim","region":"Khulna"},{"d":"2026-04-07","cust":"Naofa Trading","mt":28.0,"price":87000.0,"value":2436000.0,"salesman":"Meraj","region":"Laxmipur"},{"d":"2026-04-07","cust":"Halima Steel Corp","mt":300.0,"price":85000.0,"value":25500000.0,"salesman":"Mahfuz Sir","region":"All BD"},{"d":"2026-04-07","cust":"R.I Enterprise","mt":15.0,"price":87200.0,"value":1308000.0,"salesman":"Meraj","region":"Feni"},{"d":"2026-04-06","cust":"Mazidsons Construction Ltd","mt":25.0,"price":87500.0,"value":2187500.0,"salesman":"Mahfuz Sir","region":"Joypurhat"}],"recent_deliveries":[{"d":"2026-04-30","truck":"DMT-22-9892","mt":25.0,"cust":"Halima Steel Corpor.","region":"Sherpur"},{"d":"2026-04-30","truck":"DMT-18-2857","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"DMT-13-0079","mt":14.0,"cust":"Halima Steel Corpor.","region":"Chandpur"},{"d":"2026-04-30","truck":"DMT-18-2809","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"CHU-T-11-0699","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-13-0304","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"RAN-MT-11-0107","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-30","truck":"DMT-22-6604","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-20-8496","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-30","truck":"JHE-T-11-1644","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-30","truck":"DMT-11-7121","mt":13.8,"cust":"Halima Steel Corpor.","region":"Gopalgonj"},{"d":"2026-04-30","truck":"DMT-16-5943","mt":12.0,"cust":"Halima Steel Corpor.","region":"Badda"},{"d":"2026-04-30","truck":"DMT-18-2802","mt":13.9,"cust":"Halima Steel Corpor.","region":"Noakhali"},{"d":"2026-04-30","truck":"DMT-16-6040","mt":15.0,"cust":"Monir Steel House","region":"Dhaka"},{"d":"2026-04-29","truck":"DMT-24-4281","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bogura"},{"d":"2026-04-29","truck":"JES-T-11-3781","mt":15.0,"cust":"Halima Steel Corpor.","region":"Chuadanga"},{"d":"2026-04-29","truck":"DMT-12-8168","mt":14.0,"cust":"Halima Steel Corpor.","region":"Lalmonirhat"},{"d":"2026-04-29","truck":"DMT-11-5557","mt":14.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-29","truck":"KHU-MT-11-1232","mt":15.0,"cust":"Halima Steel Corpor.","region":"Magura"},{"d":"2026-04-29","truck":"DMT-14-7043","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rajshahi"},{"d":"2026-04-29","truck":"DMT-12-8155","mt":15.0,"cust":"Monir Steel House","region":"Dhaka"},{"d":"2026-04-28","truck":"DMT-24-6163","mt":15.0,"cust":"Halima Steel Corpor.","region":"Jhenaidah"},{"d":"2026-04-28","truck":"DMT-15-7948","mt":13.0,"cust":"Halima Steel Corpor.","region":"Chandpur."},{"d":"2026-04-28","truck":"DMT-18-8578","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-28","truck":"DMT-22-8508","mt":14.0,"cust":"Halima Steel Corpor.","region":"Chandpur."},{"d":"2026-04-28","truck":"DMT-16-5943","mt":16.0,"cust":"Halima Steel Corpor.","region":"Mirpur"},{"d":"2026-04-28","truck":"DMT-22-3820","mt":11.0,"cust":"Halima Steel Corpor.","region":"Barishal"},{"d":"2026-04-28","truck":"DMT-18-1743","mt":14.0,"cust":"Halima Steel Corpor.","region":"Laxmipur"},{"d":"2026-04-28","truck":"KHU-MT-11-1989","mt":22.0,"cust":"Halima Steel Corpor.","region":"B-Baria"},{"d":"2026-04-28","truck":"DMT-24-5063","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rajshahi"},{"d":"2026-04-28","truck":"CMT-11-9625","mt":13.8,"cust":"Halima Steel Corpor.","region":"Noakhali"},{"d":"2026-04-28","truck":"DMT-20-9120","mt":14.0,"cust":"Halima Steel Corpor.","region":"Barguna"},{"d":"2026-04-28","truck":"DMT-20-2335","mt":14.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-28","truck":"DMT-22-1544","mt":12.0,"cust":"Trust Iron & Steel","region":"Jessore"},{"d":"2026-04-28","truck":"DMT-12-3861","mt":15.0,"cust":"Khorshed Alam &","region":"Laxmipur"},{"d":"2026-04-28","truck":"DMN-12-6553","mt":2.87,"cust":"Md.Kholilur Rahman","region":"Gajaria"},{"d":"2026-04-27","truck":"DMT-16-0845","mt":15.0,"cust":"Halima Steel Corpor.","region":"Madaripur"},{"d":"2026-04-27","truck":"JES-T-11-5126","mt":22.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-27","truck":"DMT-16-6366","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-27","truck":"DMT-18-1695","mt":23.0,"cust":"Halima Steel Corpor.","region":"B-Baria"},{"d":"2026-04-27","truck":"DMT-15-8090","mt":15.0,"cust":"Halima Steel Corpor.","region":"Jhenaidah"},{"d":"2026-04-27","truck":"DMT-20-4486","mt":14.0,"cust":"Halima Steel Corpor.","region":"Sirajganj"},{"d":"2026-04-27","truck":"JES-T-11-6256","mt":11.5,"cust":"Halima Steel Corpor.","region":"Narial"},{"d":"2026-04-27","truck":"DMT-20-4599","mt":14.0,"cust":"Halima Steel Corpor.","region":"Dinajpur"},{"d":"2026-04-27","truck":"BOG-T-11-2023","mt":14.0,"cust":"Halima Steel Corpor.","region":"Naogaon"},{"d":"2026-04-27","truck":"DMT-15-8707","mt":12.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-27","truck":"DMT-11-7569","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-27","truck":"JES-T-11-3767","mt":23.0,"cust":"Halima Steel Corpor.","region":"Satkhira"},{"d":"2026-04-27","truck":"DMT-16-5455","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bogura"},{"d":"2026-04-27","truck":"DMT-24-6972","mt":13.0,"cust":"Mohammadi Trading","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-20-7183","mt":32.0,"cust":"Halima Steel Corpor.","region":"Sirajgonj"},{"d":"2026-04-26","truck":"DMT-18-3210","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-26","truck":"DMT-16-0369","mt":23.0,"cust":"Halima Steel Corpor.","region":"Sylhet"},{"d":"2026-04-26","truck":"DMT-12-5668","mt":14.0,"cust":"Halima Steel Corpor.","region":"Naogaon"},{"d":"2026-04-26","truck":"DMT-24-2218","mt":15.0,"cust":"Halima Steel Corpor.","region":"Meherpur"},{"d":"2026-04-26","truck":"DMT-14-9633","mt":14.0,"cust":"Halima Steel Corpor.","region":"Bhola"},{"d":"2026-04-26","truck":"DMT-16-6294","mt":28.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-12-7868","mt":14.0,"cust":"Halima Steel Corpor.","region":"Rangpur"},{"d":"2026-04-26","truck":"DMT-16-2238","mt":28.0,"cust":"Halima Steel Corpor.","region":"Cumilla"},{"d":"2026-04-26","truck":"DMT-15-6182","mt":14.0,"cust":"Mohammadi Trading","region":"Cumilla"}]};
 
 function fv(v){if(v==null)return'—';var a=Math.abs(+v);if(a>=10000000)return(+v/10000000).toFixed(1)+'Cr';if(a>=100000)return(+v/100000).toFixed(1)+'L';if(a>=1000)return(+v/1000).toFixed(1)+'K';return String(Math.round(+v));}
 function fm(v){return v!=null?(+v).toFixed(1):'—';}
@@ -1373,7 +1299,7 @@ function buildMoDetail(m){
   h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1)">'
      + '<div style="padding:11px 12px;border-right:1px solid var(--b1);border-bottom:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Sales</div><div style="font-size:17px;font-weight:700;color:var(--silver);letter-spacing:-.3px">'+fm(m.sales_vol)+' <span style="font-size:9px;color:var(--dim)">MT</span></div></div>'
      + '<div style="padding:11px 12px;border-right:1px solid var(--b1);border-bottom:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Avg Price</div><div style="font-size:17px;font-weight:700;color:var(--silver);letter-spacing:-.3px">৳'+fv(m.avg_price)+'</div></div>'
-     + '<div style="padding:11px 12px;border-bottom:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Avg Cost / T</div><div style="font-size:17px;font-weight:700;color:var(--red);letter-spacing:-.3px">৳'+fv(m.total_cost_pt)+'</div></div>'
+     + '<div style="padding:11px 12px;border-bottom:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Avg Cost / T</div><div style="font-size:17px;font-weight:700;color:var(--red);letter-spacing:-.3px">৳'+fv(m.total_cost_pt)+'</div><div style="font-size:7px;color:var(--dim3);margin-top:1px">scrap ৳'+fv(m.scrap_per_billet_pt||0)+' + other ৳'+fv(m.other_cost_pt||0)+'</div></div>'
      + '<div style="padding:11px 12px;border-right:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Production</div><div style="font-size:17px;font-weight:700;color:var(--txt);letter-spacing:-.3px">'+fm(m.rod)+' <span style="font-size:9px;color:var(--dim)">MT rod</span></div><div style="font-size:7px;color:var(--dim3);margin-top:1px">'+fm(m.billet_produced)+' MT billet</div></div>'
      + '<div style="padding:11px 12px;border-right:1px solid var(--b1)"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Delivery</div><div style="font-size:17px;font-weight:700;color:var(--txt);letter-spacing:-.3px">'+fm(m.delivery)+' <span style="font-size:9px;color:var(--dim)">MT</span></div><div style="font-size:7px;color:var(--dim3);margin-top:1px">'+(m.trucks||0)+' trucks</div></div>'
      + '<div style="padding:11px 12px"><div style="font-size:7px;font-weight:600;text-transform:uppercase;color:var(--dim);letter-spacing:.8px;margin-bottom:3px">Scrap Consumed</div><div style="font-size:17px;font-weight:700;color:var(--txt);letter-spacing:-.3px">'+fm(m.scrap_consumed||0)+' <span style="font-size:9px;color:var(--dim)">MT</span></div></div>'
@@ -1684,85 +1610,540 @@ function renderCosting(w){
   var parts=D.meta.mtd_start.split(' ');
   var MN={Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'};
   var mon=MN[parts[1]]||parts[1];
-  // Scrap split
-  var scrap_pt = pm.scrap_per_billet_pt || pm.scrap_consump_pt || 0;
+
+  // ── HERO ──
+  n('cs-heading', mon + "'s Costing Breakdown");
+  n('cs-tc-pt-mtd', '৳'+fv(pm.total_cost_pt));
+
+  // ── SCRAP CONSUMPTION ──
+  var scrap_pt   = pm.scrap_per_billet_pt || pm.scrap_consump_pt || 0;
   var purchase_pt = pm.scrap_exp_pt || 0;
-  n('cs-heading',mon+"'s Costing Breakdown");
-  n('cs-tc-pt-mtd',fv(pm.total_cost_pt));
-  // Bar: scrap purchase vs consumption (per billet MT)
-  n('cs-consump-pt',fv(scrap_pt));        // scrap consumption per billet MT
-  n('cs-exp-pt',fv(purchase_pt));         // scrap purchase price per MT
-  var expPct = scrap_pt>0 ? Math.round(purchase_pt/scrap_pt*100) : 81;
-  if(expPct>100)expPct=100; if(expPct<5)expPct=5;
-  var eb=document.getElementById('cs-bar-exp'); var gb=document.getElementById('cs-bar-gap');
-  if(eb)eb.style.width=expPct+'%'; if(gb){gb.style.left=expPct+'%';gb.style.right='0';}
-  var gap=scrap_pt-purchase_pt;
-  n('cs-gap-label',gap>=0?'▲ GAP '+fv(gap)+' / TON':'▼ GAP '+fv(Math.abs(gap))+' / TON');
-  n('cs-scrap-used',Math.round(pm.total_scrap_consumed||pm.sc_consumed||0).toLocaleString('en-IN'));
-  n('cs-billet',Math.round(pm.billet_prod||pm.billet||0).toLocaleString('en-IN'));
-  n('cs-rod',Math.round(pm.rod||0).toLocaleString('en-IN'));
-  n('cs-ratio',pm.scrap_to_billet?pm.scrap_to_billet.toFixed(3):'—');
-  n('cs-elec-total',fv(pm.electricity||0)); n('cs-elec-pt',fv(pm.elec_pt||0));
-  n('cs-oc-pt-mtd',fv(pm.other_cost_pt||0));
-  n('cs-simn-pt',fv(pm.simn_pt||0)); n('cs-fesi-pt',fv(pm.fesi_pt||0));
-  n('cs-boric-pt',fv(pm.boric_pt||0)); n('cs-quartz-pt',fv(pm.quartz_pt||0));
-  // Period-specific (toggled): show for selected period
-  n('cs-tc-pt',fv(m.total_cost_pt||0)); n('cs-sc-pt',fv(m.scrap_per_billet_pt||m.scrap_consump_pt||0)); n('cs-oc-pt',fv(m.other_cost_pt||0));
+  n('cs-consump-pt', '৳'+fv(scrap_pt));
+  n('cs-exp-pt', '৳'+fv(purchase_pt));
+  n('cs-scrap-used', Math.round(pm.total_scrap_consumed||pm.sc_consumed||0).toLocaleString('en-IN'));
+  n('cs-billet', Math.round(pm.billet_prod||pm.billet||0).toLocaleString('en-IN'));
+  n('cs-rod', Math.round(pm.rod||0).toLocaleString('en-IN'));
+  n('cs-ratio', pm.scrap_to_billet?pm.scrap_to_billet.toFixed(3)+' MT':'—');
+
+  // ── OTHER COST ──
+  n('cs-oc-pt-mtd', '৳'+fv(pm.other_cost_pt||0));
+
+  // Compute totals & breakdown
+  var rod = pm.rod || 1;
+  var elec_total = pm.electricity || 0;
+  var sal_total  = pm.salary_total || 0;
+  var simn_total = pm.simn || 0;
+  var fesi_total = pm.fesi || 0;
+  var boric_total = pm.boric || 0;
+  var quartz_total = pm.quartz || 0;
+  var chem_total = simn_total + fesi_total + boric_total + quartz_total;
+  var oc_total = pm.other_cost_total || pm.oc_total || 0;
+  var rest_total = oc_total - elec_total - sal_total - chem_total;
+  if(rest_total < 0) rest_total = 0;
+
+  var elec_pt = pm.elec_pt || Math.round(elec_total/rod);
+  var sal_pt  = pm.salary_pt || Math.round(sal_total/rod);
+  var chem_pt = Math.round(chem_total/rod);
+  var rest_pt = Math.round(rest_total/rod);
+
+  n('cs-elec-pt',  fv(elec_pt));
+  n('cs-elec-total-mtd', fv(elec_total));
+  n('cs-sal-pt',   fv(sal_pt));
+  n('cs-sal-total', fv(sal_total));
+  n('cs-chem-pt',  fv(chem_pt));
+  n('cs-chem-total', fv(chem_total));
+  n('cs-rest-pt',  fv(rest_pt));
+
+  // Composition bar widths
+  function pct(v){ return oc_total>0 ? (v/oc_total*100) : 0; }
+  var pe = pct(elec_total), ps = pct(sal_total), pc = pct(chem_total), pr = pct(rest_total);
+  var be = document.getElementById('cs-bar-elec');
+  var bs = document.getElementById('cs-bar-sal');
+  var bc = document.getElementById('cs-bar-chem');
+  var br = document.getElementById('cs-bar-rest');
+  if(be) be.style.width = pe.toFixed(2)+'%';
+  if(bs) bs.style.width = ps.toFixed(2)+'%';
+  if(bc) bc.style.width = pc.toFixed(2)+'%';
+  if(br) br.style.width = pr.toFixed(2)+'%';
+  n('cs-pct-elec', pe.toFixed(0)+'%');
+  n('cs-pct-sal',  ps.toFixed(0)+'%');
+  n('cs-pct-chem', pc.toFixed(0)+'%');
+  n('cs-pct-rest', pr.toFixed(0)+'%');
+
+  // Salary detail
+  n('cs-sal-roll', fv(pm.salary_rolling||0));
+  n('cs-sal-off',  fv(pm.salary_office||0));
+  n('cs-sal-lab',  fv(pm.salary_labour||0));
+
+  // Chemicals detail (per ton)
+  n('cs-simn-pt', fv(pm.simn_pt||0));
+  n('cs-fesi-pt', fv(pm.fesi_pt||0));
+  n('cs-boric-pt', fv(pm.boric_pt||0));
+  n('cs-quartz-pt', fv(pm.quartz_pt||0));
+
+  // ── BOTTOM TOGGLE BLOCK (period-specific) — UNTOUCHED ──
+  n('cs-tc-pt', fv(m.total_cost_pt||0));
+  n('cs-sc-pt', fv(m.scrap_per_billet_pt||m.scrap_consump_pt||0));
+  n('cs-oc-pt', fv(m.other_cost_pt||0));
 }
 
-function setRvP(w){
-  rvP=w;
-  ['today','7d','10d','14d','30d'].forEach(function(k){
-    var b=document.getElementById('rv-tbtn-'+k);
-    if(b){b.style.background=k===w?'var(--red)':'var(--bg)';b.style.color=k===w?'#fff':'var(--dim)';}
-  });
-  renderRevenue(w);
-}
 
-function renderRevenue(w) {
-  var m=D.periods[w]; if(!m)return;
-  var pm=D.periods.mtd; var c=D.competitors; var rv=D.revenue_data; var meta=D.meta;
-  var parts=meta.mtd_start.split(' ');
-  var MN={Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'};
-  var mon=MN[parts[1]]||parts[1];
-  n('rv-heading',mon+"'s Revenue Breakdown");
-  // April MTD fixed
-  n('rv-mtd-ap',fv(pm.avg_price)); n('rv-mtd-vol',(pm.sales_vol||0).toFixed(1));
-  n('rv-mtd-rev',fv(pm.revenue)); n('rv-mtd-del',(pm.delivery||0).toFixed(1));
-  n('rv-others-rate',fv(c.others_avg||0));
-  var vs=pm.avg_price-(c.others_avg||0); var el_vs=document.getElementById('rv-mtd-vs');
-  if(el_vs){el_vs.textContent=(vs>=0?'▲ ':'▼ ')+fv(Math.abs(vs));el_vs.style.color=vs>=0?'#00c853':'var(--red)';}
-  // 2026 Overview (rates is now flat: rates.mahfuz = number)
-  if(rv){
-    var rates=rv.rates||{};
-    n('rv-mahfuz-avg', rates.mahfuz?fv(rates.mahfuz):'—');
-    n('rv-meraj-avg',  rates.meraj?fv(rates.meraj):'—');
-    n('rv-nadim-avg',  rates.nadim?fv(rates.nadim):'—');
-    n('rv-halima-avg', rates.halima?fv(rates.halima):'—');
-    if(rv.halima_vs_others){
-      var hv=rv.halima_vs_others;
-      n('rv-other-rev-mtd', fv(rv.mtd_other_rev||0));
-      n('rv-rod-inv', rv.rod_inventory?rv.rod_inventory+' MT':'—');
-      n('rv-halima-vol', fv(hv.halima_vol)+' MT');
-      n('rv-others-vol', fv(hv.others_vol)+' MT');
-      var maxV=Math.max(hv.halima_vol,hv.others_vol)||1;
-      var hb=document.getElementById('rv-halima-bar'); var ob=document.getElementById('rv-others-bar');
-      if(hb)hb.style.width=Math.round(hv.halima_vol/maxV*100)+'%';
-      if(ob)ob.style.width=Math.round(hv.others_vol/maxV*100)+'%';
-    }
-    if(rv.ytd&&rv.ytd.top_regions){
-      var regs=rv.ytd.top_regions;
-      function regName(r){return r ? (r.name||r[0]) : '—';}
-      function regQty(r){return r ? Math.round(r.vol||r[1]||0)+' MT' : '—';}
-      n('rv-reg1-name', regName(regs[0])); n('rv-reg1-qty', regQty(regs[0]));
-      n('rv-reg2-name', regName(regs[1])); n('rv-reg2-qty', regQty(regs[1]));
-      n('rv-reg3-name', regName(regs[2])); n('rv-reg3-qty', regQty(regs[2]));
-    }
-    n('rv-other-rev-total', fv((rv.ytd&&rv.ytd.other_rev)||0));
+
+// ── Revenue overlay: tabbed (MTD | YTD) ──
+function renderRevenue(period){
+  if(typeof window.rvTab === 'undefined') window.rvTab = 'mtd';
+  if(typeof window.rvP === 'undefined') window.rvP = period || '7d';
+  if(period) window.rvP = period;
+  // Tabs
+  var tabsEl = document.getElementById('rv-tabs');
+  if(tabsEl){
+    var defs = [{id:'mtd', label:'MTD'}, {id:'ytd', label:'YTD'}];
+    tabsEl.innerHTML = defs.map(function(t){
+      var a = window.rvTab === t.id;
+      return '<div onclick="window.rvTab=\''+t.id+'\';renderRevenue()" style="flex:1;padding:13px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.5px;border-bottom:3px solid '+(a?'var(--red)':'transparent')+';color:'+(a?'var(--txt)':'var(--dim)')+';background:'+(a?'var(--bg)':'transparent')+'">'+t.label+'</div>';
+    }).join('');
   }
-  // Toggle driven
-  n('rv-vol-big',(m.sales_vol||0).toFixed(1)+' MT'); n('rv-hkg-rate',fv(m.avg_price)); n('rv-rev-big',fv(m.revenue));
-  ['today','7d','10d','14d','30d'].forEach(function(k){var b=document.getElementById('rv-tbtn-'+k);if(b){b.style.background=k===w?'var(--red)':'var(--bg)';b.style.color=k===w?'#fff':'var(--dim)';}});
+  // Body
+  var body = document.getElementById('rv-body');
+  if(body){
+    body.innerHTML = window.rvTab === 'mtd' ? buildRvMTD() : buildRvYTD();
+  }
+  // Bottom toggle
+  renderRvPeriod(window.rvP);
+}
+
+function setRvP(p){
+  window.rvP = p;
+  renderRvPeriod(p);
+}
+
+function renderRvPeriod(p){
+  var m = D.periods[p]; if(!m) return;
+  n('rv-per-rev', '৳'+fv(m.revenue||0));
+  n('rv-per-vol', fm(m.sales_vol||0));
+  n('rv-per-px', fv(m.avg_price||0));
+  document.querySelectorAll('.cpbtn').forEach(function(b){
+    var lbl = b.textContent.trim().toLowerCase();
+    b.classList.toggle('on', lbl === p);
+  });
+}
+
+// ──────────── MTD TAB ────────────
+function buildRvMTD(){
+  var pm = D.periods.mtd;
+  var c  = D.competitors || {};
+  var meta = D.meta || {};
+  var monthly = D.monthly || [];
+  var latestMonth = monthly[monthly.length-1] || {};
+
+  var parts = (meta.mtd_start||'').split(' ');
+  var MN = {Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'};
+  var mon = MN[parts[1]] || parts[1] || '';
+
+  var rod_rev = pm.revenue || 0;
+  var other_rev = pm.other_rev || latestMonth.other_revenue || 0;
+  var total_rev = rod_rev + other_rev;
+  var cash_recv = latestMonth.cash_received || 0;
+  var variance = cash_recv - total_rev;
+  var variancePct = total_rev>0 ? Math.round(Math.abs(variance)/total_rev*100) : 0;
+
+  var bsrm = c.bsrm || 0;
+  var others_avg = c.others_avg || 0;
+  var hkg_today = c.hkg_today || pm.avg_price || 0;
+  var hkg_avg = pm.avg_price || 0;
+
+  var h = '';
+
+  // ── HERO ──
+  h += '<div style="padding:14px 16px;background:var(--s2);border-bottom:2px solid var(--red);border-left:3px solid var(--red)">'
+     +   '<div style="display:flex;justify-content:space-between;align-items:flex-end">'
+     +     '<div>'
+     +       '<div style="font-size:7.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">'+mon+' Revenue · MTD</div>'
+     +       '<div style="font-size:18px;font-weight:700;color:var(--txt);letter-spacing:.2px;line-height:1.1">Generated this month</div>'
+     +       '<div style="font-size:7.5px;color:var(--dim3);margin-top:3px;letter-spacing:.5px">rod sales + by-products · accrual basis</div>'
+     +     '</div>'
+     +     '<div style="text-align:right">'
+     +       '<div style="font-size:7px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Total Revenue</div>'
+     +       '<div style="font-size:30px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-1.2px">৳'+fv(total_rev)+'</div>'
+     +     '</div>'
+     +   '</div>'
+     + '</div>';
+
+  // ── COMPOSITION ──
+  h += rvSec('Revenue Composition', 'rod sales vs by-product income');
+  // 3 bigger cells
+  h += '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1)">'
+     +   rvCell('Rod Sales (Estimated)', '৳'+fv(rod_rev), 'var(--silver)', fm(pm.sales_vol||0)+' MT @ ৳'+fv(pm.avg_price||0)+'/MT', 'var(--dim2)')
+     +   rvCell('By-products', '৳'+fv(other_rev), 'var(--silver)', (total_rev>0?(other_rev/total_rev*100).toFixed(1):'0')+'% of total', 'var(--dim2)')
+     +   rvCell('Cash Received', '৳'+fv(cash_recv), variance>=0?'var(--green)':'var(--red2)',
+                variance>=0 ? '+ ৳'+fv(variance)+' over est' : '− ৳'+fv(Math.abs(variance))+' under est',
+                variance>=0?'var(--green)':'var(--red2)')
+     + '</div>';
+
+  // Composition bar
+  if(total_rev > 0){
+    var rodPct = rod_rev/total_rev*100;
+    var otherPct = other_rev/total_rev*100;
+    h += '<div style="padding:11px 16px;background:var(--bg);border-bottom:1px solid var(--b1)">'
+       +   '<div style="display:flex;height:7px;border-radius:3px;overflow:hidden;background:var(--b2)">'
+       +     '<div style="width:'+rodPct.toFixed(2)+'%;background:#1e88e5"></div>'
+       +     '<div style="width:'+otherPct.toFixed(2)+'%;background:#43a047"></div>'
+       +   '</div>'
+       +   '<div style="display:flex;gap:14px;margin-top:5px;font-size:8.5px;color:var(--dim2)">'
+       +     '<span><span style="display:inline-block;width:7px;height:7px;background:#1e88e5;border-radius:50%;margin-right:4px"></span>Rod Sales <strong style="color:var(--txt)">'+rodPct.toFixed(1)+'%</strong></span>'
+       +     '<span><span style="display:inline-block;width:7px;height:7px;background:#43a047;border-radius:50%;margin-right:4px"></span>By-products <strong style="color:var(--txt)">'+otherPct.toFixed(1)+'%</strong></span>'
+       +   '</div>'
+       + '</div>';
+  }
+
+  // ── BY-PRODUCT BREAKDOWN ──
+  if(latestMonth.other_rev_breakdown && latestMonth.other_rev_breakdown.length){
+    h += rvSubHdr('By-product Income · Detail');
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Item','left') + rvTh('Volume','right') + rvTh('Revenue','right') + rvTh('Txns','right')
+       + '</tr></thead><tbody>';
+    latestMonth.other_rev_breakdown.forEach(function(it, i){
+      var border = i === latestMonth.other_rev_breakdown.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600">'+it.item+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(it.mt)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;font-weight:600">৳'+fv(it.rev)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums">'+it.txns+'</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  // ── EXPECTED vs ACTUAL ──
+  h += rvSec('Expected vs Actual', 'estimated revenue vs cash actually received');
+  var diff = cash_recv - total_rev;
+  var diffPos = diff >= 0;
+  h += '<div style="padding:14px 16px;background:var(--card);border-bottom:1px solid var(--b1)">'
+     +   '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+     +     '<div style="flex:1">'
+     +       '<div style="font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:2px">Estimated Revenue</div>'
+     +       '<div style="font-size:18px;font-weight:700;color:var(--silver);line-height:1;letter-spacing:-.4px">৳'+fv(total_rev)+'</div>'
+     +     '</div>'
+     +     '<div style="padding:0 10px;font-size:14px;color:var(--dim);font-weight:300">→</div>'
+     +     '<div style="flex:1;text-align:right">'
+     +       '<div style="font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:2px">Cash Received</div>'
+     +       '<div style="font-size:18px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.4px">৳'+fv(cash_recv)+'</div>'
+     +     '</div>'
+     +   '</div>'
+     +   '<div style="height:6px;background:var(--b2);border-radius:3px;overflow:hidden;display:flex">'
+     +     '<div style="width:'+(total_rev>0?Math.min(100, cash_recv/total_rev*100).toFixed(2):0)+'%;background:'+(diffPos?'var(--green)':'var(--red)')+'"></div>'
+     +   '</div>'
+     +   '<div style="display:flex;justify-content:space-between;margin-top:6px;font-size:8px;color:var(--dim2)">'
+     +     '<span>Collection ratio <strong style="color:var(--txt)">'+(total_rev>0?Math.round(cash_recv/total_rev*100):0)+'%</strong></span>'
+     +     '<span>Variance <strong style="color:'+(diffPos?'var(--green)':'var(--red2)')+'">'+(diffPos?'+ ৳':'− ৳')+fv(Math.abs(diff))+'</strong></span>'
+     +   '</div>'
+     +   '<div style="font-size:7.5px;color:var(--dim3);margin-top:8px;letter-spacing:.3px;line-height:1.4">'
+     +     (diffPos
+       ? 'Cash received exceeds estimated revenue — likely collections from prior month invoices flowing in.'
+       : 'Cash received is below estimated revenue — '+variancePct+'% of '+mon+' sales still in receivables.')
+     +   '</div>'
+     + '</div>';
+
+  // ── DELIVERY DESTINATIONS ──
+  if(latestMonth.regions && latestMonth.regions.length){
+    h += rvSec('Delivery Destinations · '+mon, 'where rod was actually delivered (by region)');
+    var maxReg = Math.max.apply(null, latestMonth.regions.map(function(r){return r.mt;}));
+    h += '<div style="background:var(--card);border-bottom:1px solid var(--b1)">';
+    latestMonth.regions.forEach(function(r, i){
+      var pct = maxReg>0 ? r.mt/maxReg*100 : 0;
+      var border = i === latestMonth.regions.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<div style="padding:9px 14px;'+border+'">'
+         +   '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+         +     '<div style="font-size:11px;font-weight:600;color:var(--txt)">'+r.name+'</div>'
+         +     '<div style="display:flex;gap:14px;font-size:9px;color:var(--dim2)">'
+         +       '<span>'+fm(r.mt)+' <span style="color:var(--dim3);font-size:7.5px">MT</span></span>'
+         +       '<span>৳'+fv(r.rev)+'</span>'
+         +       '<span>'+(r.trucks||0)+' <span style="color:var(--dim3);font-size:7.5px">trucks</span></span>'
+         +     '</div>'
+         +   '</div>'
+         +   '<div style="height:4px;background:var(--b2);border-radius:2px;overflow:hidden">'
+         +     '<div style="height:100%;width:'+pct.toFixed(2)+'%;background:var(--silver);border-radius:2px"></div>'
+         +   '</div>'
+         + '</div>';
+    });
+    h += '</div>';
+  }
+
+  // ── MARKET COMPARISON ──
+  h += rvSec('Market Comparison', 'HKG avg price vs the market');
+  var hkgVsBsrm  = hkg_avg - bsrm;
+  var hkgVsOthers = hkg_avg - others_avg;
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1)">'
+     +   rvCell('HKG Avg', '৳'+fv(hkg_avg), 'var(--red)', mon+' MTD price', 'var(--dim2)')
+     +   rvCell('vs Others', (hkgVsOthers>=0?'+ ৳':'− ৳')+fv(Math.abs(hkgVsOthers)),
+                hkgVsOthers>=0?'var(--green)':'var(--red2)',
+                'others avg ৳'+fv(others_avg), 'var(--dim2)')
+     +   rvCell('vs BSRM', (hkgVsBsrm>=0?'+ ৳':'− ৳')+fv(Math.abs(hkgVsBsrm)),
+                hkgVsBsrm>=0?'var(--green)':'var(--red2)',
+                'BSRM ৳'+fv(bsrm)+' (premium)', 'var(--dim2)')
+     + '</div>';
+  // Note about market position
+  h += '<div style="padding:9px 16px;background:var(--bg);border-bottom:1px solid var(--b1);font-size:9px;color:var(--dim2);line-height:1.5">'
+     + (hkgVsOthers >= 0
+        ? 'HKG is pricing <strong style="color:var(--green)">above</strong> the others-average by ৳'+fv(Math.abs(hkgVsOthers))+'/MT — premium positioning. '
+        : 'HKG is pricing <strong style="color:var(--red2)">below</strong> the others-average by ৳'+fv(Math.abs(hkgVsOthers))+'/MT — discounting to win volume. ')
+     + 'BSRM remains the price leader at ৳'+fv(bsrm)+'/MT.'
+     + '</div>';
+
+  // ── TOP CUSTOMERS ──
+  if(latestMonth.top_customers && latestMonth.top_customers.length){
+    h += rvSec('Top Customers · '+mon, 'who bought the most');
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Customer','left') + rvTh('Volume','right') + rvTh('Revenue','right') + rvTh('Avg Px','right')
+       + '</tr></thead><tbody>';
+    latestMonth.top_customers.slice(0, 6).forEach(function(cu, i){
+      var avg = cu.mt>0 ? Math.round(cu.rev/cu.mt) : 0;
+      var border = i === Math.min(5, latestMonth.top_customers.length-1) ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600;font-size:11px">'+cu.name+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-size:11px">'+fm(cu.mt)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(cu.rev)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--silver);font-weight:600;font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(avg)+'</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  // ── SALESMEN MTD ──
+  if(latestMonth.salesmen && latestMonth.salesmen.length){
+    h += rvSec('Salesmen · '+mon, 'volume + revenue per rep');
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Salesman','left') + rvTh('Volume','right') + rvTh('Revenue','right') + rvTh('Avg Px','right')
+       + '</tr></thead><tbody>';
+    latestMonth.salesmen.forEach(function(s, i){
+      var border = i === latestMonth.salesmen.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600;font-size:11px">'+s.name+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-size:11px">'+fm(s.mt)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(s.rev)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--silver);font-weight:600;font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(s.avg_px||0)+'</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  h += '<div style="height:18px"></div>';
+  return h;
+}
+
+// ──────────── YTD TAB ────────────
+function buildRvYTD(){
+  var monthly = D.monthly || [];
+  var rv = D.revenue_data || {};
+  var ytdBd = D.ytd_breakdown || {};
+
+  // Aggregate YTD totals from monthly array
+  var ytdRod = 0, ytdOther = 0, ytdCash = 0, ytdSales = 0, ytdDelivery = 0, ytdTrucks = 0;
+  monthly.forEach(function(m){
+    ytdRod += m.revenue || 0;
+    ytdOther += m.other_revenue || 0;
+    ytdCash += m.cash_received || 0;
+    ytdSales += m.sales_vol || 0;
+    ytdDelivery += m.delivery || 0;
+    ytdTrucks += m.trucks || 0;
+  });
+  var ytdTotal = ytdRod + ytdOther;
+  var ytdAvgPx = ytdSales > 0 ? Math.round(ytdRod / ytdSales) : 0;
+
+  // YTD by-product aggregation
+  var bpAcc = {};
+  monthly.forEach(function(m){
+    (m.other_rev_breakdown || []).forEach(function(it){
+      if(!bpAcc[it.item]) bpAcc[it.item] = {item:it.item, mt:0, rev:0, txns:0};
+      bpAcc[it.item].mt += it.mt || 0;
+      bpAcc[it.item].rev += it.rev || 0;
+      bpAcc[it.item].txns += it.txns || 0;
+    });
+  });
+  var bpYtd = Object.values(bpAcc).sort(function(a,b){return b.rev - a.rev;});
+
+  var h = '';
+
+  // ── HERO ──
+  h += '<div style="padding:14px 16px;background:var(--s2);border-bottom:2px solid var(--red);border-left:3px solid var(--red)">'
+     +   '<div style="display:flex;justify-content:space-between;align-items:flex-end">'
+     +     '<div>'
+     +       '<div style="font-size:7.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">2026 · Year to Date</div>'
+     +       '<div style="font-size:18px;font-weight:700;color:var(--txt);letter-spacing:.2px;line-height:1.1">'+monthly.length+' months · Jan – Apr</div>'
+     +       '<div style="font-size:7.5px;color:var(--dim3);margin-top:3px;letter-spacing:.5px">'+fm(ytdSales)+' MT sold · '+fm(ytdDelivery)+' MT delivered · '+ytdTrucks+' trucks</div>'
+     +     '</div>'
+     +     '<div style="text-align:right">'
+     +       '<div style="font-size:7px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">YTD Total</div>'
+     +       '<div style="font-size:30px;font-weight:700;color:var(--red);line-height:1;letter-spacing:-1.2px">৳'+fv(ytdTotal)+'</div>'
+     +     '</div>'
+     +   '</div>'
+     + '</div>';
+
+  // ── COMPOSITION ──
+  h += rvSec('YTD Composition', 'rod sales vs by-product income · cash collected');
+  h += '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1)">'
+     +   rvCell('Rod Sales', '৳'+fv(ytdRod), 'var(--silver)', fm(ytdSales)+' MT @ ৳'+fv(ytdAvgPx)+'/MT avg', 'var(--dim2)')
+     +   rvCell('By-products', '৳'+fv(ytdOther), 'var(--silver)', (ytdTotal>0?(ytdOther/ytdTotal*100).toFixed(1):'0')+'% of total', 'var(--dim2)')
+     +   rvCell('Cash Received', '৳'+fv(ytdCash), ytdCash>=ytdTotal?'var(--green)':'var(--red2)',
+                Math.round(ytdCash/ytdTotal*100)+'% collection ratio', ytdCash>=ytdTotal?'var(--green)':'var(--red2)')
+     + '</div>';
+
+  if(ytdTotal > 0){
+    var rodPct = ytdRod/ytdTotal*100;
+    var otherPct = ytdOther/ytdTotal*100;
+    h += '<div style="padding:11px 16px;background:var(--bg);border-bottom:1px solid var(--b1)">'
+       +   '<div style="display:flex;height:7px;border-radius:3px;overflow:hidden;background:var(--b2)">'
+       +     '<div style="width:'+rodPct.toFixed(2)+'%;background:#1e88e5"></div>'
+       +     '<div style="width:'+otherPct.toFixed(2)+'%;background:#43a047"></div>'
+       +   '</div>'
+       +   '<div style="display:flex;gap:14px;margin-top:5px;font-size:8.5px;color:var(--dim2)">'
+       +     '<span><span style="display:inline-block;width:7px;height:7px;background:#1e88e5;border-radius:50%;margin-right:4px"></span>Rod <strong style="color:var(--txt)">'+rodPct.toFixed(1)+'%</strong></span>'
+       +     '<span><span style="display:inline-block;width:7px;height:7px;background:#43a047;border-radius:50%;margin-right:4px"></span>By-products <strong style="color:var(--txt)">'+otherPct.toFixed(1)+'%</strong></span>'
+       +   '</div>'
+       + '</div>';
+  }
+
+  // ── MONTHLY TREND ──
+  h += rvSec('Monthly Revenue Trend', 'rod sales + by-products per month');
+  var maxMo = Math.max.apply(null, monthly.map(function(m){return (m.revenue||0) + (m.other_revenue||0);}));
+  h += '<div style="background:var(--card);border-bottom:1px solid var(--b1)">';
+  monthly.forEach(function(m, i){
+    var tot = (m.revenue||0) + (m.other_revenue||0);
+    var pct = maxMo>0 ? tot/maxMo*100 : 0;
+    var rodW = tot>0 ? (m.revenue||0)/tot * pct : 0;
+    var border = i === monthly.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+    h += '<div style="padding:10px 14px;'+border+'">'
+       +   '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">'
+       +     '<div style="font-size:12px;font-weight:700;color:var(--txt)">'+m.label+'</div>'
+       +     '<div style="display:flex;gap:14px;font-size:9.5px;color:var(--dim2);font-variant-numeric:tabular-nums">'
+       +       '<span>৳'+fv(tot)+'</span>'
+       +       '<span style="color:var(--dim3)">cash ৳'+fv(m.cash_received||0)+'</span>'
+       +     '</div>'
+       +   '</div>'
+       +   '<div style="height:6px;background:var(--b2);border-radius:3px;overflow:hidden;display:flex">'
+       +     '<div style="height:100%;width:'+rodW.toFixed(2)+'%;background:#1e88e5"></div>'
+       +     '<div style="height:100%;width:'+(pct - rodW).toFixed(2)+'%;background:#43a047"></div>'
+       +   '</div>'
+       + '</div>';
+  });
+  h += '</div>';
+
+  // ── YTD BY-PRODUCTS ──
+  if(bpYtd.length){
+    h += rvSec('By-products · YTD', 'aggregated across the year');
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Item','left') + rvTh('YTD Volume','right') + rvTh('YTD Revenue','right') + rvTh('Txns','right')
+       + '</tr></thead><tbody>';
+    bpYtd.forEach(function(it, i){
+      var border = i === bpYtd.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600;font-size:11px">'+it.item+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-size:11px">'+fm(it.mt)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;font-weight:600;font-size:11px">৳'+fv(it.rev)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums;font-size:11px">'+it.txns+'</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  // ── TOP CUSTOMERS YTD ──
+  if(D.top_customers && D.top_customers.length){
+    h += rvSec('Top Customers · YTD', 'highest-value buyers this year');
+    var totVol = D.top_customers.reduce(function(a,c){return a + (c.vol||0);}, 0);
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Customer','left') + rvTh('Volume','right') + rvTh('Revenue','right') + rvTh('Avg Px','right') + rvTh('Share','right')
+       + '</tr></thead><tbody>';
+    D.top_customers.slice(0, 8).forEach(function(cu, i){
+      var border = i === Math.min(7, D.top_customers.length-1) ? '' : 'border-bottom:1px solid var(--b1)';
+      var share = totVol>0 ? cu.vol/totVol*100 : 0;
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600;font-size:11px">'+cu.name+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-size:11px">'+fm(cu.vol)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(cu.rev)+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-weight:600;font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(cu.avg_px||0)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums;font-size:11px">'+share.toFixed(1)+'%</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  // ── REGIONS YTD ──
+  if(rv.ytd && rv.ytd.top_regions && rv.ytd.top_regions.length){
+    h += rvSec('Top Regions · YTD', 'rod delivery footprint');
+    var maxR = Math.max.apply(null, rv.ytd.top_regions.map(function(r){return r[1];}));
+    h += '<div style="background:var(--card);border-bottom:1px solid var(--b1)">';
+    rv.ytd.top_regions.forEach(function(r, i){
+      var pct = maxR>0 ? r[1]/maxR*100 : 0;
+      var border = i === rv.ytd.top_regions.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<div style="padding:9px 14px;'+border+'">'
+         +   '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+         +     '<div style="font-size:11px;font-weight:600;color:var(--txt)">'+r[0]+'</div>'
+         +     '<div style="display:flex;gap:14px;font-size:9px;color:var(--dim2)">'
+         +       '<span>'+fm(r[1])+' <span style="color:var(--dim3);font-size:7.5px">MT</span></span>'
+         +       '<span>৳'+fv(r[2])+'</span>'
+         +     '</div>'
+         +   '</div>'
+         +   '<div style="height:4px;background:var(--b2);border-radius:2px;overflow:hidden">'
+         +     '<div style="height:100%;width:'+pct.toFixed(2)+'%;background:var(--silver);border-radius:2px"></div>'
+         +   '</div>'
+         + '</div>';
+    });
+    h += '</div>';
+  }
+
+  // ── SALESMEN YTD ──
+  if(D.salesmen && D.salesmen.length){
+    h += rvSec('Salesmen · YTD', 'volume + revenue + activity per rep');
+    h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:1px solid var(--b1)">';
+    h += '<thead><tr style="background:var(--s2)">'
+       +   rvTh('Salesman','left') + rvTh('Volume','right') + rvTh('Revenue','right') + rvTh('Avg Px','right') + rvTh('Customers','right')
+       + '</tr></thead><tbody>';
+    D.salesmen.forEach(function(s, i){
+      var border = i === D.salesmen.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+      h += '<tr style="'+border+'">'
+         +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600;font-size:11px">'+s.name+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-size:11px">'+fm(s.vol||0)+' MT</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(s.rev||0)+'</td>'
+         +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-weight:600;font-variant-numeric:tabular-nums;font-size:11px">৳'+fv(s.avg_px||0)+'</td>'
+         +   '<td style="padding:9px 14px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums;font-size:11px">'+(s.customers||0)+'</td>'
+         + '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+
+  h += '<div style="height:18px"></div>';
+  return h;
+}
+
+// ── Helpers ──
+function rvSec(label, sub){
+  return '<div style="padding:8px 16px;background:var(--bg);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">'
+       +   '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">'+label+'</div>'
+       +   (sub?'<div style="font-size:7.5px;color:var(--dim3);letter-spacing:.4px">'+sub+'</div>':'')
+       + '</div>';
+}
+
+function rvSubHdr(label){
+  return '<div style="padding:6px 16px;background:var(--s2);border-bottom:1px solid var(--b1)">'
+       +   '<div style="font-size:8px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim2)">'+label+'</div>'
+       + '</div>';
+}
+
+function rvCell(label, value, valColor, sub, subColor){
+  return '<div style="padding:11px 12px;border-right:1px solid var(--b1)">'
+       +   '<div style="font-size:7px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--dim);margin-bottom:3px">'+label+'</div>'
+       +   '<div style="font-size:16px;font-weight:700;color:'+valColor+';letter-spacing:-.3px;line-height:1">'+value+'</div>'
+       +   (sub ? '<div style="font-size:7px;color:'+(subColor||'var(--dim3)')+';margin-top:3px">'+sub+'</div>' : '')
+       + '</div>';
+}
+
+function rvTh(label, align){
+  return '<th style="text-align:'+align+';padding:8px '+(align==='left'?'14px':'12px')+';font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">'+label+'</th>';
 }
 
 function openOv(name){
@@ -1776,7 +2157,7 @@ function openOv(name){
   if(name==='delivery'){var e=document.getElementById('ov-delivery');if(e)e.classList.add('open');renderDelivery();return;}
   var e=document.getElementById('ov-'+name); if(e)e.classList.add('open');
   if(name==='costing'){renderCosting(costP);}
-  else if(name==='revenue'){setRvP(rvP);}
+  else if(name==='revenue'){renderRevenue(rvP);}
   else{refreshOv(curP);}
 }
 function showToast(msg){
@@ -2498,9 +2879,37 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 function renderInventory() {
+  if(typeof window.ivTab === 'undefined') window.ivTab = 'stocks';
+  // Build tabs
+  var tabsEl = document.getElementById('iv-tabs');
+  if(tabsEl){
+    var defs = [
+      {id:'stocks', label:'Stocks'},
+      {id:'detail', label:'Detail'},
+    ];
+    tabsEl.innerHTML = defs.map(function(t){
+      var a = window.ivTab === t.id;
+      return '<div onclick="window.ivTab=\''+t.id+'\';renderInventory()" style="flex:1;padding:13px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.5px;border-bottom:3px solid '+(a?'var(--red)':'transparent')+';color:'+(a?'var(--txt)':'var(--dim)')+';background:'+(a?'var(--bg)':'transparent')+'">'+t.label+'</div>';
+    }).join('');
+  }
+  // Show/hide bodies
+  var sb = document.getElementById('iv-body-stocks');
+  var db = document.getElementById('iv-body-detail');
+  if(window.ivTab === 'stocks'){
+    if(sb) sb.style.display = 'contents';
+    if(db) db.style.display = 'none';
+    renderInventoryStocks();
+  } else {
+    if(sb) sb.style.display = 'none';
+    if(db) db.style.display = '';
+    renderInventoryDetail();
+  }
+}
+
+// === STOCKS TAB (existing content) ===
+function renderInventoryStocks(){
   var s=D.stocks, p=D.stock_prices, im=D.inventory_meta;
   if(!s) return;
-  // Stocks
   n('iv-hms',  s.hms.toFixed(1));
   n('iv-bun',  s.bundle.toFixed(1));
   n('iv-bil',  s.billet.toFixed(1));
@@ -2508,24 +2917,20 @@ function renderInventory() {
   n('iv-simn', (s.simn||0).toFixed(3));
   n('iv-fesi', (s.fesi||0).toFixed(3));
   if(!p) return;
-  // Values
   n('iv-hms-val',  fv(Math.round(s.hms * p.hms)));
   n('iv-bun-val',  fv(Math.round(s.bundle * p.bundle)));
   n('iv-bil-val',  fv(Math.round(s.billet * p.billet)));
   n('iv-rod-val',  fv(Math.round(s.rod * p.rod)));
   n('iv-simn-val', fv(Math.round((s.simn||0) * (p.simn||0))));
   n('iv-fesi-val', fv(Math.round((s.fesi||0) * (p.fesi||0))));
-  // Price labels
   n('iv-hms-px',  '৳'+fv(p.hms)+'/MT');
   n('iv-bun-px',  '৳'+fv(p.bundle)+'/MT');
   n('iv-bil-px',  '৳'+fv(p.billet)+'/MT cost');
   n('iv-rod-px',  '৳'+fv(p.rod)+'/MT sell');
   n('iv-simn-px', '৳'+fv(p.simn||0)+'/MT');
   n('iv-fesi-px', '৳'+fv(p.fesi||0)+'/MT');
-  // Total
   var total=s.hms*p.hms+s.bundle*p.bundle+s.billet*p.billet+s.rod*p.rod+(s.simn||0)*(p.simn||0)+(s.fesi||0)*(p.fesi||0);
   n('iv-total-val', fv(Math.round(total)));
-  // YTD change
   if(im && im.inv_change_ytd!==undefined){
     var ch = im.inv_change_ytd;
     var pos = ch>=0;
@@ -2536,13 +2941,163 @@ function renderInventory() {
     n('iv-change-ytd-from', '৳'+fv(im.opening_inv_val||0));
     n('iv-change-ytd-to', '৳'+fv(im.total_inv_val||0));
   }
-  // Days of inventory
   if(im) {
     n('iv-bun-days', (im.bun_days||0).toFixed(1));
     n('iv-rod-days', (im.rod_days||0).toFixed(1));
     n('iv-hms-days', (im.hms_days||0).toFixed(1));
     n('iv-daily-sales', (im.rod_daily_sales||0).toFixed(1));
   }
+}
+
+// === DETAIL TAB (NEW — MT only) ===
+function renderInventoryDetail(){
+  var dv = (D.inventory_detail || {});
+  var body = document.getElementById('iv-body-detail');
+  if(!body) return;
+
+  var h = '';
+
+  // Header
+  h += '<div style="padding:9px 14px;background:var(--s2);border-bottom:1px solid var(--b1);border-left:3px solid var(--red);display:flex;align-items:center;justify-content:space-between">'
+     +   '<div>'
+     +     '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">Inventory Detail</div>'
+     +     '<div style="font-size:7.5px;color:var(--dim3);margin-top:2px;letter-spacing:.5px">All quantities in metric tons (MT)</div>'
+     +   '</div>'
+     +   '<div style="font-size:8px;color:var(--dim);background:var(--s1);padding:3px 8px;border-radius:3px;border:1px solid var(--b2)">as of '+(dv.as_of||'—')+'</div>'
+     + '</div>';
+
+  // SECTION A: RAW MATERIALS
+  h += ivSectionHdr('A · Raw Materials');
+  h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:2px solid var(--red)">';
+  h += '<thead><tr style="background:var(--s2)">'
+     +   ivTh('Material', 'left')
+     +   ivTh('Opening', 'right')
+     +   ivTh('Purchased / Received', 'right')
+     +   ivTh('Consumed', 'right')
+     +   ivTh('Closing', 'right')
+     + '</tr></thead><tbody>';
+  (dv.raw_materials||[]).forEach(function(r){
+    var inflowStr;
+    if(r.purchased && r.received){
+      inflowStr = fm(r.purchased)+' <span style="font-size:8px;color:var(--dim3)">+ '+fm(r.received)+'</span>';
+    } else if(r.received !== undefined && r.purchased === undefined){
+      inflowStr = fm(r.received);
+    } else {
+      inflowStr = fm(r.purchased||0);
+    }
+    h += '<tr style="border-bottom:1px solid var(--b1)">'
+       +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600">'+r.name
+       +     (r.note?'<div style="font-size:7.5px;color:var(--dim3);font-weight:400;margin-top:1px">'+r.note+'</div>':'')
+       +   '</td>'
+       +   '<td style="padding:9px 10px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(r.opening||0)+'</td>'
+       +   '<td style="padding:9px 10px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;font-weight:600">'+inflowStr+'</td>'
+       +   '<td style="padding:9px 10px;text-align:right;color:var(--red2);font-variant-numeric:tabular-nums">'+fm(r.consumed||0)+'</td>'
+       +   '<td style="padding:9px 14px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-weight:700">'+fm(r.closing||0)+'</td>'
+       + '</tr>';
+  });
+  h += '</tbody></table>';
+
+  // SECTION B: WIP
+  var w = dv.wip || {};
+  h += ivSectionHdr('B · Work in Progress');
+  h += '<div style="background:var(--card);border-bottom:2px solid var(--red)">'
+     + '<table style="width:100%;border-collapse:collapse">'
+     +   '<thead><tr style="background:var(--s2)">'
+     +     ivTh('Item','left')
+     +     ivTh('Opening','right')
+     +     ivTh('Produced','right')
+     +     ivTh('Rolled','right')
+     +     ivTh('Crack/Oval','right')
+     +     ivTh('Closing','right')
+     +   '</tr></thead><tbody>'
+     +   '<tr style="border-bottom:1px solid var(--b1)">'
+     +     '<td style="padding:9px 14px;color:var(--txt);font-weight:600">Billet'
+     +       '<div style="font-size:7.5px;color:var(--dim3);font-weight:400;margin-top:1px">Cast then issued to rolling mill</div>'
+     +     '</td>'
+     +     '<td style="padding:9px 10px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(w.opening||0)+'</td>'
+     +     '<td style="padding:9px 10px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;font-weight:600">'+fm(w.produced||0)+'</td>'
+     +     '<td style="padding:9px 10px;text-align:right;color:var(--red2);font-variant-numeric:tabular-nums">'+fm(w.consumed||0)+'</td>'
+     +     '<td style="padding:9px 10px;text-align:right;color:var(--red2);font-variant-numeric:tabular-nums">'+fm(w.crack_oval||0)+'</td>'
+     +     '<td style="padding:9px 14px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-weight:700">'+fm(w.closing||0)+'</td>'
+     +   '</tr>'
+     + '</tbody></table>'
+     + '</div>';
+
+  // SECTION C: FINISHED ROD BY GRADE
+  var fr = dv.finished_rod || {};
+  h += ivSectionHdr('C · Finished Goods · Rod by Grade');
+
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--b1)">'
+     +   ivCell('Total Rod', fm(fr.total_balance||0)+' MT', 'var(--txt)', 'all grades')
+     +   ivCell('500W', fm(fr.rod_500w||0)+' MT', 'var(--silver)', 'main grade')
+     +   ivCell('60G', fm(fr.rod_60g||0)+' MT', 'var(--silver)', 'thermomechanical')
+     +   ivCell('Sample Rod', fm(fr.sample_rod||0)+' MT', 'var(--dim2)', 'QC samples')
+     + '</div>';
+
+  h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:2px solid var(--red)">'
+     + '<thead><tr style="background:var(--s2)">'
+     +   ivTh('Grade','left')
+     +   ivTh('YTD Produced','right')
+     +   ivTh('YTD Sold','right')
+     +   ivTh('Sold/Made','right')
+     +   ivTh('Closing','right')
+     + '</tr></thead><tbody>';
+  function gradeRow(name, prod, sold, balance){
+    var ratio = prod>0 ? sold/prod*100 : 0;
+    var ratioCol = ratio>=98?'var(--green)':ratio>=90?'var(--silver)':'var(--red2)';
+    return '<tr style="border-bottom:1px solid var(--b1)">'
+         + '<td style="padding:9px 14px;color:var(--txt);font-weight:600">'+name+'</td>'
+         + '<td style="padding:9px 10px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(prod)+'</td>'
+         + '<td style="padding:9px 10px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(sold)+'</td>'
+         + '<td style="padding:9px 10px;text-align:right;color:'+ratioCol+';font-variant-numeric:tabular-nums;font-weight:600">'+ratio.toFixed(1)+'%</td>'
+         + '<td style="padding:9px 14px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-weight:700">'+fm(balance)+'</td>'
+         + '</tr>';
+  }
+  h += gradeRow('500W (BS 4449)', fr.ytd_500w_produced||0, fr.ytd_500w_sold||0, fr.rod_500w||0);
+  h += gradeRow('60G (TMT)',      fr.ytd_60g_produced||0,  fr.ytd_60g_sold||0,  fr.rod_60g||0);
+  h += '</tbody></table>';
+
+  // SECTION D: BY-PRODUCTS
+  h += ivSectionHdr('D · By-Products');
+  h += '<table style="width:100%;border-collapse:collapse;background:var(--card);border-bottom:2px solid var(--red)">';
+  h += '<thead><tr style="background:var(--s2)">'
+     +   ivTh('Item','left')
+     +   ivTh('YTD Generated','right')
+     +   ivTh('YTD Delivered','right')
+     +   ivTh('Closing','right')
+     + '</tr></thead><tbody>';
+  (dv.byproducts||[]).forEach(function(b){
+    h += '<tr style="border-bottom:1px solid var(--b1)">'
+       +   '<td style="padding:9px 14px;color:var(--txt);font-weight:600">'+b.name
+       +     (b.note?'<div style="font-size:7.5px;color:var(--dim3);font-weight:400;margin-top:1px">'+b.note+'</div>':'')
+       +   '</td>'
+       +   '<td style="padding:9px 10px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums">'+fm(b.ytd_generated||0)+'</td>'
+       +   '<td style="padding:9px 10px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;font-weight:600">'+fm(b.ytd_delivered||0)+'</td>'
+       +   '<td style="padding:9px 14px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-weight:700">'+fm(b.closing||0)+'</td>'
+       + '</tr>';
+  });
+  h += '</tbody></table>';
+
+  h += '<div style="height:24px"></div>';
+  body.innerHTML = h;
+}
+
+function ivSectionHdr(label){
+  return '<div style="padding:7px 14px;background:var(--bg);border-bottom:1px solid var(--b1);border-left:3px solid var(--red)">'
+       +   '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">'+label+'</div>'
+       + '</div>';
+}
+
+function ivTh(label, align){
+  return '<th style="text-align:'+align+';padding:7px '+(align==='left'?'14px':'10px')+';font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">'+label+'</th>';
+}
+
+function ivCell(label, value, color, sub){
+  return '<div style="padding:13px 12px;border-right:1px solid var(--b1);text-align:center">'
+       +   '<div style="font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">'+label+'</div>'
+       +   '<div style="font-size:17px;font-weight:700;color:'+color+';letter-spacing:-.3px;line-height:1">'+value+'</div>'
+       +   (sub ? '<div style="font-size:7px;color:var(--dim3);margin-top:3px">'+sub+'</div>' : '')
+       + '</div>';
 }
 
 // loadData() called by checkPw()
@@ -2847,6 +3402,80 @@ function mkRdNarrative(w, prev, ctx, yieldPct, yieldVsAvg, wastePct, wasteVsAvg,
 
 function buildRdTable() {
   var weeks = ROD_DATA;
+
+  // ── YTD BAR SIZE SUMMARY (sits above the weekly table) ──
+  var ytdBars = {sz_8:0, sz_10:0, sz_12:0, sz_16:0, sz_20:0, sz_22:0, sz_25:0, sz_28:0, sz_32:0};
+  var ytdDays = 0, ytd500w = 0;
+  weeks.forEach(function(w){
+    ytdBars.sz_8  += w.size_8mm  || 0;
+    ytdBars.sz_10 += w.size_10mm || 0;
+    ytdBars.sz_12 += w.size_12mm || 0;
+    ytdBars.sz_16 += w.size_16mm || 0;
+    ytdBars.sz_20 += w.size_20mm || 0;
+    ytdBars.sz_22 += w.size_22mm || 0;
+    ytdBars.sz_25 += w.size_25mm || 0;
+    ytdBars.sz_28 += w.size_28mm || 0;
+    ytdBars.sz_32 += w.size_32mm || 0;
+    ytdDays += w.days || 0;
+    ytd500w += w.rod_500w || 0;
+  });
+  var sizeDefs = [
+    {label:'8mm',  mt:ytdBars.sz_8,  color:'#26a69a'},
+    {label:'10mm', mt:ytdBars.sz_10, color:'#1e88e5'},
+    {label:'12mm', mt:ytdBars.sz_12, color:'#43a047'},
+    {label:'16mm', mt:ytdBars.sz_16, color:'#fb8c00'},
+    {label:'20mm', mt:ytdBars.sz_20, color:'#8e24aa'},
+    {label:'22mm', mt:ytdBars.sz_22, color:'#6d4c41'},
+    {label:'25mm', mt:ytdBars.sz_25, color:'#cc0000'},
+    {label:'28mm', mt:ytdBars.sz_28, color:'#5e35b1'},
+    {label:'32mm', mt:ytdBars.sz_32, color:'#3949ab'},
+  ].filter(function(s){ return s.mt > 0; });
+  var ytdTotal = sizeDefs.reduce(function(a,s){return a+s.mt;}, 0);
+
+  var sz = '';
+  if(sizeDefs.length > 0){
+    sz += '<div style="margin:10px 10px 14px;border:1px solid var(--b1);border-left:3px solid var(--red);border-radius:4px;background:var(--card);overflow:hidden">'
+       +   '<div style="padding:9px 14px;background:var(--s2);border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center">'
+       +     '<div>'
+       +       '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt)">YTD Production by Bar Size · 500W</div>'
+       +       '<div style="font-size:7.5px;color:var(--dim3);margin-top:2px;letter-spacing:.5px">'+sizeDefs.length+' size'+(sizeDefs.length===1?'':'s')+' rolled · '+fm(ytdTotal)+' MT total · '+ytdDays+' days</div>'
+       +     '</div>'
+       +     '<div style="font-size:8px;color:var(--dim);background:var(--s1);padding:3px 8px;border-radius:3px;border:1px solid var(--b2)">YTD</div>'
+       +   '</div>'
+       // Stacked color bar
+       +   '<div style="padding:13px 14px 11px;background:var(--bg);border-bottom:1px solid var(--b1)">'
+       +     '<div style="display:flex;height:8px;border-radius:3px;overflow:hidden;background:var(--b2)">'
+       +       sizeDefs.map(function(s){
+                 var pct = s.mt / ytdTotal * 100;
+                 return '<div style="width:'+pct.toFixed(2)+'%;background:'+s.color+'" title="'+s.label+': '+s.mt.toFixed(0)+' MT"></div>';
+               }).join('')
+       +     '</div>'
+       +   '</div>'
+       // Detailed mini-table
+       +   '<table style="width:100%;border-collapse:collapse">'
+       +     '<thead><tr style="background:var(--s2)">'
+       +       '<th style="text-align:left;padding:8px 14px;font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">Size</th>'
+       +       '<th style="text-align:right;padding:8px 12px;font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">YTD MT</th>'
+       +       '<th style="text-align:right;padding:8px 12px;font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">% of 500W</th>'
+       +       '<th style="text-align:right;padding:8px 14px;font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--b1)">Avg / Day</th>'
+       +     '</tr></thead><tbody>'
+       +     sizeDefs.map(function(s, i){
+             var pct = s.mt / ytdTotal * 100;
+             var perDay = ytdDays>0 ? s.mt / ytdDays : 0;
+             var border = i === sizeDefs.length-1 ? '' : 'border-bottom:1px solid var(--b1)';
+             return '<tr style="'+border+'">'
+                  +   '<td style="padding:9px 14px;font-weight:600;color:var(--txt)">'
+                  +     '<span style="display:inline-block;width:9px;height:9px;background:'+s.color+';border-radius:2px;margin-right:8px;vertical-align:middle"></span>'
+                  +     s.label+'</td>'
+                  +   '<td style="padding:9px 12px;text-align:right;color:var(--silver);font-variant-numeric:tabular-nums;font-weight:600">'+fm(s.mt)+'</td>'
+                  +   '<td style="padding:9px 12px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums">'+pct.toFixed(1)+'%</td>'
+                  +   '<td style="padding:9px 14px;text-align:right;color:var(--dim2);font-variant-numeric:tabular-nums">'+fm(perDay)+' MT</td>'
+                  + '</tr>';
+           }).join('')
+       +     '</tbody></table>'
+       + '</div>';
+  }
+
   var cols = [
     {k:'week_label',     h:'Week',           fmt:function(w){return w.week_label;},                col:function(w){return 'var(--txt)';},    bold:true,  align:'left'},
     {k:'days',           h:'Days',           fmt:function(w){return w.days;},                      col:function(w){return 'var(--txt2)';},   bold:false, align:'right'},
@@ -2885,7 +3514,7 @@ function buildRdTable() {
     h += '</tr>';
   });
   h += '</tbody></table></div>';
-  return h;
+  return sz + h;
 }
 
 function buildBlCards() {
