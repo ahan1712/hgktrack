@@ -270,6 +270,28 @@ body.light{background:#f5f5f5}
   .overlay [style*="font-size:14px"]{font-size:20px !important}
   .overlay [style*="font-size:11px"]{font-size:16px !important}
 }
+/* Costing overlay — desktop layout fix.
+   Costing was designed as a single-screen, phone-shaped dashboard where
+   sections use flex:1.1 / flex:1.4 to fill viewport height. On a wide
+   desktop (95vw), those flex-grow sections stretch vertically and create
+   huge empty gaps (especially around chemicals + composition bar). On
+   desktop we override the flex-fill so each section takes its natural
+   content height; the overlay scrolls if content overflows. */
+@media (min-width:768px){
+  #ov-costing{overflow-y:auto !important}
+  /* Stop the two main sections (Scrap Consumption, Other Cost) from
+     vertically flex-filling — let them size to content instead. */
+  #ov-costing > div[style*="flex:1.1"],
+  #ov-costing > div[style*="flex:1.4"]{flex:none !important}
+  /* Inside Other Cost: same for the Big-4 (electricity/salary/etc) and
+     chemicals breakdown rows so they don't stretch awkwardly tall. */
+  #ov-costing div[style*="flex:1.1;display:grid"]{flex:none !important}
+  #ov-costing div[style*="flex:1;display:flex;flex-direction:column;background:var(--card)"]{flex:none !important}
+  #ov-costing div[style*="flex:1;display:flex;align-items:stretch"]{flex:none !important;min-height:80px}
+  /* Source-attribution and mini-stats rows inside Scrap Consumption. */
+  #ov-costing div[style*="flex:1;display:grid;grid-template-columns:1fr 1fr"]{flex:none !important}
+  #ov-costing div[style*="flex:.7;display:grid"]{flex:none !important}
+}
 </style>
 </head>
 <body class="dark">
